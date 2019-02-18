@@ -3,7 +3,7 @@
 <html>
     {# Make modifiable head elements #}
     <head>
-        <title>{% block title %}Home {% endblock title %} | DjangoSurvivalGame</title>
+        <title>{% block title %} Home {% endblock title %} | DjangoSurvivalGame</title>
         {% block head_favicon %}
             <link rel="icon" type="image/png"
                   href="{{ STATIC_URL }}images/favicon.ico">
@@ -52,7 +52,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
                             <li><a href="">Logout</a></li>
-                            <li><a href=""">My Account</a></li>
+                            <li><a href="">My Account</a></li>
 
                         {% else %}
                             <li><a href="">Login</a></li>
