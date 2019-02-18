@@ -15,7 +15,22 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from DjangoSurvivalGame import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^home', views.langing_page, name="home"),
+    url(r'^learn_more', views.learn_more, name='learn_more'),
+    url(r'^sign_up', views.sign_up, name='sign_up'),
+    url(r'^game', views.game, name='game')
+    url(r'^my_profile', views.my_profile, name='my_profile')
+
 ]
+
+'''
+/home
+/signup
+/learnmore
+/game
+/myprofile
+'''
