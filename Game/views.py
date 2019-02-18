@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 
 
-def landing_page(request):
+def home(request):
     # if the request is a POST, pull the info & log the user in
     if request.method == "POST":
 
@@ -25,7 +25,7 @@ def landing_page(request):
                 login(request, user)
                 # if user.has_save_file:
                 #     can_continue = True
-                return render(request, 'Game/langing_page.html', {'can_continue': can_continue})
+                return render(request, 'Game/home.html', {'can_continue': can_continue})
             else:
                 return HttpResponse("Account disabled, you cheater")
 
@@ -38,14 +38,17 @@ def landing_page(request):
 
     else:
 
-        return render(request, 'Game/landing_page.html', {})
+        return render(request, 'Game/home.html', {})
 
+
+def about(reques):
+    return render(request, "about.html")
 
 def home(request):
     # line below SHOULD count total number of users
     all_user_count = Count(User.objects.all())
     context_dict = {'user_count': all_user_count}
-    return render(request, 'Game/about.html', context_dict)
+    return render(request, 'Game/home.html', context_dict)
 
 
 def sign_up(request):
@@ -80,7 +83,7 @@ def sign_up(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('landing_page'))
+    return HttpResponseRedirect(reverse('home'))
 
 
 @login_required
