@@ -35,8 +35,8 @@
     <body>
     {# Navigation Menu #}
     <header>
-        <div class="navbar navbar-default navbar-static-top
-        {% block nav-style %}{% endblock %}">
+        <div class="navbar navbar-default navbar-static-top">
+        {% block nav-style %}{% endblock nav-style %}"
             <div class="container p-none">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle"
@@ -50,14 +50,14 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        {% if user.is_authenticated %}
+                        <!-- {% if user.is_authenticated %}
                             <li><a href="">Logout</a></li>
                             <li><a href="">My Account</a></li>
 
-                        {% else %}
-                            <li><a href="">Login</a></li>
-                            <li><a href="" class="p-r-none">Sign Up</a></li>
-                        {% endif %}
+                        {% else %} -->
+                            <li><a href="registration/login">Login</a></li>
+                            <li><a href="registration/register" class="p-r-none">Sign Up</a></li>
+                        <!-- {% endif %} -->
                     </ul>
                 </div>
             </div>
