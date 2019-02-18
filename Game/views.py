@@ -46,6 +46,9 @@ def landing(request):
 def about(request):
     return render(request, "Game/about.html")
 
+def instructions(request):
+    return render(request, "Game/instructions.html")
+
 def home(request):
     # line below SHOULD count total number of users
     all_user_count = Count(User.objects.all())
