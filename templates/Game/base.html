@@ -11,7 +11,7 @@
   	<!--Add keywords that describe your project between the quotation marks. This helps search engines find and home your content-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% endblock %}
+
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="static/css/styles.css">
@@ -26,6 +26,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
+    {% endblock %}
   </head>
 
 
@@ -54,8 +55,8 @@
                   Learn more
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">How to play</a>
-                  <a class="dropdown-item" href="#">About us</a>
+                  <a class="dropdown-item" href="{% url 'instructions' %}">How to play</a>
+                  <a class="dropdown-item" href="{% url 'about' %}">About us</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Something else here</a>
                 </div>
