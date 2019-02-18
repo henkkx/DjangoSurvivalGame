@@ -18,9 +18,10 @@ from django.contrib import admin
 from Game import views
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
+    url(r'^$', views.landing, name='landing_page'),
     url(r'^home', views.home, name="home"),
-    url(r'^about', views.about, name='learn_more'),
+    url(r'^about', views.about, name='about'),
+    url(r'^instructions', views.instructions, name='instructions'),
     url(r'^sign_up', views.sign_up, name='sign_up'),
     url(r'^game', views.game, name='game'),
     url(r'^my_profile', views.my_profile, name='my_profile')
