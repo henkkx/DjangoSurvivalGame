@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.db.models import Count
+from Game.forms import UserForm, Profile
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -56,7 +57,8 @@ def sign_up(request):
 
     if request.method == "POST":
         # display the forms ( waiting for models)
-
+        user_form = UserForm(data=request.POST)
+        profile_form = Profile(data=request.POST)
         if user_form.is_valid and profile_form.is_valid:
             # save user data
             user = user_form.save()
@@ -74,7 +76,7 @@ def sign_up(request):
             print(user_form.errors, profile_form.errors)
     else:
         user_form = UserForm()
-        profile_form = UserProfileForm()
+        profile_form = Profile()
     return render(request, 'Game/sign_up.html',
                   {'user_form': user_form,
                    'profile_form': profile_form,
