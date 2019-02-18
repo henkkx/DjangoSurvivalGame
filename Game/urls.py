@@ -20,7 +20,7 @@ from Game import views
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^home', views.home, name="home"),
-    url(r'^learn_more', views.about, name='learn_more'),
+    url(r'^about', views.about, name='learn_more'),
     url(r'^sign_up', views.sign_up, name='sign_up'),
     url(r'^game', views.game, name='game'),
     url(r'^my_profile', views.my_profile, name='my_profile')
