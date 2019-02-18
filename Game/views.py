@@ -25,7 +25,7 @@ def landing_page(request):
                 login(request, user)
                 # if user.has_save_file:
                 #     can_continue = True
-                return render(request, 'DjangoSurvivalGame/langing_page.html', {'can_continue': can_continue})
+                return render(request, 'Game/langing_page.html', {'can_continue': can_continue})
             else:
                 return HttpResponse("Account disabled, you cheater")
 
@@ -38,14 +38,14 @@ def landing_page(request):
 
     else:
 
-        return render(request, 'DjangoSurvivalGame/landing_page.html', {})
+        return render(request, 'Game/landing_page.html', {})
 
 
 def home(request):
     # line below SHOULD count total number of users
     all_user_count = Count(User.objects.all())
     context_dict = {'user_count': all_user_count}
-    return render(request, 'DjangoSurvivalGame/learn_more.html', context_dict)
+    return render(request, 'Game/about.html', context_dict)
 
 
 def sign_up(request):
@@ -72,7 +72,7 @@ def sign_up(request):
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
-    return render(request, 'DjangoSurvivalGame/sign_up.html',
+    return render(request, 'Game/sign_up.html',
                   {'user_form': user_form,
                    'profile_form': profile_form,
                    'registered': registered})
@@ -88,9 +88,9 @@ def game(request):
     if not request.user.is_authenticated():
         return HttpResponse("Whoops, must be logged in to play")
     else:
-        return render(request, 'DjangoSurvivalGame/game.html', {'user': request.user})
+        return render(request, 'Game/game.html', {'user': request.user})
 
 
 @login_required
 def my_profile(request):
-    return render(request, 'DjangoSurvivalGame/my_account.html', {})
+    return render(request, 'Game/my_account.html', {})
