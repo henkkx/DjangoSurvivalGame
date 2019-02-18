@@ -41,8 +41,8 @@ def home(request):
         return render(request, 'Game/home.html', {})
 
 
-def about(reques):
-    return render(request, "about.html")
+def about(request):
+    return render(request, "Game/about.html")
 
 def home(request):
     # line below SHOULD count total number of users
