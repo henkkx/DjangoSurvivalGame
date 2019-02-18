@@ -1,88 +1,91 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html>
-    {# Make modifiable head elements #}
-    <head>
-        <title>{% block title %} Home {% endblock title %} | DjangoSurvivalGame</title>
-        <!-- {% block head_favicon %} -->
-            <!-- <link rel="icon" type="image/png"
-                  href="{{ STATIC_URL }}images/favicon.ico"> -->
-        <!-- {% endblock head_favicon %} -->
-        {% block head_meta %}
-            {% block head_meta_charset %}
-                <meta http-equiv="Content-Type"
-                      content="text/html; charset=utf-8" />
-            {% endblock head_meta_charset %}
-            {% block head_meta_contentlanguage %}
-                <meta http-equiv="Content-Language" value="en-UK" />
-            {% endblock head_meta_contentlanguage %}
-            {% block head_meta_viewport %}
-                <meta name="viewport"
-                      content="width=device-width, initial-scale=1.0">
-            {% endblock head_meta_viewport %}
-        {% endblock head_meta %}
-        {% block head_css %}
-            {% block head_css_site %}
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-                <!-- <link href="{{ STATIC_URL }}css/app.css"
-                      rel="stylesheet" media="screen"> -->
-            {% endblock head_css_site %}
-            {% block head_css_section %}{% endblock head_css_section %}
-            {% block head_css_page %}{% endblock head_css_page %}
-        {% endblock head_css %}
-    </head>
-    <body>
-    {# Navigation Menu #}
-    <header>
-        <div class="navbar navbar-default navbar-static-top">
-        {% block nav-style %}{% endblock nav-style %}"
-            <div class="container p-none">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle"
-                            data-toggle="collapse"
-                            data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">DjangoSurvivalGame</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- {% if user.is_authenticated %}
-                            <li><a href="">Logout</a></li>
-                            <li><a href="">My Account</a></li>
+<!-- This loads of all of files that you call below from your 'static' folder -->
+{% load static %}
+<!--The static folder consists of your bootstrap files (.css, .js, fonts, etc)-->
+<!--When you load the static folders is calls all those folders in the static files without having to code each one in individually-->
 
-                        {% else %} -->
-                            <li><a href="registration/login">Login</a></li>
-                            <li><a href="registration/register" class="p-r-none">Sign Up</a></li>
-                        <!-- {% endif %} -->
-                    </ul>
+<html>
+  <head>
+    <!--This is the meta information which is good for SEO-->
+    {% block head-meta %}
+  	<meta charset="utf-8">
+  	<!--Add keywords that describe your project between the quotation marks. This helps search engines find and home your content-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock %}
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+  </head>
+
+
+<!-- This is the start of the navigation bar at the top of the page-->
+<header>
+    <div class="container clearfix">
+
+<div class= "navbar-wrapper">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="{% url 'home' %}">SurvivalGame</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'game' %}">Play now</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Learn more
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">How to play</a>
+                  <a class="dropdown-item" href="#">About us</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
                 </div>
-            </div>
-        </div>
-    </header>
-    {# The Document Body #}
-    <div id="site-wrapper">
-        {% block content %}
-            if you see this, something is wrong!
-        {% endblock content %}
+              </li>
+              <li class="nav-item">
+
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search Players" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+      </nav>
     </div>
-    {# The Footer #}
-    <div class="footer">
-        <div class="container">
-            <p>DjangoSurvivalGame by Henrik, Marios, Ensi, and Matthew</p>
-        </div>
-    </div>
-</body>
-{% block footer_javascript %}
-        {% block footer_javascript_site %}
-            <!-- <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
-            <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-            <script src="{{ STATIC_URL }}js/app.js"></script> -->
-        {% endblock footer_javascript_site %}
-        {% block footer_javascript_section %}{% endblock footer_javascript_section %}
-        {% block footer_javascript_page %}{% endblock footer_javascript_page %}
-    {% endblock footer_javascript %}
+</div>
+</div>
+</header>
+
+<!-- This is where you'll put your page content. Leave it blank for now. -->
+<div class="container">
+{% block content %} Nothing Here yet {% endblock %}
+</div>
+
+
+<!-- This is where the footer begins -->
+<footer class = "footer">
+  <div>
+      DjangoSurvivalGame &copy; Henrik, Marios, Ensi, Matthew
+  </div>
+</footer>
+<!--This is my javascript block. If you've included the javascript files you need in the 'static' folder then there's no need to
+put this here and you can delete the block below.-->
 </html>
