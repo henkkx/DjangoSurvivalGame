@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 
 
-def landing_page(request):
+def home(request):
     # if the request is a POST, pull the info & log the user in
     if request.method == "POST":
 
@@ -41,7 +41,7 @@ def landing_page(request):
         return render(request, 'DjangoSurvivalGame/landing_page.html', {})
 
 
-def home(request):
+def learn_more(request):
     # line below SHOULD count total number of users
     all_user_count = Count(User.objects.all())
     context_dict = {'user_count': all_user_count}
@@ -76,6 +76,7 @@ def sign_up(request):
                   {'user_form': user_form,
                    'profile_form': profile_form,
                    'registered': registered})
+
 
 @login_required
 def user_logout(request):
