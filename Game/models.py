@@ -33,8 +33,8 @@ class Player(models.Model):
         return self.user.username
 
 
-class Badge:
-    name = models.CharField(max_length=64, required=True)
+class Badge(models.Model):
+    name = models.CharField(max_length=64)
     description = models.CharField(max_length=254)
     criteria = models.IntegerField(default=10)
     badge_type = models.CharField(max_length=32)
@@ -51,9 +51,9 @@ class Badge:
         return self.name
 
 
-class Achievement:
+class Achievement(models.Model):
     player = models.OneToOneField(Player)
-    badge = models.ManyToOneRel(Badge)
+    badge = models.ForeignKey(Badge)
     # following should save current DD-MM-YYYY date
     now = datetime.datetime.now()
     date_awarded = models.DateField(default=now.strftime("%d-%m-%Y"))
