@@ -5,8 +5,8 @@
     <head>
         <title>{% block title %} Home {% endblock title %} | DjangoSurvivalGame</title>
         {% block head_favicon %}
-            <link rel="icon" type="image/png"
-                  href="{{ STATIC_URL }}images/favicon.ico">
+            <!-- <link rel="icon" type="image/png"
+                  href="{{ STATIC_URL }}images/favicon.ico"> -->
         {% endblock head_favicon %}
         {% block head_meta %}
             {% block head_meta_charset %}
@@ -23,10 +23,10 @@
         {% endblock head_meta %}
         {% block head_css %}
             {% block head_css_site %}
-                <link href="{{ STATIC_URL }}css/bootstrap.min.css"
-                      rel="stylesheet" media="screen">
-                <link href="{{ STATIC_URL }}css/app.css"
-                      rel="stylesheet" media="screen">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+                <!-- <link href="{{ STATIC_URL }}css/app.css"
+                      rel="stylesheet" media="screen"> -->
             {% endblock head_css_site %}
             {% block head_css_section %}{% endblock head_css_section %}
             {% block head_css_page %}{% endblock head_css_page %}
@@ -78,9 +78,9 @@
 </body>
 {% block footer_javascript %}
         {% block footer_javascript_site %}
-            <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+            <!-- <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
             <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-            <script src="{{ STATIC_URL }}js/app.js"></script>
+            <script src="{{ STATIC_URL }}js/app.js"></script> -->
         {% endblock footer_javascript_site %}
         {% block footer_javascript_section %}{% endblock footer_javascript_section %}
         {% block footer_javascript_page %}{% endblock footer_javascript_page %}
