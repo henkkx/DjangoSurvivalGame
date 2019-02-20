@@ -54,7 +54,7 @@ class Badge(models.Model):
 
 
 class Achievement(models.Model):
-    player = models.OneToOneField(Player)
+    player = models.ForeignKey(Player)
     badge = models.ForeignKey(Badge)
     # following should save current DD-MM-YYYY date
     now = datetime.datetime.now()
