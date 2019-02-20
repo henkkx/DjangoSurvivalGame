@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.db.models import Count
+from Game.forms import UserForm, Profile
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -43,17 +44,20 @@ def home(request):
 def landing_page(request):
     return render(request, "Game/landing_page.html")
 
-def about(request):
-    return render(request, "Game/about.html")
+
+
+def learn_more(request):
+    return render(request, "Game/learn_more.html")
 
 def instructions(request):
     return render(request, "Game/instructions.html")
 
-def home(request):
+
+def about(request):
     # line below SHOULD count total number of users
     all_user_count = Count(User.objects.all())
     context_dict = {'user_count': all_user_count}
-    return render(request, 'Game/home.html', context_dict)
+    return render(request, 'Game/about.html', context_dict)
 
 
 def sign_up(request):
@@ -61,7 +65,8 @@ def sign_up(request):
 
     if request.method == "POST":
         # display the forms ( waiting for models)
-
+        user_form = UserForm(data=request.POST)
+        profile_form = Profile(data=request.POST)
         if user_form.is_valid and profile_form.is_valid:
             # save user data
             user = user_form.save()
@@ -79,11 +84,12 @@ def sign_up(request):
             print(user_form.errors, profile_form.errors)
     else:
         user_form = UserForm()
-        profile_form = UserProfileForm()
+        profile_form = Profile()
     return render(request, 'Game/sign_up.html',
                   {'user_form': user_form,
                    'profile_form': profile_form,
                    'registered': registered})
+
 
 @login_required
 def user_logout(request):
