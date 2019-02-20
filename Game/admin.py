@@ -3,13 +3,13 @@ from Game.models import Player, Badge, Achievement
 
 #These classes allow us to add extra functionality to the admin page
 class PlayerAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('user', 'most_dayes_survived', 'most_kills', 'most_people')
     
 class AchievementAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('player', 'badge', 'date_awarded')
 
 class BadgeAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'description', 'criteria', 'badge_type', 'icon')
 
 # Register your models here.
 admin.site.register(Player, PlayerAdmin)
