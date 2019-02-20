@@ -11,6 +11,7 @@ class Player(models.Model):
     most_dayes_survived = models.IntegerField(default=0)
     most_kills = models.IntegerField(default=0)
     most_people = models.IntegerField(default=0)
+    most_exp = models.IntegerField(default=0)
     current_game = {'inventory': [], 'stats': {}, 'maps': {}}
 
     '''
