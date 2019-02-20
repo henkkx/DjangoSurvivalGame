@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 import pickle
 import datetime
 
+
 class Player(models.Model):
     user = models.OneToOneField(User)
     picture = models.ImageField(upload_to='profile_images', blank=True)
@@ -62,8 +63,3 @@ class Achievement(models.Model):
         return "Player {0} has the {1} badge. Achieved on {2}".format(self.player,
                                                                       self.badge,
                                                                       self.date_awarded)
-
-
-
-
-
