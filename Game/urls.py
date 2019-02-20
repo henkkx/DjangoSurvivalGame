@@ -18,7 +18,8 @@ from django.contrib import admin
 from Game import views
 
 urlpatterns = [
-    url(r'^$', views.landing, name='landing_page'),
+    url(r'^$', views.landing_page, name='landing_page'),
+    url(r'^landing_page', views.landing_page, name = ''),
     url(r'^home', views.home, name="home"),
     url(r'^about', views.about, name='about'),
     url(r'^instructions', views.instructions, name='instructions'),

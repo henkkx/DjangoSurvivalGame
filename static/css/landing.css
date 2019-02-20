@@ -15,6 +15,16 @@ body {
   font-weight: 700;
 }
 
+#landing-header h4{
+  color: #fff;
+  font-size: 50px;
+  font-weight: 700;
+}
+
+#hr{
+  width: 40px
+}
+
 .slideshow {
   position: fixed;
   width: 100%;
