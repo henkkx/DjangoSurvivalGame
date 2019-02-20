@@ -1,0 +1,8 @@
+.jumbotron {
+  height: 50vh;
+  width: 100%;
+  background-image: url("../images/home1.jpg");
+  background-size: cover;
+  background-position: center;
+  color: red;
+}
