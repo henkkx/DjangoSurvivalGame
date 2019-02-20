@@ -36,7 +36,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+ROOT_URLCONF = 'DjangoSurvivalGame.urls'
 # Application definition
 
 INSTALLED_APPS = [
@@ -92,10 +92,13 @@ DATABASES = {
     }
 }
 
-
+LOGIN_URL = '/home'
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
-
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+)
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
