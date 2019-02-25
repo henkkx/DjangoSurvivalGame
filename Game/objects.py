@@ -29,14 +29,31 @@ class Weapon(Objects):
         
     #self.__name__ prints the class name.
     def __str__(self):
-        print("Type: {0}, Name: {1}, damage: {2} range: {3}\nDescripition: {4}".format(self.__class__.__name__, self.name, self.dmg, self.raange, self.desc))
+        print("Type: {0}, Name: {1}, damage: {2} range: {3} size: {4}\nDescripition: {5}".format(self.__class__.__name__, self.name, self.dmg, self.raange, self.size, self.desc))
 
     def read(self):
               print("Not sure how you plan on reading a weapon")
+
+class Lore(Objects):
+    def __init__(self, name, desc, size, text):
+        super().__init__(name, desc, size)
+        self.text = text
+        #text holds the readable text
+        
+
+        
+    #self.__name__ prints the class name.
+    def __str__(self):
+        print("Type: {0} item, Name: {1}, Size: {2} \nDescription: {3}".format(self.__class__.__name__, self.name, self.size, self.desc))
+
+    def read(self):
+              print(self.text)
 
 #Tests
 weapon1 = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 1000, 2)
 weapon1.__str__()
 weapon1.read()
-
+lore1 = Lore("Necronomicon", "Book of dead names. Read at your own peril", 1, "Ph\'nglui mglw\'nafh Cthulhu R\'lyeh wgah\'nagl fhtagn")
+lore1.__str__()
+lore1.read()
             
