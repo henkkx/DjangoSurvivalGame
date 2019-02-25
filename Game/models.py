@@ -11,6 +11,7 @@ class Player(models.Model):
     most_dayes_survived = models.IntegerField(default=0)
     most_kills = models.IntegerField(default=0)
     most_people = models.IntegerField(default=0)
+    most_exp = models.IntegerField(default=0)
     current_game = {'inventory': [], 'stats': {}, 'maps': {}}
 
     '''
@@ -53,7 +54,7 @@ class Badge(models.Model):
 
 
 class Achievement(models.Model):
-    player = models.OneToOneField(Player)
+    player = models.ForeignKey(Player)
     badge = models.ForeignKey(Badge)
     # following should save current DD-MM-YYYY date
     now = datetime.datetime.now()
