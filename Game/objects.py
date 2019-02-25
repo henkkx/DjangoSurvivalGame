@@ -1,5 +1,4 @@
 class Objects:
-
     def __init__(self, name, desc, type, etc=None):
         self.name = name
         self.description = desc
