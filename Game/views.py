@@ -41,7 +41,7 @@ def home(request):
 
         return render(request, 'Game/home.html', {})
 
-def landing(request):
+def landing_page(request):
     return render(request, "Game/landing_page.html")
 
 
