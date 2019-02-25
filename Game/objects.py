@@ -49,6 +49,22 @@ class Lore(Objects):
     def read(self):
               print(self.text)
 
+class Food(Objects):
+    def __init__(self, name, desc, size, nutrients):
+        super().__init__(name, desc, size)
+        self.nutrients = nutrients
+        #nutrients is a place holder until we work out how the eating sytem works
+        
+        
+
+        
+    #self.__name__ prints the class name.
+    def __str__(self):
+        print("Type: {0} item, Name: {1}, Size: {2}, Nutrional Value: {3}\nDescription: {4}".format(self.__class__.__name__, self.name, self.size, self.nutrients, self.desc))
+
+    def read(self):
+              print("How are you gonna read a {0}?".format(self.name))
+
 #Tests
 weapon1 = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 1000, 2)
 weapon1.__str__()
@@ -56,4 +72,7 @@ weapon1.read()
 lore1 = Lore("Necronomicon", "Book of dead names. Read at your own peril", 1, "Ph\'nglui mglw\'nafh Cthulhu R\'lyeh wgah\'nagl fhtagn")
 lore1.__str__()
 lore1.read()
+food1 = Food("Cake", "A delicious sponge cake", 1, 5)
+food1.__str__()
+food1.read()
             
