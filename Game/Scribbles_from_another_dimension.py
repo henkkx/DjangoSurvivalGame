@@ -6,7 +6,9 @@ fight
 interact
 """
 from Game.buildings import Building, Room
-
+from Game.people import PC, NPC
+from Game.creatures import Creature
+from Game.objects import Objects
 
 houses = {}
 road_objects = {}  # probably won't use this, but better have it and delete later
