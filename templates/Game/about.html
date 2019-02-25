@@ -2,6 +2,15 @@
 {% load staticfiles %}
 
 
-
 {% block title %} title {% endblock title%}
 {% block body %} test {% endblock body %}
+{% block content %}
+
+<p> hi there buddy </p>
+<div>
+<a href="https://www.snapchat.com/"><img src="{% static "images/sclogo.jpg" %}" width="82" height="86" title="SnapChat" alt="SnapChat"></a>
+<a href="https://www.instagram.com/"><img src="{% static "images/ig logo.png" %}" width="82" height="86" title="Instagram" alt="Instagram"></a>
+<a href="https://www.facebook.com/"><img src="{% static "images/facebook-logo.png" %}" width="82" height="86" title="Facebook" alt="Facebook"></a>
+<a href="https://www.twitter.com/"><img src="{% static "images/twitlogo.jpg" %}" width="82" height="86" title="Twitter" alt="Twitter"></a>
+</div>
+{% endblock content %}
