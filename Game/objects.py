@@ -1,20 +1,19 @@
-class Objects:
-    def __init__(self, name, desc, type, etc=None):
+#These are needed to define an abstract class and method
+from abc import ABC, abstractmethod
+
+class Objects(ABC):
+    def __init__(self, name, desc, size):
         self.name = name
         self.description = desc
-        self.type = type
-        self.etc = etc
-        ''' the variable etc will be whatever we need later for the objects extra attributes. For example it's readable
-        or it can be used to do X damage etc.'''
+        self.size = size
+        super().__init__()
+        #size could be used for a limited inventory space requirement
 
+    @abstractmethod
     def __str__(self):
-        if self.type == 'weapon':
-            return "{0}({1}, {3} dmg): {2}".format(self.name, self.type, self.description, self.etc)
-            #       Stick (weapon 20 dmg): A simple stick
-        elif self.type == 'readable':
-            return "{0}({1}): {2}".format(self.name, self.type, self.description)
-            #       Book (readable): An old, dusted book
+        pass
 
-    def read(self):  # assuming we'll check that the object is readable while performing the action of reading
-        return self.etc['text']
+    @abstractmethod
+    def read(self):  
+        pass
 
