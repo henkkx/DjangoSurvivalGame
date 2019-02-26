@@ -67,11 +67,16 @@ class Food(Objects):
 
 #Tests
 weapon1 = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 1000, 2)
+print("Weapon Example: ")
 weapon1.__str__()
 weapon1.read()
+print()
+print("Lore Object Example")
 lore1 = Lore("Necronomicon", "Book of dead names. Read at your own peril", 1, "Ph\'nglui mglw\'nafh Cthulhu R\'lyeh wgah\'nagl fhtagn")
 lore1.__str__()
 lore1.read()
+print()
+print("Food Example: ")
 food1 = Food("Cake", "A delicious sponge cake", 1, 5)
 food1.__str__()
 food1.read()
