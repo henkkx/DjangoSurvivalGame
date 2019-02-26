@@ -85,6 +85,20 @@ class Vampire(Creature):
                 self.power_level))
 
 
+class Rat(Creature):
+
+    def __init__(self, name, pl):
+        hp = 1 * pl
+        ap = 1 * pl
+        super().__init__(name, hp, ap, ["None"], ["None"], pl)
+
+    def __str__(self):
+        return (
+            "{0} (Name: {1}, Health Points: {2},  Attack Points: {3}, Weaknesses: {4}, Strengths: {5}, Level: {6})".format(
+                self.__class__.__name__, self.name, self.hp, self.ap, self.vulnerability, self.immune,
+                self.power_level))
+
+
 #Class Tests
 spider = Spider("Shelob", 5)
 print(spider.__str__())
@@ -96,3 +110,5 @@ Vampire = Vampire("er",10)
 print(Vampire.__str__())
 Witch = Witch("sd",10)
 print(Witch.__str__())
+Rat = Rat("3d",10)
+print(Rat.__str__())
