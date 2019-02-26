@@ -1,5 +1,5 @@
-from Game.models import Player
 from Game.objects import Objects
+
 
 class PC:
     def __init__(self, name, hp=100):

@@ -1,3 +1,5 @@
+from Game.objects import Objects
+
 class Building:
 
     def __init__(self, name, desc, rooms, pos):
