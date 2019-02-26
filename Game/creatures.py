@@ -98,6 +98,19 @@ class Rat(Creature):
                 self.__class__.__name__, self.name, self.hp, self.ap, self.vulnerability, self.immune,
                 self.power_level))
 
+class Zombie(Creature):
+
+    def __init__(self, name, pl):
+        hp = 4 * pl
+        ap = 3 * pl
+        super().__init__(name, hp, ap, ["Fire","Magic","Silver","Poison"], ["None"], pl)
+
+    def __str__(self):
+        return (
+            "{0} (Name: {1}, Health Points: {2},  Attack Points: {3}, Weaknesses: {4}, Strengths: {5}, Level: {6})".format(
+                self.__class__.__name__, self.name, self.hp, self.ap, self.vulnerability, self.immune,
+                self.power_level))
+
 
 #Class Tests
 spider = Spider("Shelob", 5)
@@ -112,3 +125,5 @@ Witch = Witch("sd",10)
 print(Witch.__str__())
 Rat = Rat("3d",10)
 print(Rat.__str__())
+Zombie = Zombie("timmy",10)
+print(Zombie.__str__())
