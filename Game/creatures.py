@@ -74,8 +74,8 @@ class Witch(Creature):
 class Vampire(Creature):
 
     def __init__(self, name, pl):
-        hp = 4 * pl
-        ap = 3 * pl
+        hp = 7 * pl
+        ap = 4 * pl
         super().__init__(name, hp, ap, ["Silver", "Water", "Garlic", "Fire"], ["Magic", "Poison"], pl)
 
     def __str__(self):
