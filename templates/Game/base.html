@@ -6,7 +6,7 @@
 <html>
   <head>
     <!--This is the meta information which is good for SEO-->
-    {% block head-meta %}
+    {% block head_meta %}
   	<meta charset="utf-8">
   	<!--Add keywords that describe your project between the quotation marks. This helps search engines find and home your content-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,6 +27,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
     {% endblock %}
+
+    {% block title %} {% endblock %}
+
+    {% block head_css %} {% endblock %}
+
   </head>
 
 
@@ -70,9 +75,9 @@
 </header>
 
 <!-- This is where you'll put your page content. Leave it blank for now. -->
-<div class="container">
-{% block content %} Nothing Here yet {% endblock %}
-</div>
+
+{% block content %} {% endblock %}
+
 
 
 <!-- This is where the footer begins -->
