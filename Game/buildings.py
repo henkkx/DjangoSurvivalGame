@@ -73,6 +73,17 @@ class Room:
 
         return creature_list
 
+    #helper method which returns a list of objects in the room of the same type.
+    def get_objects(self, kind):
+        objects_list =[]
+        for objec in self.objects:
+            if objec.get_type() == kind:
+                objects_list.append(objec)
+
+        return objects_list
+
+    
+
     def __str__(self):
         '''
         The following loops are to create a more readable version of the people & objects in the room.
