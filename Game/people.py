@@ -26,4 +26,4 @@ class NPC:
         return self.description  # returns the description since we shouldn't know names, just how they look
 
     def get_short(self):
-        return self.desc_S
+        return self.desc_S #returns a shorter description displayed upon entering the room.

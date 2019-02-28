@@ -39,15 +39,17 @@ class Room:
                 output.append("{0} They are named: {1}\n".format(NPC.get_short(),NPC.name))
 
         #Get monster types and there numbers
-        counter = self.count_creatures()
-        
+        if self.creatures:
+            counter = self.count_creatures()
+            
 
-        for creature in counter.keys():
-            output.append("There are {0} {1}(s).\n".format(counter[creature], creature))
+            for creature in counter.keys():
+                output.append("There are {0} {1}(s).\n".format(counter[creature], creature))
 
         #Show which objects are present.
-        for objec in self.objects:
-            output.append("You see a {0} item. {1}\n".format(objec.get_type(), objec.desc))
+        if self.objects:
+            for objec in self.objects:
+                output.append("You see a {0} item. {1}\n".format(objec.get_type(), objec.desc))
 
         return "".join(output)
 
