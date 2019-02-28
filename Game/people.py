@@ -1,5 +1,4 @@
-from Game.objects import Objects
-
+from objects import *
 
 class PC:
     def __init__(self, name, hp=100):
@@ -14,9 +13,10 @@ class PC:
         return "Player {0} has {1}/{2} hp".format(self.name, self.hp, self.max_hp)
 
 class NPC:
-    def __init__(self, name, description, hp, allegiance, inventory):
+    def __init__(self, name, short_description,long_description, hp, allegiance, inventory):
         self.name = name
-        self.description = description
+        self.desc_S = short_description
+        self.desc_L = long_description
         self.hp = hp
         self.allegiance = allegiance
         self.inventory = inventory
