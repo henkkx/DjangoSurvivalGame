@@ -14,6 +14,20 @@ class Creature(ABC):
     def get_type(self):
         return self.__class__.__name__
 
+
+    """ This can be used if monsters are to be fought individually
+    #returns a string which can be used to inform the player of the monsters
+    #strngth compraed to their own.
+    def level_comp(self, player_level):
+        difference = player_level - self.power_level
+        if difference in range(-1, 2):
+            return "Should be a fair fight"
+        elif difference > 1:
+            return "They look weak"
+        elif difference < 1:
+            return "This could be tough"
+    """
+    
     @abstractmethod
     def __str__(self):
         return "{0} ({1}, Health Points : {2}, Difficulty : {3} )".format(self.name, self.type, self.hp
