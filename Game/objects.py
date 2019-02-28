@@ -1,6 +1,7 @@
 #These are needed to define an abstract class and method
 from abc import ABC, abstractmethod
 
+
 class Objects(ABC):
     def __init__(self, name, desc, size):
         self.name = name
@@ -17,6 +18,10 @@ class Objects(ABC):
     def read(self):  
         pass
 
+    #returns the type of the object class I.e Weapon
+    def get_type(self):
+        return self.__class__.__name__
+
 #The following are all subclasses for the Objects superclass
 
 class Weapon(Objects):
@@ -29,10 +34,10 @@ class Weapon(Objects):
         
     #self.__name__ prints the class name.
     def __str__(self):
-        print("Type: {0}, Name: {1}, damage: {2} range: {3} size: {4}\nDescripition: {5}".format(self.__class__.__name__, self.name, self.dmg, self.raange, self.size, self.desc))
+        return ("Type: {0}, Name: {1}, damage: {2} range: {3} size: {4}\nDescripition: {5}".format(self.__class__.__name__, self.name, self.dmg, self.raange, self.size, self.desc))
 
     def read(self):
-              print("Not sure how you plan on reading a weapon")
+        return ("Not sure how you plan on reading a weapon")
 
 class Lore(Objects):
     def __init__(self, name, desc, size, text):
@@ -44,10 +49,10 @@ class Lore(Objects):
         
     #self.__name__ prints the class name.
     def __str__(self):
-        print("Type: {0} item, Name: {1}, Size: {2} \nDescription: {3}".format(self.__class__.__name__, self.name, self.size, self.desc))
+        return ("Type: {0} item, Name: {1}, Size: {2} \nDescription: {3}".format(self.__class__.__name__, self.name, self.size, self.desc))
 
     def read(self):
-              print(self.text)
+        return (self.text)
 
 class Food(Objects):
     def __init__(self, name, desc, size, nutrients):
@@ -60,12 +65,12 @@ class Food(Objects):
         
     #self.__name__ prints the class name.
     def __str__(self):
-        print("Type: {0} item, Name: {1}, Size: {2}, Nutrional Value: {3}\nDescription: {4}".format(self.__class__.__name__, self.name, self.size, self.nutrients, self.desc))
+        return ("Type: {0} item, Name: {1}, Size: {2}, Nutrional Value: {3}\nDescription: {4}".format(self.__class__.__name__, self.name, self.size, self.nutrients, self.desc))
 
     def read(self):
-              print("How are you gonna read a {0}?".format(self.name))
+        return ("How are you gonna read a {0}?".format(self.name))
 
-#Tests
+"""
 weapon1 = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 1000, 2)
 print("Weapon Example: ")
 weapon1.__str__()
@@ -80,4 +85,4 @@ print("Food Example: ")
 food1 = Food("Cake", "A delicious sponge cake", 1, 5)
 food1.__str__()
 food1.read()
-            
+"""         
