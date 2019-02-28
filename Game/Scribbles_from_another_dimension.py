@@ -25,16 +25,22 @@ def inspect(room, pl = 1, entity = None):
     if entity == None:
         return room.get_description()
 
-    #Get all creatures with matching type
-    creatures = room.get_creatures(entity)
+    #if there are creatures in the room that match the entity then output info about these creatures
+    #if not move on to objects
+    if room.creatures:
+        
+        #Get all creatures with matching type
+        creatures = room.get_creatures(entity)
+        if creatures:
+            
+            #Display information for all creatures whose type matches entity. Includes level comparison for each
+            output = ["There are {0} {1}(s):".format(len(creatures), entity)]
+            for creature in creatures:
+                output.append("{0}.  {1}".format(creature.__str__(), creature.level_comp(pl)))
 
-    output = ["There are {0} {1}(s):".format(len(creatures), entity)]
-    for creature in creatures:
-        output.append("{0}.  {1}".format(creature.__str__(), creature.level_comp(pl)))
+            return "\n".join(output)
 
-    return "\n".join(output)
-
-
+    return "There are no entities matching {0}".format(entity)
 
 #Test data
 Zombie1 = Zombie("timmy",10)
@@ -44,8 +50,9 @@ weapon1 = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes 
 lore1 = Lore("Necronomicon", "Book of dead names. Read at your own peril", 1, "Ph\'nglui mglw\'nafh Cthulhu R\'lyeh wgah\'nagl fhtagn")
 Barney = NPC("Barney", "A tall, fat man.", "long description", 100, "Chaotic Neutral", None)
 Billy = NPC("Billy", "A short, thin man.", "long description", 100, "Chaotic Neutral", None)
-dark_room = Room("Spooky Room", [Barney, Billy], [Zombie1, Zombie2, Spider], [weapon1, lore1], " a dark dillapidated room with no windows")
+dark_room = Room("Spooky Room", [Barney, Billy], [Zombie1, Spider, Zombie2], [weapon1, lore1], " a dark dillapidated room with no windows")
 player = PC("username", 6, Room = dark_room)
 
+#Tests
 print(inspect(player.Room))
-print(inspect(player.Room, player.level, "Spider"))
+print(inspect(player.Room, player.level, "apple"))

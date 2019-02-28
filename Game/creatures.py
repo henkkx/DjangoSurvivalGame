@@ -11,6 +11,7 @@ class Creature(ABC):
         self.power_level = pl
         super().__init__()
 
+    #Returns the type of the creature i.e Spider.
     def get_type(self):
         return self.__class__.__name__
 

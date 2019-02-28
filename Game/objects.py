@@ -18,6 +18,7 @@ class Objects(ABC):
     def read(self):  
         pass
 
+    #returns the type of the object class I.e Weapon
     def get_type(self):
         return self.__class__.__name__
 
