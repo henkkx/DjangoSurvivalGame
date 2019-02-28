@@ -1,7 +1,7 @@
 from objects import *
 
 class PC:
-    def __init__(self, name, Room = None, level, hp=100):
+    def __init__(self, name, level, Room = None, hp=100):
         self.name = name
         self.hp = hp
         self.max_hp = hp
