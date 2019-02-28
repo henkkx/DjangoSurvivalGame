@@ -19,7 +19,7 @@ world = {'main road': houses, 'objects': road_objects, 'people': road_people}
 #This function displays information about the specified object or creature.
 #If no arguments are passed the current room will be described.
 #It makes use of the get_description method in the rooms class. Take a look.
-def inspect(room, entity = None):
+def inspect(room, pl = 1, entity = None):
     if room == None:
         return "You are on the street"
     if entity == None:
@@ -30,7 +30,7 @@ def inspect(room, entity = None):
 
     output = ["There are {0} {1}(s):".format(len(creatures), entity)]
     for creature in creatures:
-        output.append(creature.__str__())
+        output.append("{0}.  {1}".format(creature.__str__(), creature.level_comp(pl)))
 
     return "\n".join(output)
 
@@ -38,14 +38,14 @@ def inspect(room, entity = None):
 
 #Test data
 Zombie1 = Zombie("timmy",10)
-Zombie2 = Zombie("tommy",10)
+Zombie2 = Zombie("tommy",3)
 Spider = Spider("Shelob", 5)
 weapon1 = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 1000, 2)
 lore1 = Lore("Necronomicon", "Book of dead names. Read at your own peril", 1, "Ph\'nglui mglw\'nafh Cthulhu R\'lyeh wgah\'nagl fhtagn")
 Barney = NPC("Barney", "A tall, fat man.", "long description", 100, "Chaotic Neutral", None)
 Billy = NPC("Billy", "A short, thin man.", "long description", 100, "Chaotic Neutral", None)
 dark_room = Room("Spooky Room", [Barney, Billy], [Zombie1, Zombie2, Spider], [weapon1, lore1], " a dark dillapidated room with no windows")
-player = PC("username", Room = dark_room)
+player = PC("username", 6, Room = dark_room)
 
 print(inspect(player.Room))
-print(inspect(player.Room, "Zombie"))
+print(inspect(player.Room, player.level, "Spider"))
