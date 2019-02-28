@@ -24,19 +24,19 @@ class Objects(ABC):
 #The following are all subclasses for the Objects superclass
 
 class Weapon(Objects):
-    def __init__(self, name, desc, size, dmg, raange):
+    def __init__(self, name, desc, size, dmg, range):
         super().__init__(name, desc, size)
         self.dmg = dmg
-        self.raange = raange
+        self.range = range
         #range stat which could be used depending on how combat works
 
         
     #self.__name__ prints the class name.
     def __str__(self):
-        print("Type: {0}, Name: {1}, damage: {2} range: {3} size: {4}\nDescripition: {5}".format(self.__class__.__name__, self.name, self.dmg, self.raange, self.size, self.desc))
+        return("Type: {0}, Name: {1}, damage: {2} range: {3} size: {4}\nDescripition: {5}".format(self.__class__.__name__, self.name, self.dmg, self.raange, self.size, self.desc))
 
     def read(self):
-        print("Not sure how you plan on reading a weapon")
+        return super.desc   #("Not sure how you plan on reading a weapon")
 
 class Lore(Objects):
     def __init__(self, name, desc, size, text):
@@ -48,7 +48,7 @@ class Lore(Objects):
         
     #self.__name__ prints the class name.
     def __str__(self):
-        print("Type: {0} item, Name: {1}, Size: {2} \nDescription: {3}".format(self.__class__.__name__, self.name, self.size, self.desc))
+        return("Type: {0} item, Name: {1}, Size: {2} \nDescription: {3}".format(self.__class__.__name__, self.name, self.size, self.desc))
 
     def read(self):
         return (self.text)
@@ -56,18 +56,15 @@ class Lore(Objects):
 class Food(Objects):
     def __init__(self, name, desc, size, nutrients):
         super().__init__(name, desc, size)
-        self.nutrients = nutrients
+        self.nutrients = nutrients # LIST, [0] is the HP recovered, [1] is hunger recovered, [2] is a string, split by " " to get cured status when eaten
         #nutrients is a place holder until we work out how the eating sytem works
-        
-        
-
         
     #self.__name__ prints the class name.
     def __str__(self):
-        print("Type: {0} item, Name: {1}, Size: {2}, Nutrional Value: {3}\nDescription: {4}".format(self.__class__.__name__, self.name, self.size, self.nutrients, self.desc))
+        return("Type: {0} item, Name: {1}, Size: {2}, Nutrional Value: {3}\nDescription: {4}".format(self.__class__.__name__, self.name, self.size, self.nutrients, self.desc))
 
     def read(self):
-              print("How are you gonna read a {0}?".format(self.name))
+        return("How are you gonna read a {0}?".format(self.name))
 
 """
 weapon1 = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 1000, 2)
