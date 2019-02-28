@@ -1,13 +1,20 @@
 from Game.objects import *
 
 class PC:
-    def __init__(self, name, Room = None, hp=100):
+    def __init__(self, name, hp=100, room=[0, 0]):
         self.name = name
         self.hp = hp
         self.max_hp = hp
         self.food = 50
-        self.Room = Room
-        #self.inventory = {'stick': Objects('stick', "A simple stick", {'type': 'weapon', 'damage': 20})}
+        self.room = room
+        self.level = 1
+        # self.inventory = {'stick': Objects('stick', "A simple stick", {'type': 'weapon', 'damage': 20})}
+
+    def get_room(self):
+        return self.room
+
+    def get_level(self):
+        return self.level
 
     def __str__(self):
         return "Player {0} has {1}/{2} hp".format(self.name, self.hp, self.max_hp)

@@ -5,10 +5,11 @@ converse
 fight
 interact
 """
-from buildings import Building, Room
-from people import PC, NPC
-from creatures import Zombie, Spider
-from objects import Weapon, Lore
+from Game.buildings import Building, Room
+from Game.people import PC, NPC
+from Game.creatures import Zombie, Spider
+from Game.objects import Weapon, Lore
+from Game.game_populate import build_game
 
 houses = {}
 road_objects = {}  # probably won't use this, but better have it and delete later
@@ -34,6 +35,9 @@ lore1 = Lore("Necronomicon", "Book of dead names. Read at your own peril", 1, "P
 Barney = NPC("Barney", "A tall, fat man.", "long description", 100, "Chaotic Neutral", None)
 Billy = NPC("Billy", "A short, thin man.", "long description", 100, "Chaotic Neutral", None)
 dark_room = Room("Spooky Room", [Barney, Billy], [Zombie1, Zombie2, Spider], [weapon1, lore1], " a dark dillapidated room with no windows")
-player = PC("username", Room = dark_room)
+player = PC("username", Room=dark_room)
+
+world = build_game()
+
 
 print(inspect(player.Room))

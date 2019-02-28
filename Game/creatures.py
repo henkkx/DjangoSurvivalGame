@@ -46,7 +46,7 @@ class hellhound(Creature):
                 self.power_level))
 
 
-class ghoul(Creature):
+class Ghoul(Creature):
 
     def __init__(self, name, pl):
         hp = 4 * pl
@@ -100,6 +100,7 @@ class Rat(Creature):
             "{0} (Name: {1}, Health Points: {2},  Attack Points: {3}, Weaknesses: {4}, Strengths: {5}, Level: {6})".format(
                 self.__class__.__name__, self.name, self.hp, self.ap, self.vulnerability, self.immune,
                 self.power_level))
+
 
 class Zombie(Creature):
 
