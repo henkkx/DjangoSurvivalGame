@@ -7,7 +7,7 @@ interact
 """
 from Game.buildings import Building, Room
 from Game.people import PC, NPC
-from Game.creatures import Creature
+from Game.creatures import *
 from Game.objects import Objects
 
 houses = {}

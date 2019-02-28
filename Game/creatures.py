@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+
+
 class Creature(ABC):
 
     def __init__(self, name, hp, ap, vulnerability, immune, pl):
@@ -111,7 +113,7 @@ class Zombie(Creature):
                 self.__class__.__name__, self.name, self.hp, self.ap, self.vulnerability, self.immune,
                 self.power_level))
 
-
+'''
 #Class Tests
 spider = Spider("Shelob", 5)
 print(spider.__str__())
@@ -127,3 +129,4 @@ Rat = Rat("3d",10)
 print(Rat.__str__())
 Zombie = Zombie("timmy",10)
 print(Zombie.__str__())
+'''
