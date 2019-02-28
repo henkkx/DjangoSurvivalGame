@@ -16,17 +16,19 @@ class Creature(ABC):
 
 
     """ This can be used if monsters are to be fought individually
-    #returns a string which can be used to inform the player of the monsters
-    #strngth compraed to their own.
+    returns a string which can be used to inform the player of the monsters
+    strngth compraed to their own.
+    """
+
     def level_comp(self, player_level):
         difference = player_level - self.power_level
         if difference in range(-1, 2):
-            return "Should be a fair fight"
+            return "You seem to be similar in strength"
         elif difference > 1:
             return "They look weak"
         elif difference < 1:
-            return "This could be tough"
-    """
+            return "They look tough"
+
     
     @abstractmethod
     def __str__(self):
