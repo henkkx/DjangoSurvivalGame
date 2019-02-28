@@ -20,8 +20,19 @@ world = {'main road': houses, 'objects': road_objects, 'people': road_people}
 #If no arguments are passed the current room will be described.
 #It makes use of the get_description method in the rooms class. Take a look.
 def inspect(room, entity = None):
+    if room == None:
+        return "You are on the street"
     if entity == None:
         return room.get_description()
+
+    #Get all creatures with matching type
+    creatures = room.get_creatures(entity)
+
+    output = ["There are {0} {1}(s):".format(len(creatures), entity)]
+    for creature in creatures:
+        output.append(creature.__str__())
+
+    return "\n".join(output)
 
 
 
@@ -37,3 +48,4 @@ dark_room = Room("Spooky Room", [Barney, Billy], [Zombie1, Zombie2, Spider], [we
 player = PC("username", Room = dark_room)
 
 print(inspect(player.Room))
+print(inspect(player.Room, "Zombie"))
