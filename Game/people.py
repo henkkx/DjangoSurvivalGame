@@ -7,8 +7,7 @@ class PC:
         self.max_hp = hp
         self.food = 50
         self.Room = Room
-        self.inventory = {'stick': Objects('stick', "A simple stick", {'type': 'weapon', 'damage': 20}),
-                          }
+        #self.inventory = {'stick': Objects('stick', "A simple stick", {'type': 'weapon', 'damage': 20})}
 
     def __str__(self):
         return "Player {0} has {1}/{2} hp".format(self.name, self.hp, self.max_hp)

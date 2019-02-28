@@ -80,7 +80,7 @@ class Room:
         # not necessary to check for just 1 item, definitely won't be 0 ( not point having the room)
         return "{0}. Inside are:\n{1}\nAlso the following items:{2}".format(self.name, persons_text, objects_text)
 
-#room test
+"""
 Zombie1 = Zombie("timmy",10)
 Zombie2 = Zombie("tommy",10)
 Spider = Spider("Shelob", 5)
@@ -90,3 +90,4 @@ Barney = NPC("Barney", "A tall, fat man.", "long description", 100, "Chaotic Neu
 Billy = NPC("Billy", "A short, thin man.", "long description", 100, "Chaotic Neutral", None)
 Room = Room("Spooky Room", [Barney, Billy], [Zombie1, Zombie2, Spider], [weapon1, lore1], " a dark dillapidated room with no windows")
 print(Room.get_description())
+"""
