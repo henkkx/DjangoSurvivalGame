@@ -36,13 +36,9 @@ class Room:
             for NPC in self.NPCs:
                 output.append("{0} They are named: {1}\n".format(NPC.get_short(),NPC.name))
 
-        #show which monsters are present
-        counter = {}
-        for creature in self.creatures:
-            if creature.get_type() in counter:
-                counter[creature.get_type()] += 1
-            else:
-                counter[creature.get_type()] = 1
+        #Get monster types and there numbers
+        counter = self.count_creatures()
+        
 
         for creature in counter.keys():
             output.append("There are {0} {1}(s).\n".format(counter[creature], creature))
@@ -52,6 +48,26 @@ class Room:
             output.append("You see a {0} item. {1}\n".format(objec.get_type(), objec.desc))
                           
         return "".join(output)
+
+    #show which monsters are present and how many of each kind there are
+    def count_creatures(self):
+        counter = {}
+        for creature in self.creatures:
+            if creature.get_type() in counter:
+                counter[creature.get_type()] += 1
+            else:
+                counter[creature.get_type()] = 1
+
+        return counter
+
+    #helper method which returns a list of creatures in the room of the same type.
+    def get_creatures(self, kind):
+        creature_list =[]
+        for creature in self.creatures:
+            if creature.get_type() = kind:
+                creature_list.append(creature)
+
+        return creature_list
 
     def __str__(self):
         '''
