@@ -1,6 +1,6 @@
-from Game.objects import Weapon, Lore, Food
-from Game.people import NPC
-from Game.creatures import Zombie, Spider
+from objects import Weapon, Lore, Food
+from people import NPC
+from creatures import Zombie, Spider
 
 
 class Building:
@@ -100,6 +100,7 @@ class Room:
 
 
 #room test
+'''
 Zombie1 = Zombie("timmy",10)
 Zombie2 = Zombie("tommy",10)
 Spider = Spider("Shelob", 5)
@@ -109,4 +110,5 @@ Barney = NPC("Barney", "A tall, fat man.", "long description", 100, "Chaotic Neu
 Billy = NPC("Billy", "A short, thin man.", "long description", 100, "Chaotic Neutral", None)
 Room = Room("Spooky Room", [Barney, Billy], [Zombie1, Zombie2, Spider], [weapon1, lore1], " a dark dillapidated room with no windows")
 print(Room.get_description())
-"""
+'''
+
