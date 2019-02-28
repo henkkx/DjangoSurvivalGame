@@ -30,11 +30,11 @@ class Room:
 
         #provide short description of human characters in the room
         if len(self.NPCs) == 1:
-            output.append("You see a lone human in the room. {0} They are named {1}\n".format(self.NPCs[0].desc_S,self.NPCs[0].name))
+            output.append("You see a lone human in the room. {0} They are named {1}\n".format(self.NPCs[0].get_short,self.NPCs[0].name))
         elif len(self.NPCs) > 1:
             output.append("You see a group of humans in the room. \n")
             for NPC in self.NPCs:
-                output.append("{0} They are named: {1}\n".format(self.NPCs[0].desc_S,self.NPCs[0].name))
+                output.append("{0} They are named: {1}\n".format(NPC.get_short(),NPC.name))
 
         #show which monsters are present
         counter = {}
@@ -86,7 +86,7 @@ Zombie2 = Zombie("tommy",10)
 Spider = Spider("Shelob", 5)
 weapon1 = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 1000, 2)
 lore1 = Lore("Necronomicon", "Book of dead names. Read at your own peril", 1, "Ph\'nglui mglw\'nafh Cthulhu R\'lyeh wgah\'nagl fhtagn")
-NPC = NPC("Barney", "A tall, fat man.", "long description", 100, "Chaotic Neutral", None)
-
-Room = Room("Spooky Room", [NPC], [Zombie1, Zombie2, Spider], [weapon1, lore1], " a dark dillapidated room with no windows")
+Barney = NPC("Barney", "A tall, fat man.", "long description", 100, "Chaotic Neutral", None)
+Billy = NPC("Billy", "A short, thin man.", "long description", 100, "Chaotic Neutral", None)
+Room = Room("Spooky Room", [Barney, Billy], [Zombie1, Zombie2, Spider], [weapon1, lore1], " a dark dillapidated room with no windows")
 print(Room.get_description())
