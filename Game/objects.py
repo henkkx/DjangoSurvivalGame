@@ -17,6 +17,9 @@ class Objects(ABC):
     def read(self):  
         pass
 
+    def get_type(self):
+        return self.__class__.__name__
+
 #The following are all subclasses for the Objects superclass
 
 class Weapon(Objects):
@@ -65,7 +68,7 @@ class Food(Objects):
     def read(self):
               print("How are you gonna read a {0}?".format(self.name))
 
-#Tests
+"""
 weapon1 = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 1000, 2)
 print("Weapon Example: ")
 weapon1.__str__()
@@ -80,4 +83,4 @@ print("Food Example: ")
 food1 = Food("Cake", "A delicious sponge cake", 1, 5)
 food1.__str__()
 food1.read()
-            
+"""         
