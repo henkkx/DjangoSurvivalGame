@@ -1,4 +1,4 @@
-from Game.objects import *
+from objects import *
 
 class PC:
     def __init__(self, name, Room = None, hp=100):
