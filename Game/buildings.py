@@ -64,7 +64,7 @@ class Room:
     def get_creatures(self, kind):
         creature_list =[]
         for creature in self.creatures:
-            if creature.get_type() = kind:
+            if creature.get_type() == kind:
                 creature_list.append(creature)
 
         return creature_list
