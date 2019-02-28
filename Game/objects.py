@@ -1,6 +1,7 @@
 #These are needed to define an abstract class and method
 from abc import ABC, abstractmethod
 
+
 class Objects(ABC):
     def __init__(self, name, desc, size):
         self.name = name
@@ -35,7 +36,7 @@ class Weapon(Objects):
         print("Type: {0}, Name: {1}, damage: {2} range: {3} size: {4}\nDescripition: {5}".format(self.__class__.__name__, self.name, self.dmg, self.raange, self.size, self.desc))
 
     def read(self):
-              print("Not sure how you plan on reading a weapon")
+        print("Not sure how you plan on reading a weapon")
 
 class Lore(Objects):
     def __init__(self, name, desc, size, text):
@@ -50,7 +51,7 @@ class Lore(Objects):
         print("Type: {0} item, Name: {1}, Size: {2} \nDescription: {3}".format(self.__class__.__name__, self.name, self.size, self.desc))
 
     def read(self):
-              print(self.text)
+        return (self.text)
 
 class Food(Objects):
     def __init__(self, name, desc, size, nutrients):

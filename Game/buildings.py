@@ -1,6 +1,8 @@
-from objects import Weapon, Lore, Food
-from people import NPC
-from creatures import Zombie, Spider
+from Game.objects import Weapon, Lore, Food
+from Game.people import NPC
+from Game.creatures import Zombie, Spider
+
+
 class Building:
 
     def __init__(self, name, desc, rooms, pos):
@@ -46,7 +48,7 @@ class Room:
         #Show which objects are present.
         for objec in self.objects:
             output.append("You see a {0} item. {1}\n".format(objec.get_type(), objec.desc))
-                          
+
         return "".join(output)
 
     #show which monsters are present and how many of each kind there are
@@ -96,7 +98,8 @@ class Room:
         # not necessary to check for just 1 item, definitely won't be 0 ( not point having the room)
         return "{0}. Inside are:\n{1}\nAlso the following items:{2}".format(self.name, persons_text, objects_text)
 
-"""
+
+#room test
 Zombie1 = Zombie("timmy",10)
 Zombie2 = Zombie("tommy",10)
 Spider = Spider("Shelob", 5)
