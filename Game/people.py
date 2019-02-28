@@ -1,11 +1,12 @@
 from objects import *
 
 class PC:
-    def __init__(self, name, hp=100):
+    def __init__(self, name, Room = None, hp=100):
         self.name = name
         self.hp = hp
         self.max_hp = hp
         self.food = 50
+        self.Room = Room
         self.inventory = {'stick': Objects('stick', "A simple stick", {'type': 'weapon', 'damage': 20}),
                           }
 
