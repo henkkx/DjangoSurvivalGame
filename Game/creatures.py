@@ -116,6 +116,7 @@ class Zombie(Creature):
 
 
 #Class Tests
+"""
 spider = Spider("Shelob", 5)
 print(spider.__str__())
 hellhound = hellhound("buster",10)
@@ -131,3 +132,4 @@ print(Rat.__str__())
 Zombie = Zombie("timmy",10)
 print(Zombie.__str__())
 print(Zombie.get_type())
+"""
