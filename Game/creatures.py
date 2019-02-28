@@ -1,6 +1,4 @@
 from abc import ABC, abstractmethod
-
-
 class Creature(ABC):
 
     def __init__(self, name, hp, ap, vulnerability, immune, pl):
@@ -13,6 +11,26 @@ class Creature(ABC):
         self.power_level = pl
         super().__init__()
 
+    #Returns the type of the creature i.e Spider.
+    def get_type(self):
+        return self.__class__.__name__
+
+
+    """ This can be used if monsters are to be fought individually
+    returns a string which can be used to inform the player of the monsters
+    strngth compraed to their own.
+    """
+
+    def level_comp(self, player_level):
+        difference = player_level - self.power_level
+        if difference in range(-1, 2):
+            return "You seem to be similar in strength"
+        elif difference > 1:
+            return "They look weak"
+        elif difference < 1:
+            return "They look tough"
+
+    
     @abstractmethod
     def __str__(self):
         return "{0} ({1}, Health Points : {2}, Difficulty : {3} )".format(self.name, self.type, self.hp
@@ -113,8 +131,9 @@ class Zombie(Creature):
                 self.__class__.__name__, self.name, self.hp, self.ap, self.vulnerability, self.immune,
                 self.power_level))
 
-'''
+
 #Class Tests
+"""
 spider = Spider("Shelob", 5)
 print(spider.__str__())
 hellhound = hellhound("buster",10)
@@ -129,4 +148,5 @@ Rat = Rat("3d",10)
 print(Rat.__str__())
 Zombie = Zombie("timmy",10)
 print(Zombie.__str__())
-'''
+print(Zombie.get_type())
+"""
