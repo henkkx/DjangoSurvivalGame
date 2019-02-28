@@ -17,3 +17,9 @@ world = {'main road': houses, 'objects': road_objects, 'people': road_people}
 
 
 
+#This function displays information about the specified object or creature.
+#If no arguments are passed the current room will be described.
+#It makes use of the get_description method in the rooms class. Take a look.
+def inspect(entity = None):
+    if entity == None:
+        pass
