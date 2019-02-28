@@ -11,6 +11,9 @@ class Creature(ABC):
         self.power_level = pl
         super().__init__()
 
+    def get_type(self):
+        return self.__class__.__name__
+
     @abstractmethod
     def __str__(self):
         return "{0} ({1}, Health Points : {2}, Difficulty : {3} )".format(self.name, self.type, self.hp
@@ -127,3 +130,4 @@ Rat = Rat("3d",10)
 print(Rat.__str__())
 Zombie = Zombie("timmy",10)
 print(Zombie.__str__())
+print(Zombie.get_type())
