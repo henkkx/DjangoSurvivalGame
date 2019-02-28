@@ -40,6 +40,18 @@ def inspect(room, pl = 1, entity = None):
 
             return "\n".join(output)
 
+    if room.objects:
+        
+        #Get all creatures with matching type
+        objects = room.get_objects(entity)
+        if objects:
+            
+            #Display information for all creatures whose type matches entity. Includes level comparison for each
+            output = ["There are {0} {1}(s):".format(len(objects), entity)]
+            for objec in objects:
+                output.append("{0}.".format(objec.__str__()))
+            return "\n".join(output)
+
     return "There are no entities matching {0}".format(entity)
 
 #Test data
