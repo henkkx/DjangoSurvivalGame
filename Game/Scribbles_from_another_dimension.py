@@ -56,7 +56,7 @@ def inspect(room, pl = 1, entity = None):
     return "There are no entities matching {0}".format(entity)
 
 
-def fight(weapon, creatures,launch):
+def fight(weapon, creatures, launch):
 
     enemyap = 0
     enemyhp = 0

@@ -1,5 +1,6 @@
 from objects import *
 
+
 class PC:
     def __init__(self, name, level, Room = None, hp=100):
         self.name = name
@@ -12,6 +13,7 @@ class PC:
 
     def __str__(self):
         return "Player {0} has {1}/{2} hp".format(self.name, self.hp, self.max_hp)
+
 
 class NPC:
     def __init__(self, name, short_description,long_description, hp, allegiance, inventory):
