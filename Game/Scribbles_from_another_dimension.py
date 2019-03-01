@@ -43,7 +43,7 @@ def inspect(room, pl = 1, entity = None):
 
     if room.objects:
         
-        #Get all creatures with matching type
+        #Get all objects with matching type
         objects = room.get_objects(entity)
         if objects:
             
@@ -91,11 +91,7 @@ def fight(weapon, creatures,launch):
         enemyap = creatures.ap
         enemyhp = creatures.hp
 
-        print("""─────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                
-             🄵🄸🄶🄷🅃 🅃🄸🄼🄴
-                
-        """)
+        print("Fight Time.")
 
     while enemyhp > 0 and player.hp > 0:
 
@@ -138,6 +134,46 @@ def getcmd(cmdlist):
         print('\n   error. invalid command-\n')
         return getcmd(cmdlist)
 
+#Allows the user to pick_up an item from the current room
+def pick_up(player, object_name):
+    room_objects = player.Room.objects
+    #Checks the room actually contains objects
+    if room_objects:
+        for objec in room_objects:
+            if objec.name == object_name:
+                valid = player.add_item(objec)
+
+                #player.add_item() returns true or false depending on whether or not the object could be added.
+                if valid:
+                    room_objects.remove(objec)
+                    return "Added {0} to inventory.".format(object_name)
+                else:
+                    return "You already have a {0} in your inventory.".format(object_name)
+            
+        return "No object with that name in the current room\nYou can see the name of objects by inspecting them using inspect <object_type>"
+    else:
+        return "There are no objects to pick up"
+
+#Allows the player to drop an object to the floor
+def drop(player, object_name):
+
+    #if the players inventory is empty stop here
+    if player.inventory_empty():
+        return "Your inventory is empty. There is nothing drop"
+
+    #
+    objec = player.remove_item(object_name)
+    
+    #player.remove_item() returns true or false depending on whether or not the object could be removed.
+    if objec:
+        player.Room.objects.append(objec)
+        return "You dropped {0}.".format(object_name)
+    else:
+        return "You dont have an object called {0} in your inventory".format(object_name)
+
+def view_inventory(player):
+    return player.get_inventory()
+
 
 #Test data
 Zombie1 = Zombie("timmy",10)
@@ -154,4 +190,15 @@ player = PC("username", 6, Room = dark_room)
 print(inspect(player.Room))
 print(inspect(player.Room, player.level, "apple"))
 
-fight(weapon1,Zombie1,True)
+#Inventory test
+print("\nInventory Tests:\n")
+print(view_inventory(player))
+print(drop(player, "iten"))
+print(inspect(player.Room, player.level, "Lore"))
+print(pick_up(player, "Necronomicon"))
+print(view_inventory(player))
+print(inspect(player.Room, player.level, "Lore"))
+print(drop(player, "Necro"))
+print(drop(player, "Necronomicon"))
+print(inspect(player.Room, player.level, "Lore"))
+#fight(weapon1,Zombie1,True)
