@@ -43,11 +43,11 @@ class Building:
         if self.can_go_down(pos):
             "".join((message, "You can move one floor down.\n"))
         elif self.can_go_up(pos):
-            "".join((message, "You can move one floor up.\n"))
+            message = "".join((message, "You can move one floor up.\n"))
         if self.floors[pos] in self.floors.keys():
-            "".join((message, "You can enter the following rooms:\n"))
+            message = "".join((message, "You can enter the following rooms:\n"))
             for room in self.floors[pos]:  # for room in the floor the player in is
-                "\n".join((message, room.name)) # only want the names, description come after we've got in the room
+                message = "\n".join((message, room.name)) # only want the names, description come after we've got in the room
         return message
 
     def __str__(self):
