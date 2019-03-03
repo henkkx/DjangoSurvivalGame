@@ -5,30 +5,3 @@ footer {
   width: 100%;
   text-align: center;
 }
-
-body {
-	margin: 0;
-	padding: 0;
-}
-header {
-	padding: 25px 0;
-	background-color: #000;
-}
-.navbar {
-	padding: 25px 0;
-	background-color: red;
-	position: -webkit-sticky;
-}
-header, .navbar {
-	text-align: center;
-	color: #fff;
-}
-
-.sticky {
-  position: fixed;
-  width: 100%;
-  left: 0;
-  top: 0;
-  z-index: 100;
-  border-top: 0;
-}

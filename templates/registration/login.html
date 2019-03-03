@@ -1,24 +1,32 @@
 {% extends 'Game/base.html' %}
 {% load staticfiles %}
 
-{% block title_block %}
-  LOGIN
+{% block head_css %}
+  <link rel="stylesheet" href="/static/css/register.css">
 {% endblock %}
+{% block content %}
 
-{% block body_block %}
-<div class="">
-  <form class="form-signin" role="form" method="post" action=".">
-      {% csrf_token %}
-      <h2 class="form-signin-heading">Please sign in</h2>
-      <label for="inputUsername" class="sr-only">Username</label>
-      <input type="text" name="username" id="id_username" class="form-control"
-              placeholder="Username" required autofocus>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" name="password" id="id_password" class="form-control"
-              placeholder="Password" required>
-      <button class="btn btn-lg btn-primary btn-block" type="submit"
-              value="Submit">Sign in</button>
+<div class="container__child signup__form">
+  <form action="#">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input class="form-control" type="text" name="email" id="email" placeholder="user@example.com" required />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input class="form-control" type="password" name="password" id="password" placeholder="********" required />
+    </div>
+    <div class="m-t-lg">
+      <ul class="list-inline">
+        <li>
+          <input class="btn btn--form" type="submit" value="Login" />
+        </li>
+        <li>
+          <a class="signup__link" href="{% url 'registration_register' %}">Not a member yet? Create an account</a>
+        </li>
+      </ul>
+    </div>
   </form>
 </div>
-
+</div>
 {% endblock %}
