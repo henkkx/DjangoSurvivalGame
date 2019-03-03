@@ -1,6 +1,6 @@
-from Game.objects import Weapon, Lore, Food
-from Game.people import NPC
-from Game.creatures import Zombie, Spider
+from objects import Weapon, Lore, Food
+from people import NPC
+from creatures import Zombie, Spider
 
 
 class Building:
@@ -24,13 +24,13 @@ class Room:
         self.objects = objects
         self.desc = description
 
-    # This function returns a description of the room and everything in it.
-    # This is not a perfect implementation but shoudl work fine for our demo.
-    # Feel free to improve it.
+    #This function returns a description of the room and everything in it.
+    #This is not a perfect implementation but shoudl work fine for our demo.
+    #Feel free to improve it.
     def get_description(self):
         output = ["You find yourself in ", self.desc, "\n"]
 
-        # provide short description of human characters in the room
+        #provide short description of human characters in the room
         if len(self.NPCs) == 1:
             output.append("You see a lone human in the room. {0} They are named {1}\n".format(self.NPCs[0].get_short,self.NPCs[0].name))
         elif len(self.NPCs) > 1:
@@ -38,7 +38,23 @@ class Room:
             for NPC in self.NPCs:
                 output.append("{0} They are named: {1}\n".format(NPC.get_short(),NPC.name))
 
-        # show which monsters are present
+        #Get monster types and there numbers
+        if self.creatures:
+            counter = self.count_creatures()
+            
+
+            for creature in counter.keys():
+                output.append("There are {0} {1}(s).\n".format(counter[creature], creature))
+
+        #Show which objects are present.
+        if self.objects:
+            for objec in self.objects:
+                output.append("You see a {0} item. {1}\n".format(objec.get_type(), objec.desc))
+
+        return "".join(output)
+
+    #show which monsters are present and how many of each kind there are
+    def count_creatures(self):
         counter = {}
         for creature in self.creatures:
             if creature.get_type() in counter:
@@ -46,14 +62,27 @@ class Room:
             else:
                 counter[creature.get_type()] = 1
 
-        for creature in counter.keys():
-            output.append("There are {0} {1}(s).\n".format(counter[creature], creature))
+        return counter
 
-        # Show which objects are present.
+    #helper method which returns a list of creatures in the room of the same type.
+    def get_creatures(self, kind):
+        creature_list =[]
+        for creature in self.creatures:
+            if creature.get_type() == kind:
+                creature_list.append(creature)
+
+        return creature_list
+
+    #helper method which returns a list of objects in the room of the same type.
+    def get_objects(self, kind):
+        objects_list =[]
         for objec in self.objects:
-            output.append("You see a {0} item. {1}\n".format(objec.get_type(), objec.desc))
+            if objec.get_type() == kind:
+                objects_list.append(objec)
 
-        return "".join(output)
+        return objects_list
+
+    
 
     def __str__(self):
         '''
@@ -83,7 +112,8 @@ class Room:
         return "{0}. Inside are:\n{1}\nAlso the following items:{2}".format(self.name, persons_text, objects_text)
 
 
-# room test
+#room test
+'''
 Zombie1 = Zombie("timmy",10)
 Zombie2 = Zombie("tommy",10)
 Spider = Spider("Shelob", 5)
@@ -93,4 +123,5 @@ Barney = NPC("Barney", "A tall, fat man.", "long description", 100, "Chaotic Neu
 Billy = NPC("Billy", "A short, thin man.", "long description", 100, "Chaotic Neutral", None)
 Room = Room("Spooky Room", [Barney, Billy], [Zombie1, Zombie2, Spider], [weapon1, lore1], " a dark dillapidated room with no windows")
 print(Room.get_description())
+'''
 
