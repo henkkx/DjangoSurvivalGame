@@ -6,15 +6,23 @@ fight
 interact
 """
 import time
-from buildings import Building, Room
-from people import PC, NPC
-from creatures import Zombie, Spider
-from objects import Weapon, Lore
+try:
+    from buildings import Building, Room
+    from people import PC, NPC
+    from creatures import Zombie, Spider
+    from objects import Weapon, Lore
+except:
+    # imports are different on Mac & on Windows so we have to do this
+    from Game.buildings import Building, Room
+    from Game.people import PC, NPC
+    from Game.creatures import Zombie, Spider
+    from Game.objects import Weapon, Lore
+
 
 houses = {}
 road_objects = {}  # probably won't use this, but better have it and delete later
 road_people = {}  # again, probably won't be used we'll see
-world = {'main road': houses, 'objects': road_objects, 'people': road_people}
+world = {'buildings': houses, 'objects': road_objects, 'people': road_people}
 
 
 #This function displays information about the specified object or creature.
@@ -173,6 +181,71 @@ def drop(player, object_name):
 
 def view_inventory(player):
     return player.get_inventory()
+
+'''
+Below are all the functions related to moving. For now we will have:
+ "available" which will return the available buildings to enter when on the road
+ "enter" which is to enter either building on your sides
+ "exit_current" which is to exit the building you are currently in ( if on the ground floor)
+ "move_room" which moves you between rooms,
+ "move_floor" which is to either go a floor up or a floor down
+ 
+ Might be better if we move some of these in the Building class so we don't need to pass building,
+  we'll then need to pass player though
+  
+  Although they don't need to return True or False, it'll help debuggins so at least for now they do
+ '''
+
+
+def available():
+    current_buildings_avail = []
+    if player.position[0] == 0:
+        for building in world["buildings"]:
+            if building.position[1] == player.position[1]:
+                current_buildings_avail.append(building)
+    else:
+        return "Already in a building"
+
+    return current_buildings_avail
+
+
+def enter(building):
+    if building in available():
+        player.position = building.position.append(0)
+        return True
+        # so enter the building the player chose , on ground floor, hence the append 0 for floor number
+    return False
+
+
+def exit_current():
+    if player.position[2] == 0: # if on ground floor
+        player.position = [0, player.position[1], 0]
+        return True
+        # which means back to main road (0) on the level we are (player.position), placeholder ground floor (0)
+    return False
+
+
+def move_room(room, building):
+    if room.name in building.floors[player.position[2]]: # so if the room is in the floor the player is currently in
+        player.room = room
+        return True
+    return False
+
+
+def move_floor(building, move):
+    if move == "up":
+        if building.can_go_up(player.position[2]):
+            player.position[2] += 1
+            return True
+    if move == "down":
+        if building.can_go_down(player.position[2]):
+            player.position[2] -= 1
+            return True
+    return False
+
+
+
+
 
 
 #Test data

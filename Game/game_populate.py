@@ -1,8 +1,13 @@
-from Game.buildings import Building, Room
-from Game.objects import *
-from Game.people import PC, NPC
-from Game.creatures import *
-
+try:
+    from Game.buildings import Building, Room
+    from Game.objects import *
+    from Game.people import PC, NPC
+    from Game.creatures import *
+except:
+    from buildings import Building, Room
+    from objects import *
+    from people import PC, NPC
+    from creatures import *
 """
 Will try to include the names of all the objects ( by category) here, or in another file later so that we actually know
 what is going on without reading the whole script
