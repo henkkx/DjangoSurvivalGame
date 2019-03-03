@@ -29,71 +29,69 @@
 
 
 <!-- This is the start of the navigation bar at the top of the page-->
-<header>
-      <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand" href="{% url 'landing_page' %}">SurvivalGame</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url 'landing_page' %}">SurvivalGame</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'game' %}">Play now</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Learn more
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'instructions' %}">How to play</a>
-                  <a class="dropdown-item" href="{% url 'about' %}">About us</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'game' %}">Play now</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Learn more
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'instructions' %}">How to play</a>
+          <a class="dropdown-item" href="{% url 'about' %}">About us</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
 
-              </ul>
+      </ul>
 
-              <ul class="navbar-nav ml-auto">
-              <!-- <li>
-                <form class="form-inline my-2 my-lg-0">
-                  <input class="form-control mr-sm-2" type="search" placeholder="Search Players" aria-label="Search">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-              </li> -->
-
+      <ul class="navbar-nav ml-auto">
+      <!-- <li>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search Players" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </li> -->
 
 
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'registration_register' %}">
-                    Register Here
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'auth_login' %}">
-                    Login
-                </a>
-              </li>
 
-              <li class="nav-item dropdown ">
-        				<a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"> <i class="fa fa-user-o"></i>  your username <b class="caret"></b></a>
-        				<ul class="dropdown-menu">
-        					<li><a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></li>
-        					<li><a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
-        					<li class="divider dropdown-divider"></li>
-        					<li><a href="{% url 'auth_logout' %}?next=/home/" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a></li>
-        				</ul>
-        			</li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'registration_register' %}">
+            Register Here
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'auth_login' %}">
+            Login
+        </a>
+      </li>
 
-            </ul>
+      <li class="nav-item dropdown ">
+        <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"> <i class="fa fa-user-o"></i>  your username <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></li>
+          <li><a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
+          <li class="divider dropdown-divider"></li>
+          <li><a href="{% url 'auth_logout' %}?next=/home/" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+      </li>
 
-          </div>
-      </nav>
-</header>
+    </ul>
+
+  </div>
+</nav>
 
 <!-- This is where we'll put our page content. blank for now. -->
 
