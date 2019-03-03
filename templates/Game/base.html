@@ -20,7 +20,7 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
-
+    <script src="/static/js/stickyNav.js"></script>
     {% endblock %}
 
     {% block head_css %} {% endblock %}
@@ -30,7 +30,7 @@
 
 <!-- This is the start of the navigation bar at the top of the page-->
 <header>
-      <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark">
           <a class="navbar-brand" href="{% url 'landing_page' %}">SurvivalGame</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
