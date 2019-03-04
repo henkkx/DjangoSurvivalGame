@@ -171,8 +171,57 @@ def drop(player, object_name):
     else:
         return "You dont have an object called {0} in your inventory".format(object_name)
 
+
 def view_inventory(player):
     return player.get_inventory()
+
+
+def converse(player,NPC):
+
+    enemyometer = 5
+
+    print(" You are conversing with " + NPC.name)
+
+    # SQL Dialogue Tree?
+
+    udict = {"Billy": ["Go AWAY Billy" , "Nice to meet you Billy", "Billy can you just leave please i don't like you","what do you call a white tiger, a tiger"]}
+    edict = {"Billy":["hi my names billy", "you cheeky bugger", "Nice to meet you too","go f*** yourself","nice joke pal"]}
+
+    dpos = 0
+
+    uresponse = udict[NPC.name]
+    edict = edict[NPC.name]
+
+
+    
+
+    print("3- Attack")
+    chattree = {"Billy": [" "]}
+    cmdlist = ['1', '2', '3']
+    cmd = getcmd(cmdlist)
+
+
+
+
+
+    if enemyometer < 1:
+        fight(player.inventory["Weapon"][0], NPC, False)
+
+    if enemyometer > 8:
+        print("Would you like to recruit " + NPC.name + "Into your party\n")
+        print("1- Yes")
+        print("2- Nae Chance")
+
+        cmdlist = ['1', '2']
+        cmd = getcmd(cmdlist)
+
+        if cmd == 1:
+            #Method that handles parties
+            return
+        elif cmd == 2:
+            return
+
+
 
 
 #Test data
