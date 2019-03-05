@@ -7,6 +7,8 @@ django.setup()
 from Game.models import Badge
 
 
+
+
 def populate():
     badges = [
         {'name': 'First Blood',
