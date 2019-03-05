@@ -55,7 +55,6 @@ class Building:
 
 
 class Room:
-
     def __init__(self, name, NPCs, creatures, objects, description, pos):
         self.name = name
         self.NPCs = NPCs

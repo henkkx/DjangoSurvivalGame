@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from Game.models import Player
-
+import json
 
 def home(request):
     # if the request is a POST, pull the info & log the user in
@@ -113,3 +113,7 @@ def game(request):
 # @login_required
 def my_profile(request):
     return render(request, 'Game/my_profile.html', {})
+
+
+def test_view(request):
+    return render(request, "Game/game.html", json.dump({"Hello World": "Hello Henrik"}))
