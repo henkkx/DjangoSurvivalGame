@@ -90,7 +90,7 @@ def sign_up(request):
     else:
         user_form = UserForm()
         profile_form = Profile()
-    return render(request, 'Game/sign_up.html',
+    return render(request, 'registration/registration_form.html',
                   {'user_form': user_form,
                    'profile_form': profile_form,
                    'registered': registered})
