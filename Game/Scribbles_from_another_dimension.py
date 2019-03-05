@@ -282,8 +282,8 @@ def converse(player, NPC):
             enemyometer += edict[NPC.name][dpos+1][1+2]
 
         if cmd == '3':
-            enemyometer += -1000
-            break
+            fight(player.inventory["Weapon"][0], NPC, True)
+            return
 
         print(NPC.name, ": ", edict[NPC.name][dpos+1][-1])
         dpos += 1
