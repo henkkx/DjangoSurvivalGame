@@ -113,7 +113,3 @@ def game(request):
 # @login_required
 def my_profile(request):
     return render(request, 'Game/my_profile.html', {})
-
-
-def test_view(request):
-    return render(request, "Game/game.html", json.dump({"Hello World": "Hello Henrik"}))
