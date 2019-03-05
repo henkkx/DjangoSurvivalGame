@@ -16,8 +16,10 @@
 <!--
   <div class="signup__overlay"></div>
 </div> -->
+
+<!-- 
 <div class="container__child signup__form">
-  <form action="#">
+  <form method="POST">
     <div class="form-group">
       <label for="username">Username</label>
       <input class="form-control" type="text" name="username" id="username" placeholder="choose a name for your character" required />
@@ -46,5 +48,12 @@
     </div>
   </form>
 </div>
-</div>
+</div> -->
+
+<h1>Register Here</h1>
+<form method="post" action=".">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Submit"/>
+</form>
 {% endblock %}

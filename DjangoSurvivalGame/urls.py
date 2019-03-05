@@ -23,7 +23,7 @@ from registration.backends.simple.views import RegistrationView
 
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, user):
-        return '/Game/'
+        return '/home'
 
 app_name = 'Game'
 urlpatterns = [
