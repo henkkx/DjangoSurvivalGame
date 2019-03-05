@@ -1,6 +1,10 @@
-from objects import Weapon, Lore, Food
-from people import NPC
-from creatures import Zombie, Spider
+
+# from objects import Weapon, Lore, Food
+# from people import NPC
+# from creatures import Zombie, Spider
+'''
+Imports have been commented out, we shouldn't need them 
+'''
 
 
 class Building:
@@ -10,6 +14,41 @@ class Building:
         self.description = desc
         self.rooms = rooms
         self.position = pos
+        self.floors = {}
+        # for loop below: dict of floors, floor number maps to list of rooms in that floor
+        for room in self.rooms:
+            if room.pos in self.floors.keys():
+                self.floors[room.pos].append(room)
+            else:
+                self.floors[room.pos] = [room]
+
+    def add_room(self, room):
+        self.rooms[room.name] = room
+        # minor repetition of constructor above
+        if room.pos in self.floors.keys():
+            self.floors[room.pos].append(room)
+        else:
+            self.floors[room.pos] = [room]
+
+    def can_go_up(self, pos):
+        return pos + 1 in self.floors.keys()
+
+    def can_go_down(self, pos):
+        return pos - 1 in self.floors.keys()
+
+    def structure(self, pos):
+        message = ""
+        # since not completely sure how (in terms of data structure) player position in , I assume we pass it in
+        # this method as a single integer which is the floor at which the player is at.
+        if self.can_go_down(pos):
+            "".join((message, "You can move one floor down.\n"))
+        elif self.can_go_up(pos):
+            message = "".join((message, "You can move one floor up.\n"))
+        if self.floors[pos] in self.floors.keys():
+            message = "".join((message, "You can enter the following rooms:\n"))
+            for room in self.floors[pos]:  # for room in the floor the player in is
+                message = "\n".join((message, room.name)) # only want the names, description come after we've got in the room
+        return message
 
     def __str__(self):
         return "{0}\n{1}".format(self.name, self.description)
@@ -17,12 +56,13 @@ class Building:
 
 class Room:
 
-    def __init__(self, name, NPCs, creatures, objects, description):
+    def __init__(self, name, NPCs, creatures, objects, description, pos):
         self.name = name
         self.NPCs = NPCs
         self.creatures = creatures
         self.objects = objects
         self.desc = description
+        self.pos = pos
 
     #This function returns a description of the room and everything in it.
     #This is not a perfect implementation but shoudl work fine for our demo.

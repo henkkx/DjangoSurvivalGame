@@ -1,12 +1,17 @@
-from objects import *
+try:
+    from objects import *
+except:
+    from Game.objects import *
+
 
 class PC:
-    def __init__(self, name, level, Room = None, hp=100,):
+    def __init__(self, name, level, position=None, hp=100,):
         self.name = name
         self.hp = hp
         self.max_hp = hp
         self.food = 50
-        self.Room = Room
+        self.position = position
+        self.room = None
         self.level = level
         self.inventory = {"Weapon": [], "Lore": [], "Food": []}
 
@@ -73,6 +78,10 @@ class NPC:
         self.hp = hp
         self.allegiance = allegiance
         self.inventory = inventory
+        if inventory is None:
+            self.ap = 10
+        else:
+            self.ap = inventory["Weapon"][0]
 
     def __str__(self):
         return self.description  # returns the description since we shouldn't know names, just how they look
