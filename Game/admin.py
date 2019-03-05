@@ -9,7 +9,7 @@ These classes allow us to add extra functionality to the admin page.
 delete selected.
 '''
 class PlayerAdmin(admin.ModelAdmin):
-    list_display = ('user', 'most_dayes_survived', 'games_played', 'most_kills', 'most_people', 'most_exp')
+    list_display = ('user', 'most_days_survived', 'games_played', 'most_kills', 'most_people', 'most_exp')
     ordering = ['-most_exp']
     actions = ['reset_games_played']
 
