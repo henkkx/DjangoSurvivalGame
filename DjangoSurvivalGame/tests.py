@@ -24,10 +24,8 @@ class DatabaseTests(TestCase):
     def test_players_have_no_stats_on_create(self):
         user_no = 1
         test_player = Player.objects.get(user=User.objects.get(username="test user {0}".format(user_no)))
-        check = True
         for statistic in test_player.stats:
-            check = statistic == 0
-        self.assertTrue(expr=check)
+            self.assertTrue(expr=statistic == 0)
 
     def test_players_have_data(self):
         user_no = 1
@@ -38,7 +36,16 @@ class DatabaseTests(TestCase):
                         test_player.most_people == user_no*10 and
                         test_player.most_exp == user_no*10)
 
-
-
-
-
+    def test_players_earn_achievements(self):
+        user_nos = [1,2]
+        value = 3
+        for players_no in user_nos:
+            pl = Player(user=User.objects.get(username="test user {0}".format(players_no)))
+            for i in pl.stats:
+                pl.stats[i] += value
+                pl.stats[i] += value
+                pl.stats[i] += value
+            '''Check achievements will be the function that checks & gives out the achievements, implemented later'''
+            # check_achievements(pl)
+            for i in pl.stats:
+                self.assertTrue(expr=pl.stats[i] == value)

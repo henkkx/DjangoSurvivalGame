@@ -13,7 +13,7 @@ class Player(models.Model):
     most_people = models.IntegerField(default=0)
     most_exp = models.IntegerField(default=0)
     current_game = {'inventory': [], 'stats': {}, 'maps': {}}
-    stats = {"kills": 0, "houses":0, "people": 0}
+    stats = {"kills": 0, "houses": 0, "people": 0}
 
     '''
     Just have this to remember how to pickle in & out when I create the function later
