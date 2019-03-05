@@ -144,6 +144,8 @@ def getcmd(cmdlist):
 
 #Allows the user to pick_up an item from the current room
 def pick_up(player, object_name):
+    if player.room == None:
+        return "You are not in a room"
     room_objects = player.room.objects
     #Checks the room actually contains objects
     if room_objects:
@@ -164,6 +166,9 @@ def pick_up(player, object_name):
 
 #Allows the player to drop an object to the floor
 def drop(player, object_name):
+
+    if player.room == None:
+        return "You must be within a room to drop an item"
 
     #if the players inventory is empty stop here
     if player.inventory_empty():
@@ -323,7 +328,7 @@ Barney = NPC("Barney", "A tall, fat man.", "long description", 100, "Chaotic Neu
 Billy = NPC("Billy", "A short, thin man.", "long description", 100, "Chaotic Neutral", None)
 dark_room = Room("Spooky Room", [Barney, Billy], [Zombie1, Spider, Zombie2], [weapon1, lore1], " a dark dillapidated room with no windows", None)
 player = PC("username", 6, position = None)
-player.room = dark_room
+#player.room = dark_room
 
 
 #Tests
