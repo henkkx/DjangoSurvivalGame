@@ -59,3 +59,6 @@ def populate():
 def add_badge(name, desc, criteria, type_of):
     badge = Badge.objects.get_or_create(name=name, description=desc, criteria=criteria, type=type_of)
     return badge
+
+if __name__ == "__main__":
+    populate()

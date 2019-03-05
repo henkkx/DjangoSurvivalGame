@@ -144,7 +144,9 @@ def getcmd(cmdlist):
 
 #Allows the user to pick_up an item from the current room
 def pick_up(player, object_name):
-    room_objects = player.Room.objects
+    if player.room == None:
+        return "You are not in a room"
+    room_objects = player.room.objects
     #Checks the room actually contains objects
     if room_objects:
         for objec in room_objects:
@@ -165,6 +167,9 @@ def pick_up(player, object_name):
 #Allows the player to drop an object to the floor
 def drop(player, object_name):
 
+    if player.room == None:
+        return "You must be within a room to drop an item"
+
     #if the players inventory is empty stop here
     if player.inventory_empty():
         return "Your inventory is empty. There is nothing drop"
@@ -174,10 +179,11 @@ def drop(player, object_name):
     
     #player.remove_item() returns true or false depending on whether or not the object could be removed.
     if objec:
-        player.Room.objects.append(objec)
+        player.room.objects.append(objec)
         return "You dropped {0}.".format(object_name)
     else:
         return "You dont have an object called {0} in your inventory".format(object_name)
+
 
 def view_inventory(player):
     return player.get_inventory()
@@ -244,6 +250,70 @@ def move_floor(building, move):
     return False
 
 
+def converse(player, NPC):
+
+    enemyometer = 5
+
+    print("You are conversing with " + NPC.name ,"\n")
+
+    # SQL Dialogue Tree?
+
+    edict = {"Billy": {0: ["My Name is Billy"], 1: ["you cheeky bugger", -11, "nice to meet you", 12,
+                                                       "Would you like some Vbucks kid"]}}
+
+    udict = {"Billy": {0: ["Nah mate leave me alone", "Hi there sir"]}}
+    dpos = 0
+
+    print(NPC.name, ": ", edict[NPC.name][dpos][0])
+
+    while dpos < 1:
+
+        print("1-" , udict[NPC.name][dpos][0])
+        print("2-", udict[NPC.name][dpos][1])
+        print("3- Attack")
+        cmdlist = ['1', '2', '3']
+        cmd = getcmd(cmdlist)
+
+        if cmd == '1':
+            print("You : ", udict[NPC.name][dpos][0], "\n")
+            print(NPC.name, ": ", edict[NPC.name][dpos+1][0])
+
+            enemyometer += edict[NPC.name][dpos+1][0+1]
+
+        if cmd == '2':
+            print("You : ", udict[NPC.name][dpos][1], "\n")
+            print(NPC.name, ": ", edict[NPC.name][dpos+1][2])
+
+            enemyometer += edict[NPC.name][dpos+1][1+2]
+
+        if cmd == '3':
+            fight(player.inventory["Weapon"][0], NPC, True)
+            return
+
+        print(NPC.name, ": ", edict[NPC.name][dpos+1][-1])
+        dpos += 1
+
+        if enemyometer < 1:
+            break
+
+        continue
+
+    if enemyometer < 1:
+        fight(player.inventory["Weapon"][0], NPC, False)
+
+    if enemyometer > 8:
+        print(NPC.name + " Really likes you, Would you like to recruit " + NPC.name + " Into your party\n")
+        print("1- Yes")
+        print("2- Nae Chance")
+
+        cmdlist = ['1', '2']
+        cmd = getcmd(cmdlist)
+
+        if cmd == 1:
+            #Method that handles parties
+            return
+        elif cmd == 2:
+            return
 
 
 
@@ -256,22 +326,30 @@ weapon1 = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes 
 lore1 = Lore("Necronomicon", "Book of dead names. Read at your own peril", 1, "Ph\'nglui mglw\'nafh Cthulhu R\'lyeh wgah\'nagl fhtagn")
 Barney = NPC("Barney", "A tall, fat man.", "long description", 100, "Chaotic Neutral", None)
 Billy = NPC("Billy", "A short, thin man.", "long description", 100, "Chaotic Neutral", None)
-dark_room = Room("Spooky Room", [Barney, Billy], [Zombie1, Spider, Zombie2], [weapon1, lore1], " a dark dillapidated room with no windows")
-player = PC("username", 6, Room = dark_room)
+dark_room = Room("Spooky Room", [Barney, Billy], [Zombie1, Spider, Zombie2], [weapon1, lore1], " a dark dillapidated room with no windows", None)
+player = PC("username", 6, position = None)
+#player.room = dark_room
+
 
 #Tests
-print(inspect(player.Room))
-print(inspect(player.Room, player.level, "apple"))
+#print(inspect(player.room))
+#print(inspect(player.room, player.level, "apple"))
 
 #Inventory test
+
 print("\nInventory Tests:\n")
 print(view_inventory(player))
 print(drop(player, "iten"))
-print(inspect(player.Room, player.level, "Lore"))
+print(inspect(player.room, player.level, "Lore"))
 print(pick_up(player, "Necronomicon"))
 print(view_inventory(player))
-print(inspect(player.Room, player.level, "Lore"))
+print(inspect(player.room, player.level, "Lore"))
 print(drop(player, "Necro"))
 print(drop(player, "Necronomicon"))
-print(inspect(player.Room, player.level, "Lore"))
+print(inspect(player.room, player.level, "Lore"))
 #fight(weapon1,Zombie1,True)
+
+
+#player = PC("username", 6, None)
+player.add_item(Weapon("na","na",12,12,22))
+converse(player, Billy)

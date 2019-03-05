@@ -78,6 +78,10 @@ class NPC:
         self.hp = hp
         self.allegiance = allegiance
         self.inventory = inventory
+        if inventory is None:
+            self.ap = 10
+        else:
+            self.ap = inventory["Weapon"][0]
 
     def __str__(self):
         return self.description  # returns the description since we shouldn't know names, just how they look
