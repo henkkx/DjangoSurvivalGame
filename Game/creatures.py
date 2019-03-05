@@ -3,9 +3,10 @@ from abc import ABC, abstractmethod
 
 class Creature(ABC):
 
-    def __init__(self, name, hp, ap, vulnerability, immune, pl):
+    def __init__(self, name, desc, hp, ap, vulnerability, immune, pl):
 
         self.name = name
+        self.description = desc
         self.hp = hp
         self.ap = ap
         self.vulnerability = vulnerability

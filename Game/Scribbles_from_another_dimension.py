@@ -28,10 +28,10 @@ world = {'buildings': houses, 'objects': road_objects, 'people': road_people}
 #This function displays information about the specified object or creature.
 #If no arguments are passed the current room will be described.
 #It makes use of the get_description method in the rooms class. Take a look.
-def inspect(room, pl = 1, entity = None):
-    if room == None:
+def inspect(room, pl=1, entity=None):
+    if room is None:
         return "You are on the street"
-    if entity == None:
+    if entity is None:
         return room.get_description()
 
     #if there are creatures in the room that match the entity then output info about these creatures
@@ -64,7 +64,7 @@ def inspect(room, pl = 1, entity = None):
     return "There are no entities matching {0}".format(entity)
 
 
-def fight(weapon, creatures,launch):
+def fight(weapon, creatures, launch):
 
     enemyap = 0
     enemyhp = 0
@@ -133,7 +133,8 @@ def fight(weapon, creatures,launch):
         elif enemyhp < 1:
             print("A swift an decisive slaughter Ghandi would be honored to witness such a spectacle")
 
-# Temporary Method To Get Comand line input
+
+# Temporary Method To Get Command line input
 def getcmd(cmdlist):
     cmd = input('\nYou:> ')
     if cmd in cmdlist:
@@ -142,12 +143,13 @@ def getcmd(cmdlist):
         print('\n   error. invalid command-\n')
         return getcmd(cmdlist)
 
-#Allows the user to pick_up an item from the current room
+
+# Allows the user to pick_up an item from the current room
 def pick_up(player, object_name):
     if player.room == None:
         return "You are not in a room"
     room_objects = player.room.objects
-    #Checks the room actually contains objects
+    # Checks the room actually contains objects
     if room_objects:
         for objec in room_objects:
             if objec.name == object_name:
@@ -225,14 +227,15 @@ def enter(building):
 
 def exit_current():
     if player.position[2] == 0: # if on ground floor
-        player.position = [0, player.position[1], 0]
+        player.position = [0, player.position[1]+1, 0]
+        player.room = None
         return True
         # which means back to main road (0) on the level we are (player.position), placeholder ground floor (0)
     return False
 
 
-def move_room(room, building):
-    if room.name in building.floors[player.position[2]]: # so if the room is in the floor the player is currently in
+def move_room(room):
+    if room.name in Building.objects.get(position=player.position[:-1]): # so if the room is in the floor the player is currently in
         player.room = room
         return True
     return False
