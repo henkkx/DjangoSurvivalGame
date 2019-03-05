@@ -8,10 +8,15 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+from Game.models import Player
 
 
 def home(request):
     # if the request is a POST, pull the info & log the user in
+
+    playerList = Player.objects.order_by('-most_kills')[:5]
+
+
     if request.method == "POST":
 
         username = request.POST.get('username')
@@ -39,7 +44,7 @@ def home(request):
 
     else:
 
-        return render(request, 'Game/home.html', {})
+        return render(request, 'Game/home.html', {"players":playerList})
 
 def landing_page(request):
     return render(request, "Game/landing_page.html")
@@ -85,7 +90,7 @@ def sign_up(request):
     else:
         user_form = UserForm()
         profile_form = Profile()
-    return render(request, 'Game/sign_up.html',
+    return render(request, 'registration/registration_form.html',
                   {'user_form': user_form,
                    'profile_form': profile_form,
                    'registered': registered})
@@ -105,6 +110,6 @@ def game(request):
         return render(request, 'Game/game.html', {'user': request.user})
 
 
-@login_required
+# @login_required
 def my_profile(request):
-    return render(request, 'Game/my_account.html', {})
+    return render(request, 'Game/my_profile.html', {})
