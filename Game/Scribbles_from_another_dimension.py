@@ -247,21 +247,23 @@ def move_floor(building, move):
 
 def converse(player, NPC):
 
-    enemyometer = 5
+    enemyometer = 5  # NPC anger levels
 
     print("You are conversing with " + NPC.name ,"\n")
 
-    # SQL Dialogue Tree?
+    #Dialogue For Characaters And User Responses
 
     edict = {"Billy": {0: ["My Name is Billy"], 1: ["you cheeky bugger", -11, "nice to meet you", 12,
-                                                       "Would you like some Vbucks kid"]}}
+                                "Would you like some Vbucks kid"], 99: ["You bastard I will destroy you "], 101: 1}}
 
     udict = {"Billy": {0: ["Nah mate leave me alone", "Hi there sir"]}}
-    dpos = 0
+    dpos = 0  # Position in Conversation, User response indexed in dict using dpos, In edict npc responses
+              # indexed using dpos+1 because of inital message from character when conversation starts
 
-    print(NPC.name, ": ", edict[NPC.name][dpos][0])
+    print(NPC.name, ": ", edict[NPC.name][dpos][0])  # initial message at index 0 from NPC when conversing
+    lengthofconvo = edict[NPC.name][101]             # length of the conversation kept in dict with key value 101
 
-    while dpos < 1:
+    while dpos < lengthofconvo:
 
         print("1-" , udict[NPC.name][dpos][0])
         print("2-", udict[NPC.name][dpos][1])
@@ -294,6 +296,7 @@ def converse(player, NPC):
         continue
 
     if enemyometer < 1:
+        print(NPC.name + " : " + edict[NPC.name][99][0] + "\n") # dict with key value 99 shows pre fight message
         fight(player.inventory["Weapon"][0], NPC, False)
 
     if enemyometer > 8:
@@ -344,6 +347,9 @@ print(inspect(player.Room, player.level, "Lore"))
 #fight(weapon1,Zombie1,True)
 '''
 
+# Converse Tests
+'''
 player = PC("username", 6, None)
 player.add_item(Weapon("na","na",12,12,22))
 converse(player, Billy)
+'''
