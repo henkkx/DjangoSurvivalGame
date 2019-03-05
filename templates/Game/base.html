@@ -1,34 +1,27 @@
-<!-- This loads of all of files that you call below from your 'static' folder -->
+
 {% load static %}
-<!--The static folder consists of your bootstrap files (.css, .js, fonts, etc)-->
-<!--When you load the static folders is calls all those folders in the static files without having to code each one in individually-->
 
 <html>
   <head>
-    <!--This is the meta information which is good for SEO-->
     {% block head_meta %}
   	<meta charset="utf-8">
-  	<!--Add keywords that describe your project between the quotation marks. This helps search engines find and home your content-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 
-    <!-- jQuery library -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 
-    <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
+    <script src="/static/js/stickyNav.js"></script>
     {% endblock %}
-
-    {% block title %} {% endblock %}
 
     {% block head_css %} {% endblock %}
 
@@ -36,45 +29,71 @@
 
 
 <!-- This is the start of the navigation bar at the top of the page-->
-<header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand" href="{% url 'landing_page' %}">SurvivalGame</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url 'landing_page' %}">SurvivalGame</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'game' %}">Play now</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Learn more
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'instructions' %}">How to play</a>
-                  <a class="dropdown-item" href="{% url 'about' %}">About us</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
-              <li class="nav-item">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'game' %}">Play now</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Learn more
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'instructions' %}">How to play</a>
+          <a class="dropdown-item" href="{% url 'about' %}">About us</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
 
-              </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search Players" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-          </div>
-      </nav>
-</header>
+      </ul>
 
-<!-- This is where you'll put your page content. Leave it blank for now. -->
+      <ul class="navbar-nav ml-auto">
+      <!-- <li>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search Players" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </li> -->
+
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'registration_register' %}">
+            Register Here
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'auth_login' %}">
+            Login
+        </a>
+      </li>
+
+      <li class="nav-item dropdown ">
+        <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"> <i class="fa fa-user-o"></i>  your username <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></li>
+          <li><a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
+          <li class="divider dropdown-divider"></li>
+          <li><a href="{% url 'auth_logout' %}?next=/home/" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+      </li>
+
+    </ul>
+
+  </div>
+</nav>
+
+<!-- This is where we'll put our page content. blank for now. -->
 
 {% block content %} {% endblock %}
 
@@ -86,6 +105,4 @@
       DjangoSurvivalGame &copy; Henrik, Marios, Ensi, Matthew
   </div>
 </footer>
-<!--This is my javascript block. If you've included the javascript files you need in the 'static' folder then there's no need to
-put this here and you can delete the block below.-->
 </html>

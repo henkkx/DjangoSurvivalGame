@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+
+
 class Creature(ABC):
 
     def __init__(self, name, hp, ap, vulnerability, immune, pl):
@@ -11,10 +13,9 @@ class Creature(ABC):
         self.power_level = pl
         super().__init__()
 
-    #Returns the type of the creature i.e Spider.
+    # Returns the type of the creature i.e Spider.
     def get_type(self):
         return self.__class__.__name__
-
 
     """ This can be used if monsters are to be fought individually
     returns a string which can be used to inform the player of the monsters
@@ -30,7 +31,6 @@ class Creature(ABC):
         elif difference < 1:
             return "They look tough"
 
-    
     @abstractmethod
     def __str__(self):
         return "{0} ({1}, Health Points : {2}, Difficulty : {3} )".format(self.name, self.type, self.hp
@@ -63,7 +63,7 @@ class hellhound(Creature):
                 self.power_level))
 
 
-class ghoul(Creature):
+class Ghoul(Creature):
 
     def __init__(self, name, pl):
         hp = 4 * pl
