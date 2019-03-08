@@ -8,11 +8,12 @@ class Player(models.Model):
     user = models.OneToOneField(User)
     picture = models.ImageField(upload_to='profile_images', blank=True)
     games_played = models.IntegerField(default=0)
-    most_dayes_survived = models.IntegerField(default=0)
+    most_days_survived = models.IntegerField(default=0)
     most_kills = models.IntegerField(default=0)
     most_people = models.IntegerField(default=0)
     most_exp = models.IntegerField(default=0)
     current_game = {'inventory': [], 'stats': {}, 'maps': {}}
+    stats = {"kills": 0, "houses": 0, "people": 0}
 
     '''
     Just have this to remember how to pickle in & out when I create the function later

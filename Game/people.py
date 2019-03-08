@@ -66,9 +66,7 @@ class PC:
             inventory_list.extend(item_list)
 
         return inventory_list
-        
 
-    
 
 class NPC:
     def __init__(self, name, short_description,long_description, hp, allegiance, inventory):
