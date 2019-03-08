@@ -325,17 +325,17 @@ def converse(player, NPC):
 
 
 #Test data
-Zombie1 = Zombie("timmy",10)
-Zombie2 = Zombie("tommy",3)
-Spider = Spider("Shelob", 5)
-weapon1 = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 10, 2)
-lore1 = Lore("Necronomicon", "Book of dead names. Read at your own peril", 1, "Ph\'nglui mglw\'nafh Cthulhu R\'lyeh wgah\'nagl fhtagn")
-Barney = NPC("Barney", "A tall, fat man.", "long description", 100, "Chaotic Neutral", None)
-Billy = NPC("Billy", "A short, thin man.", "long description", 100, "Chaotic Neutral", None)
-dark_room = Room("Spooky Room", [Barney, Billy], [Zombie1, Spider, Zombie2], [weapon1, lore1], " a dark dillapidated room with no windows", None)
-player = PC("username", 6, position = None)
+# Zombie1 = Zombie("timmy",10)
+# Zombie2 = Zombie("tommy",3)
+# Spider = Spider("Shelob", 5)
+# weapon1 = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 10, 2)
+# lore1 = Lore("Necronomicon", "Book of dead names. Read at your own peril", 1, "Ph\'nglui mglw\'nafh Cthulhu R\'lyeh wgah\'nagl fhtagn")
+# Barney = NPC("Barney", "A tall, fat man.", "long description", 100, "Chaotic Neutral", None)
+# Billy = NPC("Billy", "A short, thin man.", "long description", 100, "Chaotic Neutral", None)
+# dark_room = Room("Spooky Room", [Barney, Billy], [Zombie1, Spider, Zombie2], [weapon1, lore1], " a dark dillapidated room with no windows", None)
+# player = PC("username", 6, position = None)
 #player.room = dark_room
-
+player = PC("username", 6, position=None)
 
 #Tests
 #print(inspect(player.room))
