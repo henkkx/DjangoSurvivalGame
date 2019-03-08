@@ -37,22 +37,45 @@ def handle(text_in):
     json.dump(output_dict)
 
 
-def available_actions(placement):
+def available_actions():
     data_post = {}
-
-    if placement == "inside":
+    '''REMEMBER TO CHANGE THE TOWER POSITION BELOW '''
+    tower = Building.tower
+    if player.position[0] != 0 or player.position[:-1] == [0, 5]:  # so if the player is in a building.
         data_post["move"] = {}
-        if not (player.room.objects == {}):
-            for obj in player.room.objects:
-                data_post["objects"][obj.name] = obj.name
-        for room in Building.objects.get(position=player.position[:-1]).rooms:
+        if player.room is not None:  # these are only done if we actually are in a room
+            if not (player.room.objects == {}):
+                for obj in player.room.objects:
+                    data_post["objects"][obj.name] = obj.name
+            if not player.room.creatures == {}:
+                for creature in player.room.creatures:
+                    data_post["fight"][creature.name] = {creature.description}
+            if not player.room.NPC == {}:
+                for npc in player.room.NPCs:
+                    data_post["npcs"][NPC.name] = NPC.desc_L
+        # from here on out, it's where we can move IF in a room, so it doesn't matter if we are in a room ,
+        # just that we are in a building
+        current_building = Building.objects.get(position=player.position[:-1])
+        for room in current_building.rooms:
             if room.pos == player.position[2]:
                 data_post['move'][room.name] = [room.name]
-        if not player.room.creatures == {}:
-            for creature in player.room.creatures:
-                data_post["creatures"][creature.name] = {creature.description}
-        if not player.room.NPC == {}:
-            for npc in player.room.NPCs:
-                data_post["npcs"][NPC.name] = NPC.desc_L
+        if current_building.can_go_up(player.position[2]):
+            data_post['floor up']
+        if current_building.can_go_down(player.position[2]):
+            data_post['floor down']
+        data_post["exit"]
+        for item in player.inventory["Lore"]:
+            data_post['read'][item.name] = [item.text]
+        for item in player.inventory["Food"]:
+            data_post['consume'][item.name] = [item.name]
+    else:  # if not in a building ( so in the main road )
+        for building in Building.objects.get(position=player.position[:-1]):
+            data_post["enter"][building.name] = building.description
+
+    return data_post
+
+
+
+
 
 

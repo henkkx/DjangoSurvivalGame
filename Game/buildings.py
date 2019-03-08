@@ -8,6 +8,7 @@ Imports have been commented out, we shouldn't need them
 
 
 class Building:
+    tower = 5
 
     def __init__(self, name, desc, rooms, pos):
         self.name = name
