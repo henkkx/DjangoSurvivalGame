@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from Game.models import Player
+from Game.game_handler import *
 import json
 
 def home(request):
@@ -113,3 +114,8 @@ def game(request):
 # @login_required
 def my_profile(request):
     return render(request, 'Game/my_profile.html', {})
+
+
+def test_view(request):
+    if request.method == "POST":
+        print(request)
