@@ -24,9 +24,10 @@ urlpatterns = [
     url(r'^about', views.about, name='about'),
     url(r'^instructions', views.instructions, name='instructions'),
     url(r'^sign_up', views.sign_up, name='sign_up'),
-    url(r'^game', views.game, name='game'),
+    url(r'^game', views.my_test, name='game'),
     url(r'^my_profile', views.my_profile, name='my_profile'),
     url(r'^test', views.test_view, name="test"),
+    url(r'^test2', views.test_view2, name="test"),
 ]
 
 '''
