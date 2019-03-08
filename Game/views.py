@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from Game.models import Player
+from Game.game_handler import *
 import json
 from django.http import JsonResponse
 
@@ -116,6 +117,7 @@ def my_profile(request):
     return render(request, 'Game/my_profile.html', {})
 
 
+
 def test_view(request):
     
     render(request, "Game/gamePage.html")
@@ -130,3 +132,18 @@ def jsonreturn():
     }
     return JsonResponse(data)
     return render(request, 'Game/my_profile.html', {})
+def my_test(request):
+    return render(request, "Game/gamePage.html",{})
+
+def test_view(request):
+    if request.method == "POST":
+        test_handle(request.POST)
+    else:
+        print("Not a POST request something is wrong here.")
+
+def test_view2(request):
+    if request.method == "GET":
+        return "returning this"
+    else:
+        print("Not a POST request something is wrong here.")
+
