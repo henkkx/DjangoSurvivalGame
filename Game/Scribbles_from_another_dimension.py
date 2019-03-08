@@ -28,7 +28,9 @@ world = {'buildings': houses, 'objects': road_objects, 'people': road_people}
 #This function displays information about the specified object or creature.
 #If no arguments are passed the current room will be described.
 #It makes use of the get_description method in the rooms class. Take a look.
-def inspect(room, pl = 1, entity = None):
+def inspect(player, entity = None):
+    room = player.room
+    pl = player.level
     if room == None:
         return "You are on the street"
     if entity == None:
@@ -357,15 +359,15 @@ player.room = dark_room
 print("\nInventory Tests:\n")
 print(view_inventory(player))
 print(drop(player, "iten"))
-print(inspect(player.room, player.level, "Lore"))
+print(inspect(player, "Lore"))
 print(pick_up(player, "Necronomicon"))
 print(view_inventory(player))
-print(inspect(player.room, player.level, "Lore"))
+print(inspect(player, "Lore"))
 print(drop(player, "Necro"))
 print(drop(player, "Necronomicon"))
-print(inspect(player.room, player.level, "Lore"))
-print(inspect(player.room))
-print(inspect(player.room, player.level, "Food"))
+print(inspect(player, "Lore"))
+print(inspect(player))
+print(inspect(player, "Food"))
 print(view_inventory(player))
 print(pick_up(player, "Cake"))
 print(view_inventory(player))
@@ -375,6 +377,7 @@ print(consume(player, "Apple"))
 print(consume(player, "Cake"))
 print(view_inventory(player))
 print(consume(player, "Apple"))
+print(inspect(player))
 #fight(weapon1,Zombie1,True)
 
 
