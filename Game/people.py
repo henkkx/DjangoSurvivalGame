@@ -9,7 +9,8 @@ class PC:
         self.name = name
         self.hp = hp
         self.max_hp = hp
-        self.food = 50
+        self.hunger = 50
+        self.max_hunger = 50
         self.position = position
         self.room = None
         self.level = level
@@ -20,7 +21,7 @@ class PC:
 
     #adds item to inventory unless it is already stored.
     def add_item(self, item):
-        if item not in self.inventory[item.get_type()]:
+        if item not in self.inventory[item.get_type()] or item.get_type() == "Food":
             self.inventory[item.get_type()].append(item)
             return True
         else:
@@ -43,7 +44,7 @@ class PC:
         for kind in self.inventory:
             items = self.inventory[kind]
             if items:
-                output.append("You have {0} {1}(s):".format(len(items), kind))
+                output.append("You have {0} {1} item(s):".format(len(items), kind))
                 for item in items:
                     output.append(item.__str__())
                 output.append("")
@@ -67,6 +68,20 @@ class PC:
 
         return inventory_list
 
+    def eat(self, food):
+        self.remove_item(food.name)
+        if (self.hunger + food.nutrients) > self.max_hunger:
+            self.hunger = self.max_hunger
+        else:
+            self.hunger += food.nutrients
+
+        if (self.hp + food.hp_regen) > self.max_hp:
+            self.hp = self.max_hp
+        else:
+            self.hp += food.hp_regen
+        
+        return "Ate {0}. Hunger is now {1}/{2}. Health is now {3}/{4}".format(food.name, self.hunger, self.max_hunger, self.hp, self.max_hp)
+
 
 class NPC:
     def __init__(self, name, short_description,long_description, hp, allegiance, inventory):
@@ -89,6 +104,13 @@ class NPC:
 
 player = PC("Ban", 10)
 sword = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 10, 2)
+cake = Food("Cake", "A delicious sponge cake", 1, 5, 10)
 print(player.add_item(sword))
 print(player.add_item(sword))
+print(player.add_item(cake))
+print(player.add_item(cake))
+player.hp -= 15
+player.hunger -= 10
+print(player.get_inventory())
+print(player.eat(cake))
 print(player.get_inventory())
