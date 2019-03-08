@@ -55,9 +55,10 @@ class Lore(Objects):
         return (self.text)
 
 class Food(Objects):
-    def __init__(self, name, desc, size, nutrients):
+    def __init__(self, name, desc, size, nutrients, hp_regen):
         super().__init__(name, desc, size)
         self.nutrients = nutrients
+        self.hp_regen = hp_regen
         #nutrients is a place holder until we work out how the eating sytem works
         
         
@@ -65,12 +66,12 @@ class Food(Objects):
         
     #self.__name__ prints the class name.
     def __str__(self):
-        return ("Type: {0} item, Name: {1}, Size: {2}, Nutrional Value: {3}\nDescription: {4}".format(self.__class__.__name__, self.name, self.size, self.nutrients, self.desc))
+        return ("Type: {0} item, Name: {1}, Size: {2}, Nutrional Value: {3}, Health Regen: {4}\nDescription: {5}".format(self.__class__.__name__, self.name, self.size, self.nutrients, self. hp_regen, self.desc))
 
     def read(self):
         return ("How are you gonna read a {0}?".format(self.name))
 
-"""
+
 weapon1 = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 1000, 2)
 print("Weapon Example: ")
 weapon1.__str__()
@@ -82,7 +83,7 @@ lore1.__str__()
 lore1.read()
 print()
 print("Food Example: ")
-food1 = Food("Cake", "A delicious sponge cake", 1, 5)
-food1.__str__()
+food1 = Food("Cake", "A delicious sponge cake", 1, 5, 10)
+print(food1.__str__())
 food1.read()
-"""         
+     
