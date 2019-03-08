@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from Game.models import Player
 import json
+from django.http import JsonResponse
 
 def home(request):
     # if the request is a POST, pull the info & log the user in
@@ -116,4 +117,15 @@ def my_profile(request):
 
 
 def test_view(request):
-    return render(request, "Game/game.html", json.dump({"Hello World": "Hello Henrik"}))
+    
+    render(request, "Game/gamePage.html")
+
+
+def jsonreturn():
+    data = data = {
+        'name': 'abc',
+        'location': 'Finland',
+        'is_active': True,
+        'count': 999
+    }
+    return JsonResponse(data)
