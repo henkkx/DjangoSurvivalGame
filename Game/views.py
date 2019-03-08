@@ -129,3 +129,4 @@ def jsonreturn():
         'count': 999
     }
     return JsonResponse(data)
+    return render(request, 'Game/my_profile.html', {})
