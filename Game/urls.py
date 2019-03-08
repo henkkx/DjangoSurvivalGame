@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^game', views.game, name='game'),
     url(r'^my_profile', views.my_profile, name='my_profile'),
     url(r'^test', views.test_view, name="test"),
+    url(r'^ajax', views.jsonreturn, name="ajax"),
 ]
 
 '''
