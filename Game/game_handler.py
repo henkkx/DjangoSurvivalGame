@@ -40,10 +40,10 @@ def handle(text_in):
 def available_actions():
     data_post = {}
     '''REMEMBER TO CHANGE THE TOWER POSITION BELOW '''
-    tower = 5
-    if player.position[0] != 0 or player.position[:-1] == [0,5]: # so if the player is in a building.
+    tower = Building.tower
+    if player.position[0] != 0 or player.position[:-1] == [0, 5]:  # so if the player is in a building.
         data_post["move"] = {}
-        if player.room is not None: # these are only done if we actually are in a room
+        if player.room is not None:  # these are only done if we actually are in a room
             if not (player.room.objects == {}):
                 for obj in player.room.objects:
                     data_post["objects"][obj.name] = obj.name
@@ -71,6 +71,8 @@ def available_actions():
     else:  # if not in a building ( so in the main road )
         for building in Building.objects.get(position=player.position[:-1]):
             data_post["enter"][building.name] = building.description
+
+    return data_post
 
 
 
