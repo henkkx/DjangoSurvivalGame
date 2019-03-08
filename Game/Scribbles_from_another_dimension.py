@@ -10,7 +10,7 @@ try:
     from buildings import Building, Room
     from people import PC, NPC
     from creatures import Zombie, Spider
-    from objects import Weapon, Lore
+    from objects import Weapon, Lore, Food
 except:
     # imports are different on Mac & on Windows so we have to do this
     from Game.buildings import Building, Room
@@ -318,6 +318,18 @@ def converse(player, NPC):
         elif cmd == 2:
             return
 
+def consume(player, food_name):
+    if player.inventory["Food"] == []:
+        return "You arent carrying any food."
+
+    food_list = player.inventory["Food"]
+    for food in food_list:
+        if food.name == food_name:
+            return player.eat(food)
+        
+    return "You dont have any food items with the name {0}".format(food_name)
+    
+
 
 
 
@@ -329,7 +341,9 @@ weapon1 = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes 
 lore1 = Lore("Necronomicon", "Book of dead names. Read at your own peril", 1, "Ph\'nglui mglw\'nafh Cthulhu R\'lyeh wgah\'nagl fhtagn")
 Barney = NPC("Barney", "A tall, fat man.", "long description", 100, "Chaotic Neutral", None)
 Billy = NPC("Billy", "A short, thin man.", "long description", 100, "Chaotic Neutral", None)
-dark_room = Room("Spooky Room", [Barney, Billy], [Zombie1, Spider, Zombie2], [weapon1, lore1], " a dark dillapidated room with no windows", None)
+cake = Food("Cake", "A delicious sponge cake", 1, 5, 10)
+
+dark_room = Room("Spooky Room", [Barney, Billy], [Zombie1, Spider, Zombie2], [weapon1, lore1, cake, cake, cake], " a dark dillapidated room with no windows", None)
 player = PC("username", 6, position = None)
 player.room = dark_room
 
@@ -350,6 +364,17 @@ print(inspect(player.room, player.level, "Lore"))
 print(drop(player, "Necro"))
 print(drop(player, "Necronomicon"))
 print(inspect(player.room, player.level, "Lore"))
+print(inspect(player.room))
+print(inspect(player.room, player.level, "Food"))
+print(view_inventory(player))
+print(pick_up(player, "Cake"))
+print(view_inventory(player))
+player.hp -= 15
+player.hunger -= 10
+print(consume(player, "Apple"))
+print(consume(player, "Cake"))
+print(view_inventory(player))
+print(consume(player, "Apple"))
 #fight(weapon1,Zombie1,True)
 
 
