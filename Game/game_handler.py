@@ -16,6 +16,10 @@ except:
     from Game.Scribbles_from_another_dimension import *
 
 
+def test_handle(text_in):
+    print(text_in.cmd)
+
+
 def handle(text_in):
     cmds = text_in.split(",")
     output_dict = {}

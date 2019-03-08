@@ -1,4 +1,5 @@
 {% extends 'Game/base.html' %}
+
 {% block head_css %}
 <script src="/static/js/testajax.js"></script>
 {% endblock %}
@@ -7,5 +8,96 @@
 
 <button id="test">this is a test</button>
 
+
+
+{% load staticfiles %}
+
+{% block head_css %}
+{% endblock %}
+
+{% block content %}
+<script type="text/javascript">
+        function test_fun() {
+            alert("This ok")
+            var query = "command=move";
+            $.ajax({
+              type: "GET",
+              url: "/test2",
+              data: {cmd: "cmd",
+                  room:"room"
+              }
+
+            }).done(function(data) {
+                alert(data)
+                alert("Kinda works?");
+            });
+
+            alert("This too")
+            $("#test").click(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "/test",
+                    data: {
+                        id: $(this).val(), // < note use of 'this' here
+                        access_token: $("#access_token").val()
+                    },
+                    success: function(result) {
+                        alert('ok');
+                    },
+                    error: function(result) {
+                        alert('error');
+                    }
+                 });
+        })}
+    </script>
+<div id="demo">
+<h2>Let AJAX change this text</h2>
+<button id = "test" type="button" onclick="test_fun()">BTN</button>
+</div>
+<div>
+$(document).ready(function() {
+    $("#test").click(function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "/test",
+        data: {
+            id: $(this).val(), // < note use of 'this' here
+            access_token: $("#access_token").val()
+        },
+        success: function(result) {
+            alert('ok');
+        },
+        error: function(result) {
+            alert('error');
+        }
+    });
+});
+</div>
+
+
+$('#Test').click(function () {
+    var query = "command move";
+    $.ajax({
+      type: "POST",
+      url: "/test",
+      data: query,
+      datatype: "json",
+    }).done(function(data) {
+       alert(data)
+    });
+});
+$('#Test2').click(function () {
+    var query = "command move";
+    $.ajax({
+      type: "POST",
+      url: "/test",
+      data: query,
+      datatype: "json",
+    }).done(function(data) {
+       alert(data)
+    });
+});
 
 {% endblock %}
