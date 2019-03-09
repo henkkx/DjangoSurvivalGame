@@ -1,4 +1,6 @@
 from django.test import TestCase
+from django.contrib.staticfiles import finders
+from django.urls import reverse
 from Game.models import *
 from Game.forms import *
 from Game.views import *
@@ -49,3 +51,44 @@ class DatabaseTests(TestCase):
             # check_achievements(pl)
             for i in pl.stats:
                 self.assertTrue(expr=pl.stats[i] == value)
+
+    def test_home(self):
+        url = reverse('home')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_about(self):
+        url = reverse('about')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_landing_page(self):
+        url = reverse('landing_page')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_sign_up(self):
+        url = reverse('sign_up')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_instructions(self):
+        url = reverse('instructions')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_static_files(self, file_path):
+        result = finders.find(file_path)
+        self.assertIsNotNone(result)
+
+    def test_landing_to_home(self):
+        try:
+            response = self.client.get(reverse('home'))
+        except:
+            response = False
+        return response
+
+
+
+
+
