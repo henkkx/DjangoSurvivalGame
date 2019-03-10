@@ -28,7 +28,7 @@ stick
 sword
 burned note (x2)
 """
-zack = PC("Zack", 100)
+zack = PC("Zack", 1,[0, 0, 0])
 
 def init_objects():
     output = {}
@@ -56,23 +56,23 @@ def init_NPCs():
 
 def init_creatures():
     output = {}
-    output['charred rat'] = Rat("Charred fur rat", zack.get_level())
+    output['rat'] = Rat("Charred fur rat", zack.level)
     return output
 
 
 def init_rooms():
     output = {}
-    output["kitchen"] = Room("kitchen", NPCs["Doug"], {}, objects["bread"], "You can smell spices, and a hint of both \
-    garlic & onion. There are utensils & plates all around")
-    output["bedroom"] = Room("bedroom", {}, creatures['rat'], objects["health potion"], "You are in a bedroom, single bed. Sheets indicate a child\
-    slept here. In the corner a rat is munching on something")
+    output["kitchen"] = Room("kitchen", {"doug": NPCs["doug"]}, {}, {"bread": objects["bread"]}, "You can smell spices, and a hint of both \
+    garlic & onion. There are utensils & plates all around",0)
+    output["bedroom"] = Room("bedroom", {}, {"rat": creatures['rat']}, {"health potion": objects["health potion"]}, "You are in a bedroom, single bed. Sheets indicate a child\
+    slept here. In the corner a rat is munching on something",0)
     return output
 
 
 def init_buildings():
-    output = []
-    output['roofless house'] = Building('Roofless House', "This house is made of stone. It's roof has fallen because it's old.",
-                          [rooms["kitchen"], rooms["bedroom"]], [1, 1])
+    output = {}
+    output["roofless house"] = Building('Roofless House', "This house is made of stone. It's roof has fallen because it's old.",
+                            [rooms["kitchen"], rooms["bedroom"]], [1,1])
     return output
 
 
@@ -89,5 +89,6 @@ def build_game():
     creatures = init_creatures()
     rooms = init_rooms()
     buildings = init_buildings()
-    world = {"objects": objects, "NPCs": NPCs, "creatures": creatures, "rooms": rooms, "buildings": buildings}
+    world = {"objects": objects, "NPCs": NPCs, "creatures": creatures, "rooms": rooms,
+             "buildings": buildings, "player": zack}
     return world
