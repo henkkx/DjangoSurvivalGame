@@ -111,7 +111,8 @@ class Rat(Creature):
     def __init__(self, name, pl):
         hp = 1 * pl
         ap = 1 * pl
-        super().__init__(name, hp, ap, ["None"], ["None"], pl)
+        desc = "Well it's a rat what more do you want"
+        super().__init__(name, desc, hp, ap, ["None"], ["None"], pl)
 
     def __str__(self):
         return (

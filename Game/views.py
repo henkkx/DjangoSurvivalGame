@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.db.models import Count
@@ -8,14 +7,14 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from Game.models import Player
+from Game.models import PC
 from Game.game_handler import *
 import json
 
 def home(request):
     # if the request is a POST, pull the info & log the user in
 
-    playerList = Player.objects.order_by('-most_kills')[:5]
+    playerList = PC.objects.order_by('-most_kills')[:5]
 
 
     if request.method == "POST":
@@ -120,13 +119,7 @@ def my_test(request):
     return render(request, "Game/gamePage.html",{})
 
 def test_view(request):
-    if request.method == "POST":
-        test_handle(request.POST)
-    else:
-        print("Not a POST request something is wrong here.")
+    return available_actions()
 
 def test_view2(request):
-    if request.method == "GET":
-        return "returning this"
-    else:
-        print("Not a POST request something is wrong here.")
+    return available_actions()

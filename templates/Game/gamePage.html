@@ -6,86 +6,59 @@
 
 {% block content %}
 <script type="text/javascript">
-        function test_fun() {
-            alert("This ok")
-            var query = "command=move";
-            $.ajax({
-              type: "GET",
-              url: "/test2",
-              data: {cmd: "cmd",
-                  room:"room"
-              }
+        function test_fun(inp) {
+            var word = "";
+            for (i in inp){
+                if (inp[i] != ","){
+                    word = word + inp[i];
+                }else {
+                    alert("else")
+                    $('#buttons').append('<button onclick="other_fun">' + word + '</button>');
+                    word = "";
+                }
 
-            }).done(function(data) {
-                alert(data)
-                alert("Kinda works?");
-            });
+            }
+            $('#buttons').append('<button onclick="other_fun">' + word + '</button>');
 
-            alert("This too")
-            $("#test").click(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    url: "/test",
-                    data: {
-                        id: $(this).val(), // < note use of 'this' here
-                        access_token: $("#access_token").val()
-                    },
-                    success: function(result) {
-                        alert('ok');
-                    },
-                    error: function(result) {
-                        alert('error');
-                    }
-                 });
-        })}
-    </script>
-<div id="demo">
-<h2>Let AJAX change this text</h2>
-<button id = "test" type="button" onclick="test_fun()">BTN</button>
-</div>
-<div>
-$(document).ready(function() {
-    $("#test").click(function(e) {
-    e.preventDefault();
-    $.ajax({
-        type: "POST",
-        url: "/test",
-        data: {
-            id: $(this).val(), // < note use of 'this' here
-            access_token: $("#access_token").val()
-        },
-        success: function(result) {
-            alert('ok');
-        },
-        error: function(result) {
-            alert('error');
         }
-    });
-});
+</script>
+<!--<script type="text/javascript">-->
+    <!--$(document).ready(function (dat) {-->
+        <!--$("some selector").click({data: "Hello", param2: "World"}, cool_function);-->
+    <!--});-->
+
+<!--</script>-->
+<script type="text/javascript">
+            $(document).ready(function (event) {
+                // alert("test1")
+
+                // $("button").click(function () {
+                //     $.getJSON("/test2", function (data) {
+                //         $.each(data, function (i, e) {
+                //             var el = '<p class="low-level">'+this+'</p>';
+                //             $('#buttons').append('<button onClick="test_fun(\'' + el + '\')" data-role="button"' +
+                //                 ' type="button" id="testID"">' + '' + i + '</button>');
+                //         })
+                //     })
+                    $.ajax({
+                        type: 'GET',
+                        url: "/test2",
+                        dataType: "json",
+                        success: function (data) {
+                            for(var i in data){
+                                    $('#buttons').append('<button onClick="test_fun(\'' +data[i] + '\')" data-role="button"' +
+                                        ' type="button" id="testID"">' + '' + i + '</button>');
+
+                                }
+                            }
+                        });
+                    });
+
+    </script>
+<div id="buttons">
+<button >Click here for magic, we can later make it so that this is done on page launch & every button click :D</button>
+
 </div>
 
 
-$('#Test').click(function () {
-    var query = "command move";
-    $.ajax({
-      type: "POST",
-      url: "/test",
-      data: query,
-      datatype: "json",
-    }).done(function(data) {
-       alert(data)
-    });
-});
-$('#Test2').click(function () {
-    var query = "command move";
-    $.ajax({
-      type: "POST",
-      url: "/test",
-      data: query,
-      datatype: "json",
-    }).done(function(data) {
-       alert(data)
-    });
-});
 {% endblock %}
