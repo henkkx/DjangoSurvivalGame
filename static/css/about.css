@@ -65,24 +65,15 @@ body {
     
 }
 
-/*Site Heading*/
-.site-heading h3{
-    font-size : 40px;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-.border {
-    background: #e1e1e1;
-    height: 1px;
-    width: 25%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 45px;
+.container{
+    padding-top: 60px;
+    padding-bottom: 60px;
 }
 
+
 .paddingTB60 {
-    padding-top:60px;
-    padding-bottom:60px;
+    padding-top:100px;
+    padding-bottom:80px;
 }
 
 .image-aboutus-banner {
@@ -106,13 +97,14 @@ body {
     padding-bottom:30px;
  }
 .lg-text {
-    font-size:52px;
+    font-size: 68px;
     font-weight: 600;
     text-transform: none;
     color:#fff;
 }
 .image-aboutus-para {
-    color:#fff;
+    font-size: 26px;
+    color: #fff;
 }
 
 
@@ -153,11 +145,11 @@ h3 {
      color: #000;
 }
 
-p {
+/* p {
     font-weight: 400;
     font-style: normal;
     color: #494949;
-}
+} */
 
 
 a {
@@ -181,8 +173,11 @@ i {
 /* MEET OUR TEAM */
 
 #team {
-    background: #eee !important;
-    
+    /* background: #eee !important; */
+    background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(https://cdn.pixabay.com/photo/2015/11/17/18/59/architecture-1048092_960_720.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 
 .btn-primary:hover,
@@ -192,6 +187,8 @@ i {
     box-shadow: none;
     outline: none;
 }
+
+
 
 .btn-primary {
     color: #fff;
@@ -205,7 +202,7 @@ section {
 
 section .section-title {
     text-align: center;
-    color: #004f7a;
+    color: #fff;
     margin-bottom: 50px;
     text-transform: uppercase;
 }
