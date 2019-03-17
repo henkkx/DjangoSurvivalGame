@@ -28,7 +28,7 @@ class DatabaseTests(TestCase):
     #Updated to check against values and not keys
     def test_players_have_no_stats_on_create(self):
         user_no = 1
-        test_player = Player.objects.get(user=User.objects.get(username="test user {0}".format(user_no)))
+        test_player = PC.objects.get(user=User.objects.get(username="test user {0}".format(user_no)))
         for statistic in test_player.stats.values():
             self.assertTrue(expr=statistic == 0)
 
@@ -137,7 +137,7 @@ class ViewTests(TestCase):
         #Create ten users with increasing number of kills
         player_list = []
         for i in range(1, 11):
-            player_list.append(Player.objects.create(user=User.objects.create_user(username="test user {0}".format(i),email='test1@mail.com', password='limbo')
+            player_list.append(PC.objects.create(user=User.objects.create_user(username="test user {0}".format(i),email='test1@mail.com', password='limbo')
                               , picture=None, games_played=10*i,
                               most_days_survived=10*i, most_kills=10*i,
                               most_people=10*i, most_exp=10*i))
