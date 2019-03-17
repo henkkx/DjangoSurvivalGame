@@ -28,7 +28,9 @@ world = {'buildings': houses, 'objects': road_objects, 'people': road_people}
 #This function displays information about the specified object or creature.
 #If no arguments are passed the current room will be described.
 #It makes use of the get_description method in the rooms class. Take a look.
-def inspect(room, pl=1, entity=None):
+def inspect(player, entity=None):
+    room = player.room
+    pl = player.level
     if room is None:
         return "You are on the street"
     if entity is None:
@@ -388,3 +390,4 @@ player = PC("username", 6, None)
 player.add_item(Weapon("na","na",12,12,22))
 converse(player, Billy)
 '''
+
