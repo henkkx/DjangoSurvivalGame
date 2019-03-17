@@ -3,9 +3,10 @@ from abc import ABC, abstractmethod
 
 class Creature(ABC):
 
-    def __init__(self, name, hp, ap, vulnerability, immune, pl):
+    def __init__(self, name, desc, hp, ap, vulnerability, immune, pl):
 
         self.name = name
+        self.description = desc
         self.hp = hp
         self.ap = ap
         self.vulnerability = vulnerability
@@ -110,7 +111,8 @@ class Rat(Creature):
     def __init__(self, name, pl):
         hp = 1 * pl
         ap = 1 * pl
-        super().__init__(name, hp, ap, ["None"], ["None"], pl)
+        desc = "Well it's a rat what more do you want"
+        super().__init__(name, desc, hp, ap, ["None"], ["None"], pl)
 
     def __str__(self):
         return (

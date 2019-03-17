@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.db.models import Count
@@ -8,14 +7,16 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from Game.models import Player
+from Game.models import PC
+from Game.game_handler import *
+import json
+from django.views.decorators.csrf import csrf_exempt
 
 
 def home(request):
     # if the request is a POST, pull the info & log the user in
 
-    playerList = Player.objects.order_by('-most_kills')[:5]
-
+    # playerList = PC.objects.order_by('-most_kills')[:5]
 
     if request.method == "POST":
 
@@ -34,7 +35,6 @@ def home(request):
                 return render(request, 'Game/home.html', {'can_continue': can_continue})
             else:
                 return HttpResponse("Account disabled, you cheater")
-
         else:
             '''
             WATCH IT HERE, will probably put this 'print' into the context_dict
@@ -44,15 +44,16 @@ def home(request):
 
     else:
 
-        return render(request, 'Game/home.html', {"players":playerList})
+        return render(request, 'Game/home.html', {"players": ""})
+
 
 def landing_page(request):
     return render(request, "Game/landing_page.html")
 
 
-
 def learn_more(request):
     return render(request, "Game/learn_more.html")
+
 
 def instructions(request):
     return render(request, "Game/instructions.html")
@@ -113,3 +114,33 @@ def game(request):
 # @login_required
 def my_profile(request):
     return render(request, 'Game/my_profile.html', {})
+
+
+
+def test_view(request):
+    
+    render(request, "Game/gamePage.html")
+
+
+def jsonreturn():
+    data = data = {
+        'name': 'abc',
+        'location': 'Finland',
+        'is_active': True,
+        'count': 999
+    }
+    return JsonResponse(data)
+    return render(request, 'Game/my_profile.html', {})
+def my_test(request):
+    return render(request, "Game/gamePage.html",{})
+
+def test_view(request):
+    return available_actions()
+
+def test_view2(request):
+    return available_actions()
+
+@csrf_exempt
+def post_data(request):
+    if request.method == "POST":
+        handle(request.body)
