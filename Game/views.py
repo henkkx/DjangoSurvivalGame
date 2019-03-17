@@ -10,12 +10,13 @@ from datetime import datetime
 from Game.models import PC
 from Game.game_handler import *
 import json
+from django.views.decorators.csrf import csrf_exempt
+
 
 def home(request):
     # if the request is a POST, pull the info & log the user in
 
-    playerList = PC.objects.order_by('-most_kills')[:5]
-
+    # playerList = PC.objects.order_by('-most_kills')[:5]
 
     if request.method == "POST":
 
@@ -34,7 +35,6 @@ def home(request):
                 return render(request, 'Game/home.html', {'can_continue': can_continue})
             else:
                 return HttpResponse("Account disabled, you cheater")
-
         else:
             '''
             WATCH IT HERE, will probably put this 'print' into the context_dict
@@ -44,15 +44,16 @@ def home(request):
 
     else:
 
-        return render(request, 'Game/home.html', {"players":playerList})
+        return render(request, 'Game/home.html', {"players": ""})
+
 
 def landing_page(request):
     return render(request, "Game/landing_page.html")
 
 
-
 def learn_more(request):
     return render(request, "Game/learn_more.html")
+
 
 def instructions(request):
     return render(request, "Game/instructions.html")
@@ -123,3 +124,8 @@ def test_view(request):
 
 def test_view2(request):
     return available_actions()
+
+@csrf_exempt
+def post_data(request):
+    if request.method == "POST":
+        handle(request.body)
