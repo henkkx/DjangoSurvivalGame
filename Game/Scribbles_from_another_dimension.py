@@ -337,7 +337,7 @@ def consume(player, food_name):
 
 
 
-
+"""
 #Test data
 # Zombie1 = Zombie("timmy",10)
 # Zombie2 = Zombie("tommy",3)
@@ -390,4 +390,4 @@ player = PC("username", 6, None)
 player.add_item(Weapon("na","na",12,12,22))
 converse(player, Billy)
 '''
-
+"""
