@@ -21,6 +21,8 @@ except:
     from Game.game_populate import build_game
 
 player = PC("name", 1, [0, 0, 0])
+
+
 def test_handle(text_in):
     print(text_in)
     output_dict = {"button1": "1", "button2": "2"}
@@ -29,7 +31,8 @@ def test_handle(text_in):
 
 
 def handle(text_in):
-    print("HERE BOI", text_in)
+    print("\n\nHERE BOI", text_in, "HERE BOI\n\n")
+    print(text_in.decode("utf-8"))
     # cmds = text_in.split(",")
     # output_dict = {}
     # if cmds[0] == "move":
@@ -47,7 +50,8 @@ def handle(text_in):
     # elif cmds[0] == "drop":
     #     drop(player, player.room.objects.get(name=cmds[1]))
     output_dict = {"this":"that"}
-    return render(HttpResponse, "Game/gamePage.html", json.dump(output_dict))
+    # return render(HttpResponse, "Game/gamePage.html", json.dump(output_dict))
+
 
 world = build_game()
 player = world['player']
@@ -68,9 +72,9 @@ def available_actions():
                 for creature in player.room.creatures:
                     data_post["fight"][creature.name] = {creature.description}
             if not player.room.NPCs == {}:
-                data_post["npcs"] = {}
+                data_post["npcs"] = []
                 for npc in player.room.NPCs.values():
-                    data_post["npcs"][npc.name] = npc.desc_L
+                    data_post["npcs"].append(npc.name)
         # from here on out, it's where we can move IF in a room, so it doesn't matter if we are in a room ,
         # just that we are in a building
         current_building = world["buildings"]["roofless house"]

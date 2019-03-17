@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+{% csrf_token %}
 <script type="text/javascript">
         function test_fun(inp) {
             var word = "";
@@ -19,7 +20,28 @@
 
             }
             $('#buttons').append('<button onclick="other_fun">' + word + '</button>');
-
+        }
+</script>
+<script type="text/javascript">
+        function post_fun(inp) {
+            alert('WILL BE EXECUTED')
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", '/post_data', true);
+            var cmd= "This is my text, my text is amazing";
+            xhr.send(cmd);
+            alert("SOMETHING")
+            $.ajax({
+                    type: 'GET',
+                    url: "/test2",
+                    dataType: "json",
+                    success: function (data) {
+                        alert("AIGHT")
+                        for(var i in data){
+                                $('#buttons').append('<button onClick="test_fun(data[i])" data-role="button"' +
+                                    ' type="button" id="testID"">' + '' + i + '</button>');
+                            }
+                        }
+                    });
         }
 </script>
 <!--<script type="text/javascript">-->
@@ -29,8 +51,9 @@
 
 <!--</script>-->
 <script type="text/javascript">
-            $(document).ready(function (event) {
-                // alert("test1")
+    alert("ok")
+            $(document).ready(function () {
+                alert("test1")
 
                 // $("button").click(function () {
                 //     $.getJSON("/test2", function (data) {
@@ -46,19 +69,16 @@
                         dataType: "json",
                         success: function (data) {
                             for(var i in data){
-                                    $('#buttons').append('<button onClick="test_fun(\'' +data[i] + '\')" data-role="button"' +
+                                    $('#buttons').append('<button onClick="test_fun(data[i])" data-role="button"' +
                                         ' type="button" id="testID"">' + '' + i + '</button>');
-
                                 }
                             }
                         });
                     });
-
-    </script>
+</script>
 <div id="buttons">
-<button >Click here for magic, we can later make it so that this is done on page launch & every button click :D</button>
+<button onClick="post_fun('text to post')">Click here for magic</button>
 
 </div>
-
 
 {% endblock %}
