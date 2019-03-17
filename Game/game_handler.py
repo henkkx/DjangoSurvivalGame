@@ -31,8 +31,8 @@ def test_handle(text_in):
 
 
 def handle(text_in):
-    print("\n\nHERE BOI", text_in, "HERE BOI\n\n")
-    print(text_in.decode("utf-8"))
+    print("\n\nHERE BOI", text_in, "HERE BOI")
+    print(text_in.decode("utf-8") + '\n\n')
     # cmds = text_in.split(",")
     # output_dict = {}
     # if cmds[0] == "move":
@@ -49,14 +49,16 @@ def handle(text_in):
     #     converse(player, NPC.objects.get(name=cmds[1]))
     # elif cmds[0] == "drop":
     #     drop(player, player.room.objects.get(name=cmds[1]))
-    output_dict = {"this":"that"}
+    output_dict = {"this": "that"}
     # return render(HttpResponse, "Game/gamePage.html", json.dump(output_dict))
 
 
 world = build_game()
 player = world['player']
 player.room = world["rooms"]["kitchen"]
-player.position = [1,1,0]
+player.position = [1, 1, 0]
+
+
 def available_actions():
     data_post = {}
     '''REMEMBER TO CHANGE THE TOWER POSITION BELOW '''
@@ -85,7 +87,7 @@ def available_actions():
             data_post['floor up'] = '__'
         if current_building.can_go_down(player.position[2]):
             data_post['floor down'] = '__'
-        data_post["exit"] = '__'
+        data_post[" exit"] = ' '
         data_post["drop"] = []
         for cat in player.inventory:
             if player.inventory[cat] != []:
