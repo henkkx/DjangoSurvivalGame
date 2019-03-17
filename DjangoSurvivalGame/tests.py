@@ -77,8 +77,30 @@ class DatabaseTests(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    def test_static_files(self, file_path):
-        result = finders.find(file_path)
+    # TESTING KEY STATIC IMAGES
+
+    def test_dunkey_image(self):
+        result = finders.find('images/dunkey.jpg')
+        self.assertIsNotNone(result)
+
+    def test_ig_image(self):
+        result = finders.find('images/ig logo.png')
+        self.assertIsNotNone(result)
+
+    def test_landing_image(self):
+        result = finders.find('images/landing.jpg')
+        self.assertIsNotNone(result)
+
+    def test_mayhem_image(self):
+        result = finders.find('images/mayhem.jpg')
+        self.assertIsNotNone(result)
+
+    def test_ign_image(self):
+        result = finders.find('images/ign.jpg')
+        self.assertIsNotNone(result)
+
+    def test_tunnel_image(self):
+        result = finders.find('images/tunnel.jpg')
         self.assertIsNotNone(result)
 
     def test_landing_to_home(self):
@@ -87,6 +109,25 @@ class DatabaseTests(TestCase):
         except:
             response = False
         return response
+
+    # Population Script Check
+
+    def test_population_script(self):
+
+        try:
+            from Game import game_populate
+            game_populate()
+        except ImportError:
+            print('does not exist')
+        except NameError:
+            print('game_populate() does not exist or is not correct')
+        except:
+            print('Something went wrong with the game_populate file')
+
+
+    
+
+
 
 
 
