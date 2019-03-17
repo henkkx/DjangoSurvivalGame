@@ -16,88 +16,71 @@
 {% endblock %}
 
 {% block content %}
+{% csrf_token %}
+<!--<script type="text/javascript">-->
+        <!--function button_fun(inp, inp2){-->
+            <!--alert("in button fun")-->
+            <!--// minor is the minor button options ( the ones the will be created),-->
+            <!--// major is the name of the button that was clicked to call this so we can just pass it into-->
+            <!--//       the python code from here-->
+            <!--var word = "";-->
+            <!--var cmd = "";-->
+            <!--alert("1");-->
+            <!--for (i in inp){-->
+                <!--if (inp[i] != ","){-->
+                    <!--alert("if");-->
+                    <!--word = word + inp[i];-->
+                <!--}else {-->
+                    <!--alert("else");-->
+                    <!--cmd  = inp2 + "," + inp[i];-->
+                    <!--$('#buttons').append('<button onclick="post_fun(cmd)">' + word + '</button>');-->
+                    <!--word = "";-->
+                    <!--cmd = "";-->
+                    <!--alert("finish else");-->
+                <!--}-->
+
+            <!--}-->
+            <!--$('#buttons').append('<button>' + word + '</button>');-->
+        <!--}-->
+<!--</script>-->
 <script type="text/javascript">
-        function test_fun() {
-            alert("This ok")
-            var query = "command=move";
+        function post_fun(inp) {
+            alert("post_fun invoked"+inp);
+            // NOTE IMPORTANT: this function will go to the error branch because it get's no response
+            // for now at least, it DOES post the data though
             $.ajax({
-              type: "GET",
-              url: "/test2",
-              data: {cmd: "cmd",
-                  room:"room"
-              }
-
-            }).done(function(data) {
-                alert(data)
-                alert("Kinda works?");
-            });
-
-            alert("This too")
-            $("#test").click(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    url: "/test",
-                    data: {
-                        id: $(this).val(), // < note use of 'this' here
-                        access_token: $("#access_token").val()
-                    },
-                    success: function(result) {
-                        alert('ok');
-                    },
-                    error: function(result) {
-                        alert('error');
-                    }
-                 });
-        })}
-    </script>
-<div id="demo">
-<h2>Let AJAX change this text</h2>
-<button id = "test" type="button" onclick="test_fun()">BTN</button>
-</div>
-<div>
-$(document).ready(function() {
-    $("#test").click(function(e) {
-    e.preventDefault();
-    $.ajax({
-        type: "POST",
-        url: "/test",
-        data: {
-            id: $(this).val(), // < note use of 'this' here
-            access_token: $("#access_token").val()
-        },
-        success: function(result) {
-            alert('ok');
-        },
-        error: function(result) {
-            alert('error');
+                type: "POST",
+                url: "/post_data",
+                data: inp,
+                success: function(){
+                },
+                error: function(){
+                    // alert("error" + inp);
+                }
+            })
         }
-    });
-});
+        $(document).ready(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: "/test2",
+                    dataType: "json",
+                    success: function (data) {
+                        for (var i in data) {
+                            if (i != "text") {
+                                for (var j in data[i]) {
+                                    cmd = i + "," + data[i][j];
+                                    $('#buttons').append('<button onclick="post_fun(cmd)">' + i +" "+ data[i][j] + '</button>');
+
+                                }
+                            }
+                        }
+                    }
+                });
+        });
+</script>
+<div id="buttons">
+<button onClick="post_fun('text to post')">Click here for magic</button>
+
 </div>
-
-
-$('#Test').click(function () {
-    var query = "command move";
-    $.ajax({
-      type: "POST",
-      url: "/test",
-      data: query,
-      datatype: "json",
-    }).done(function(data) {
-       alert(data)
-    });
-});
-$('#Test2').click(function () {
-    var query = "command move";
-    $.ajax({
-      type: "POST",
-      url: "/test",
-      data: query,
-      datatype: "json",
-    }).done(function(data) {
-       alert(data)
-    });
-});
 
 {% endblock %}
