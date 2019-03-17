@@ -84,18 +84,20 @@ class PC:
 
 
 class NPC:
-    def __init__(self, name, short_description,long_description, hp, allegiance, inventory):
+    def __init__(self, name, short_description, long_description, hp, allegiance, inventory):
         self.name = name
         self.desc_S = short_description
         self.desc_L = long_description
         self.hp = hp
         self.allegiance = allegiance
         self.inventory = inventory
-        if inventory is None:
+        try:
+            if inventory is None:
+                self.ap = 10
+            else:
+                self.ap = inventory["Weapon"][0]
+        except:
             self.ap = 10
-        else:
-            self.ap = inventory["Weapon"][0]
-
     def __str__(self):
         return self.description  # returns the description since we shouldn't know names, just how they look
 
