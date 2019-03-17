@@ -8,6 +8,7 @@ Imports have been commented out, we shouldn't need them
 
 
 class Building:
+    tower = 5
 
     def __init__(self, name, desc, rooms, pos):
         self.name = name
@@ -16,11 +17,12 @@ class Building:
         self.position = pos
         self.floors = {}
         # for loop below: dict of floors, floor number maps to list of rooms in that floor
-        for room in self.rooms:
-            if room.pos in self.floors.keys():
-                self.floors[room.pos].append(room)
-            else:
-                self.floors[room.pos] = [room]
+        if self.rooms is not None:
+            for room in self.rooms:
+                if room.pos in self.floors.keys():
+                    self.floors[room.pos].append(room)
+                else:
+                    self.floors[room.pos] = [room]
 
     def add_room(self, room):
         self.rooms[room.name] = room
@@ -55,8 +57,7 @@ class Building:
 
 
 class Room:
-
-    def __init__(self, name, NPCs, creatures, objects, description, pos):
+    def __init__(self, name, NPCs, creatures, objects, description, pos=0):
         self.name = name
         self.NPCs = NPCs
         self.creatures = creatures
@@ -131,7 +132,7 @@ class Room:
          were to use .join() without the if)
         '''
         persons_text = ""
-        for person in self.people:
+        for person in self.NPCs:
             if persons_text is "":
                 persons_text = person
             else:
