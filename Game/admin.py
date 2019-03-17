@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Game.models import Player, Badge, Achievement
+from Game.models import PC, Badge, Achievement
 
 '''
 These classes allow us to add extra functionality to the admin page.
@@ -26,6 +26,6 @@ class BadgeAdmin(admin.ModelAdmin):
     ordering = ['badge_type', 'criteria']
 
 # Register your models here.
-admin.site.register(Player, PlayerAdmin)
+admin.site.register(PC, PlayerAdmin)
 admin.site.register(Achievement, AchievementAdmin)
 admin.site.register(Badge, BadgeAdmin)

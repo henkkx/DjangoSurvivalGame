@@ -1,11 +1,11 @@
-
+/* 
 
 body {
   font: 100% / 1.414 "Open Sans", "Roboto", arial, sans-serif;
 }
 /* a,
 [type="submit"] {transition: all .25s ease-in;} */
-.signup__container {
+/* .signup__container {
   position: absolute;
   top: 50%;
   right: 0;
@@ -55,11 +55,11 @@ h1,
 h2 {
   font-weight: 300;
   color: rgba(255,255,255,1);
-}
+} */
 /* .heading--primary {font-size: 1.999rem;}
 .heading--secondary {font-size: 1.414rem;} */
 
-
+/*
 .signup__form {
   padding: 2.5rem;
   background: #fafafa;
@@ -96,4 +96,4 @@ label {
   color: #999;
   &:focus,
   &:hover {color: darken(#999, 13%);}
-}
+} */
