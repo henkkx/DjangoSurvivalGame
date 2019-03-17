@@ -4,7 +4,7 @@ import pickle
 import datetime
 
 
-class PC(models.Model):
+class Player(models.Model):
     user = models.OneToOneField(User)
     picture = models.ImageField(upload_to='profile_images', blank=True)
     games_played = models.IntegerField(default=0)
@@ -55,7 +55,7 @@ class Badge(models.Model):
 
 
 class Achievement(models.Model):
-    player = models.ForeignKey(PC)
+    player = models.ForeignKey(Player)
     badge = models.ForeignKey(Badge)
     # following should save current DD-MM-YYYY date
     now = datetime.datetime.now()

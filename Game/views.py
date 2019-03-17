@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from Game.models import PC
+from Game.models import Player
 from Game.game_handler import *
 import json
 from django.views.decorators.csrf import csrf_exempt
