@@ -29,6 +29,6 @@ app_name = 'Game'
 urlpatterns = [
     url(r'',include('Game.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/register/$', views.sign_up, name = 'registration_register'),
+    url(r'^accounts/register/$', MyRegistrationView.as_view(), name = 'registration_register'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

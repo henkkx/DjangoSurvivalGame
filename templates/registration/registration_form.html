@@ -53,7 +53,7 @@
 <h1>Register Here</h1>
 <form method="post" action=".">
   {% csrf_token %}
-  {{ user_form.as_p }}
+  {{ form.as_p }}
   {{ profile_form.as_p }}
   <input type="submit" value="Submit"/>
 </form>
