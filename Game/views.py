@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.db.models import Count
-from Game.forms import Profile
+from Game.forms import UserForm, Profile
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -114,23 +114,21 @@ def game(request):
 @login_required
 def my_profile(request):
 
+    contxt = {}
     #retrieve associated player object and pass important stats to template
     if request.user.is_authenticated:
         player = Player.objects.get_or_create(user=request.user)[0]
         print(player)
-        games = player.games_played
-        kills = player.most_kills
-        exp = player.most_exp
-        longest_survived = player.most_days_survived
-        achievements = list(Achievement.objects.filter(player=player))
-        
-
+        contxt["games"] = player.games_played
+        contxt["kills"] = player.most_kills
+        contxt["exp"] = player.most_exp
+        contxt["longest_survived"] = player.most_days_survived
+        contxt["achievements"] = list(Achievement.objects.filter(player=player))
+        if player.picture:
+            contxt["picture"] = player.picture
     
     
-    return render(request, 'Game/my_profile.html', {"games_played": games,
-                                                    "most_kills": kills, "most_exp": exp,
-                                                    "longest_survived": longest_survived,
-                                                    "image": player.picture, "chievs": achievements} )
+    return render(request, 'Game/my_profile.html', contxt )
 
 
 
