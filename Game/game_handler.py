@@ -32,7 +32,7 @@ def test_handle(text_in):
 
 def handle(text_in):
     print("\n\nHERE BOI", text_in, "HERE BOI")
-    print(text_in.decode("utf-8") + '\n\n')
+    print("'"+text_in.decode("utf-8") + "'\n\n")
     # cmds = text_in.split(",")
     # output_dict = {}
     # if cmds[0] == "move":

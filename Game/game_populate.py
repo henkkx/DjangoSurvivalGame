@@ -34,10 +34,12 @@ def init_objects():
     output = {}
     output["stick"]= Weapon("Stick", "A wooden stick, sturdy.", 1, 20, 5)
     output["sword"] = Weapon("Sword", "A simple, standard medival sword", 1, 30, 5)
+
+    #Changed final arguments to match object constuctor parameters
     output["bread"] = Food("Bread", "An apparently fresh loaf of bread, smells like it just came out...of the oven",
-                       1, [40, 5, ""])
+                       1, 40, 5)
     output["health potion"] = Food("Health Potion", "It's small, it's red, come on this is in every game. Hm, maybe ours is green.",
-                       1, [50, 0, "all"])
+                       1, 50, 0)
     output["burned note 1"] = Lore("Burned note #1", "A slightly burned piece of paper with scribbled writing. Looks like you wrote it",
                        1, "Why would I do that? How could I let this happen even?")
     output["burned note 2"] = Lore("Burned note #2", "A slightly burned piece of paper with scribbled writing. Looks like you wrote it",

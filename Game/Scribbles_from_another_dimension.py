@@ -10,7 +10,7 @@ try:
     from buildings import Building, Room
     from people import PC, NPC
     from creatures import Zombie, Spider
-    from objects import Weapon, Lore
+    from objects import Weapon, Lore, Food
 except:
     # imports are different on Mac & on Windows so we have to do this
     from Game.buildings import Building, Room
@@ -28,7 +28,9 @@ world = {'buildings': houses, 'objects': road_objects, 'people': road_people}
 #This function displays information about the specified object or creature.
 #If no arguments are passed the current room will be described.
 #It makes use of the get_description method in the rooms class. Take a look.
-def inspect(room, pl=1, entity=None):
+def inspect(player, entity=None):
+    room = player.room
+    pl = player.level
     if room is None:
         return "You are on the street"
     if entity is None:
@@ -321,9 +323,21 @@ def converse(player, NPC):
         elif cmd == 2:
             return
 
+def consume(player, food_name):
+    if player.inventory["Food"] == []:
+        return "You arent carrying any food."
+
+    food_list = player.inventory["Food"]
+    for food in food_list:
+        if food.name == food_name:
+            return player.eat(food)
+        
+    return "You dont have any food items with the name {0}".format(food_name)
+    
 
 
 
+"""
 #Test data
 # Zombie1 = Zombie("timmy",10)
 # Zombie2 = Zombie("tommy",3)
@@ -346,13 +360,25 @@ player = PC("username", 6, position=None)
 print("\nInventory Tests:\n")
 print(view_inventory(player))
 print(drop(player, "iten"))
-print(inspect(player.room, player.level, "Lore"))
+print(inspect(player, "Lore"))
 print(pick_up(player, "Necronomicon"))
 print(view_inventory(player))
-print(inspect(player.room, player.level, "Lore"))
+print(inspect(player, "Lore"))
 print(drop(player, "Necro"))
 print(drop(player, "Necronomicon"))
-print(inspect(player.room, player.level, "Lore"))
+print(inspect(player, "Lore"))
+print(inspect(player))
+print(inspect(player, "Food"))
+print(view_inventory(player))
+print(pick_up(player, "Cake"))
+print(view_inventory(player))
+player.hp -= 15
+player.hunger -= 10
+print(consume(player, "Apple"))
+print(consume(player, "Cake"))
+print(view_inventory(player))
+print(consume(player, "Apple"))
+print(inspect(player))
 #fight(weapon1,Zombie1,True)
 
 
@@ -364,3 +390,4 @@ player = PC("username", 6, None)
 player.add_item(Weapon("na","na",12,12,22))
 converse(player, Billy)
 '''
+"""
