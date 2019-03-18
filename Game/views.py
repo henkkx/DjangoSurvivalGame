@@ -66,35 +66,35 @@ def about(request):
     return render(request, 'Game/about.html', context_dict)
 
 
-def sign_up(request):
-    registered = False
+# def sign_up(request):
+#     registered = False
 
-    if request.method == "POST":
-        # display the forms ( waiting for models)
-        user_form = UserForm(data=request.POST)
-        profile_form = Profile(data=request.POST)
-        if user_form.is_valid and profile_form.is_valid:
-            # save user data
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-            # save profile data
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            # if the user provided a picture save that
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
-            profile.save()
-            registered = True
-        else:
-            print(user_form.errors, profile_form.errors)
-    else:
-        user_form = UserForm()
-        profile_form = Profile()
-    return render(request, 'registration/registration_form.html',
-                  {'user_form': user_form,
-                   'profile_form': profile_form,
-                   'registered': registered})
+#     if request.method == "POST":
+#         # display the forms ( waiting for models)
+#         user_form = UserForm(data=request.POST)
+#         profile_form = Profile(data=request.POST)
+#         if user_form.is_valid and profile_form.is_valid:
+#             # save user data
+#             user = user_form.save()
+#             user.set_password(user.password)
+#             user.save()
+#             # save profile data
+#             profile = profile_form.save(commit=False)
+#             profile.user = user
+#             # if the user provided a picture save that
+#             if 'picture' in request.FILES:
+#                 profile.picture = request.FILES['picture']
+#             profile.save()
+#             registered = True
+#         else:
+#             print(user_form.errors, profile_form.errors)
+#     else:
+#         user_form = UserForm()
+#         profile_form = Profile()
+#     return render(request, 'registration/registration_form.html',
+#                   {'user_form': user_form,
+#                    'profile_form': profile_form,
+#                    'registered': registered})
 
 
 @login_required
