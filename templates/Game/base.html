@@ -65,7 +65,7 @@
       </li> -->
 
 
-
+      {% if not user.is_authenticated %}
       <li class="nav-item">
         <a class="nav-link" href="{% url 'registration_register' %}">
             Register Here
@@ -77,16 +77,21 @@
         </a>
       </li>
 
-      <li class="nav-item dropdown ">
-        <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"> <i class="fa fa-user-o"></i>  your username <b class="caret"></b></a>
+      {% else %}
+      
+      <li class="nav-item dropdown">
+        <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"> <i class="fa fa-user-o"></i>  </a>
         <ul class="dropdown-menu">
           <li><a href="{% url 'my_profile' %}" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></li>
           <li><a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
           <li class="divider dropdown-divider"></li>
-          <li><a href="{% url 'auth_logout' %}?next=/home/" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+          <li><a href="{% url 'auth_logout' %}?next=/home" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
       </li>
+      <li id = "userGreeting"> Hello, {{ user }}!</li>
+      
 
+      {% endif %}
     </ul>
 
   </div>

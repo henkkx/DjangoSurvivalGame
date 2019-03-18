@@ -50,11 +50,17 @@
 </div>
 </div> -->
 
-<h1>Register Here</h1>
-<form method="post" action=".">
-  {% csrf_token %}
-  {{ user_form.as_p }}
-  {{ profile_form.as_p }}
-  <input type="submit" value="Submit"/>
+<div class='col-sm-6 col-sm-offset-3 text-center'>
+<h1>Register</h1>
+<hr/>
+<form class='text-left' method="post" action="{% url 'registration_register' %}">
+{% csrf_token %}
+{{ form.as_p }}
+
+<input type="submit" value="Register" />
+<input type="hidden" name="next" value="{{ next }}" />
 </form>
+<p>Did you need to <a href='{% url "auth_login" %}'>Login</a>?
+</div>
+
 {% endblock %}

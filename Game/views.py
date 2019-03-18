@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.db.models import Count
-from Game.forms import UserForm, Profile
+from Game.forms import Profile
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from Game.models import Player
+from Game.models import Player, Achievement
+from Game.game_handler import *
 import json
 from django.views.decorators.csrf import csrf_exempt
 from Game.Scribbles_from_another_dimension import available_actions, handle
@@ -66,35 +67,35 @@ def about(request):
     return render(request, 'Game/about.html', context_dict)
 
 
-def sign_up(request):
-    registered = False
+# def sign_up(request):
+#     registered = False
 
-    if request.method == "POST":
-        # display the forms ( waiting for models)
-        user_form = UserForm(data=request.POST)
-        profile_form = Profile(data=request.POST)
-        if user_form.is_valid and profile_form.is_valid:
-            # save user data
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-            # save profile data
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            # if the user provided a picture save that
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
-            profile.save()
-            registered = True
-        else:
-            print(user_form.errors, profile_form.errors)
-    else:
-        user_form = UserForm()
-        profile_form = Profile()
-    return render(request, 'registration/registration_form.html',
-                  {'user_form': user_form,
-                   'profile_form': profile_form,
-                   'registered': registered})
+#     if request.method == "POST":
+#         # display the forms ( waiting for models)
+#         user_form = UserForm(data=request.POST)
+#         profile_form = Profile(data=request.POST)
+#         if user_form.is_valid and profile_form.is_valid:
+#             # save user data
+#             user = user_form.save()
+#             user.set_password(user.password)
+#             user.save()
+#             # save profile data
+#             profile = profile_form.save(commit=False)
+#             profile.user = user
+#             # if the user provided a picture save that
+#             if 'picture' in request.FILES:
+#                 profile.picture = request.FILES['picture']
+#             profile.save()
+#             registered = True
+#         else:
+#             print(user_form.errors, profile_form.errors)
+#     else:
+#         user_form = UserForm()
+#         profile_form = Profile()
+#     return render(request, 'registration/registration_form.html',
+#                   {'user_form': user_form,
+#                    'profile_form': profile_form,
+#                    'registered': registered})
 
 
 @login_required
@@ -111,9 +112,26 @@ def game(request):
         return render(request, 'Game/game.html', {'user': request.user})
 
 
-# @login_required
+@login_required
 def my_profile(request):
-    return render(request, 'Game/my_profile.html', {})
+
+    #retrieve associated player object and pass important stats to template
+    if request.user.is_authenticated:
+        player = Player.objects.get_or_create(user=request.user)[0]
+        print(player)
+        games = player.games_played
+        kills = player.most_kills
+        exp = player.most_exp
+        longest_survived = player.most_days_survived
+        achievements = list(Achievement.objects.filter(player=player))
+
+
+
+
+    return render(request, 'Game/my_profile.html', {"games_played": games,
+                                                    "most_kills": kills, "most_exp": exp,
+                                                    "longest_survived": longest_survived,
+                                                    "image": player.picture, "chievs": achievements} )
 
 
 

@@ -5,3 +5,17 @@ footer {
   width: 100%;
   text-align: center;
 }
+
+.dropdown-menu{
+  margin-right:0; 
+}
+
+#userGreeting{
+    margin-top: 8px;
+    color: #fff; 
+}
+
+li.dropdown:last-child .dropdown-menu {
+  right: 0;
+  left: auto;
+}
