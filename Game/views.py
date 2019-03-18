@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from Game.models import Player
+from Game.models import Player, Achievement
 from Game.game_handler import *
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -111,9 +111,26 @@ def game(request):
         return render(request, 'Game/game.html', {'user': request.user})
 
 
-# @login_required
+@login_required
 def my_profile(request):
-    return render(request, 'Game/my_profile.html', {})
+
+    #retrieve associated player object and pass important stats to template
+    if request.user.is_authenticated:
+        player = Player.objects.get_or_create(user=request.user)[0]
+        print(player)
+        games = player.games_played
+        kills = player.most_kills
+        exp = player.most_exp
+        longest_survived = player.most_days_survived
+        achievements = list(Achievement.objects.filter(player=player))
+        
+
+    
+    
+    return render(request, 'Game/my_profile.html', {"games_played": games,
+                                                    "most_kills": kills, "most_exp": exp,
+                                                    "longest_survived": longest_survived,
+                                                    "image": player.picture, "chievs": achievements} )
 
 
 
