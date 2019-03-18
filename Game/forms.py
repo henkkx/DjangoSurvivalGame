@@ -10,6 +10,8 @@ class UserForm(forms.ModelForm):
         model = User
         fields = {'username', 'email', 'password'}
 
+    field_order = ['username', 'email', 'password']
+
 
 class Profile(forms.ModelForm):
 
