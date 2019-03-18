@@ -26,8 +26,7 @@ urlpatterns = [
     #url(r'^sign_up', views.sign_up, name='sign_up'),
     url(r'^game', views.my_test, name='game'),
     url(r'^my_profile', views.my_profile, name='my_profile'),
-    url(r'^test', views.test_view, name="test"),
-    url(r'^test2', views.test_view2, name="test2"),
+    url(r'^get_actions', views.get_actions, name="get_actions"),
     url(r'^post_data', views.post_data, name="post_data")
 ]
 

@@ -12,7 +12,7 @@ class Player(models.Model):
     most_kills = models.IntegerField(default=0)
     most_people = models.IntegerField(default=0)
     most_exp = models.IntegerField(default=0)
-    current_game = {'inventory': [], 'stats': {}, 'maps': {}}
+    current_game = {'inventory': [], "position": []}
     stats = {"kills": 0, "houses": 0, "people": 0}
 
     '''
