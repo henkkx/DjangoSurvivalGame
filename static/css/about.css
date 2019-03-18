@@ -8,10 +8,6 @@
 
 
 body {
-    font-family: 'Roboto';
-    line-height: 24px;
-    letter-spacing: 0.5px;
-    font-weight: 400;
     font-style: normal;
     color: #494949;
     font-size: 16px;
@@ -65,24 +61,15 @@ body {
     
 }
 
-/*Site Heading*/
-.site-heading h3{
-    font-size : 40px;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-.border {
-    background: #e1e1e1;
-    height: 1px;
-    width: 25%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 45px;
+.container{
+    padding-top: 60px;
+    padding-bottom: 60px;
 }
 
+
 .paddingTB60 {
-    padding-top:60px;
-    padding-bottom:60px;
+    padding-top:100px;
+    padding-bottom:80px;
 }
 
 .image-aboutus-banner {
@@ -106,13 +93,14 @@ body {
     padding-bottom:30px;
  }
 .lg-text {
-    font-size:52px;
+    font-size: 68px;
     font-weight: 600;
     text-transform: none;
     color:#fff;
 }
 .image-aboutus-para {
-    color:#fff;
+    font-size: 26px;
+    color: #fff;
 }
 
 
@@ -128,7 +116,7 @@ h1 {
     line-height: 40px;
     letter-spacing: 0px;
     font-weight: 600;
-    color: #000;
+    color: #004f7a;
 }
 h2 {
     font-size: 30px;
@@ -153,11 +141,11 @@ h3 {
      color: #000;
 }
 
-p {
+/* p {
     font-weight: 400;
     font-style: normal;
     color: #494949;
-}
+} */
 
 
 a {
@@ -174,52 +162,29 @@ i {
     font-size: 42px;
     text-align: center;
     line-height: 64px;
+    
 }
-
-/* Breadcum bar */
-.bread-bar {
-    background: #f9f9f9;
-    box-shadow: 0 1px 2px rgba(0,0,0,.1);
-    min-height: 40px;
-    height: auto;
-    position: relative;
-    z-index: 555;
-}
-.breadcrumb {
-    background: none;
-    margin: 0;
-    font-weight: 300;
-    padding-left: 0;
-    font-size: 13px;
-}
-.breadcrumb a {
-    color: #999;
-}
-.breadcrumb > .active {
-    color: #666;
-}
-.breadcrumb > li + li::before {
-    content: "\203A";
-    color: #999;
-    padding: 0 8px;
-}
-
-
 
 
 /* MEET OUR TEAM */
 
 #team {
-    background: #eee !important;
+    /* background: #eee !important; */
+    background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(https://cdn.pixabay.com/photo/2015/11/17/18/59/architecture-1048092_960_720.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 
 .btn-primary:hover,
 .btn-primary:focus {
     background-color: #004f7a;
-    border-color: #108d6f;
+    border-color: #000;
     box-shadow: none;
     outline: none;
 }
+
+
 
 .btn-primary {
     color: #fff;
@@ -233,7 +198,7 @@ section {
 
 section .section-title {
     text-align: center;
-    color: #004f7a;
+    color: #fff;
     margin-bottom: 50px;
     text-transform: uppercase;
 }
@@ -321,8 +286,18 @@ section .section-title {
 }
 
 .backside .card a {
-    font-size: 18px;
-    color: #007b5e !important;
+    font-size: 28px;
+    color: #000;
+}
+
+.backside .card a:hover {
+    font-size: 36px;
+    color: #004f7a;
+}
+
+.fa-github:hover{
+    font-size: 36px;
+    color: #c71d06;
 }
 
 .frontside .card .card-title,
