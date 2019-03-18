@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from Game.models import PC
+from Game.models import Player
 from Game.game_handler import *
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -61,7 +61,7 @@ def instructions(request):
 
 def about(request):
     # line below SHOULD count total number of users
-    all_user_count = Count(User.objects.all())
+    all_user_count = len(User.objects.all())
     context_dict = {'user_count': all_user_count}
     return render(request, 'Game/about.html', context_dict)
 
