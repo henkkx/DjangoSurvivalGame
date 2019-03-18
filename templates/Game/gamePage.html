@@ -1,24 +1,15 @@
 {% extends 'Game/base.html' %}
 
 {% block head_css %}
-<script src="/static/js/testajax.js"></script>
 {% endblock %}
-
-{% block content %}
-
-<button id="test">this is a test</button>
-
-
 
 {% load staticfiles %}
 
-{% block head_css %}
-{% endblock %}
+
 
 {% block content %}
 <script type="text/javascript">
         function post_fun(inp) {
-            alert("post_fun invoked "+inp);
             // NOTE IMPORTANT: this function will go to the error branch because it get's no response
             // for now at least, it DOES post the data though
             $.ajax({
@@ -26,8 +17,6 @@
                 url: "/post_data",
                 data: inp,
                 success: function(){
-                },
-                error: function(){
                     $(".actionBtn").remove();
                     get_fun();
                 }
@@ -36,43 +25,27 @@
         function get_fun(){
             $.ajax({
                     type: 'GET',
-                    url: "/test2",
+                    url: "/get_actions",
                     dataType: "json",
                     success: function (data) {
-                        var cmd = "";
+                        var text = data["text"];
                         for (var i in data) {
-                            for (var j in data[i]) {
-                                if (i != "text") {
-                                    cmd = i + "," + data[i][j];
+                            if (i != "text") {
+                                for (var j in data[i]) {
                                     $('#buttons').append('<button class="actionBtn" onClick=post_fun(this.firstChild.nodeValue)>' + i + " " + data[i][j] + '</button>');
+                                }
+                            }else{
+                                $("#gameText").append('<p>' + " " + data[i] + '</p>');
                                 }
                             }
                         }
-                    }
-
                 });
         }
         $(document).ready(function() {
-                $.ajax({
-                    type: 'GET',
-                    url: "/test2",
-                    dataType: "json",
-                    success: function (data) {
-                        var cmd = "";
-                        
-                        for (var i in data) {
-                            for (var j in data[i]) {
-                                if (i != "text") {
-                                    cmd = i + "," + data[i][j];
-                                    $('#buttons').append('<button class="actionBtn" onClick=post_fun(this.firstChild.nodeValue)>' + i + " " + data[i][j] + '</button>');
-                                }
-                            }
-                        }
-                    }
-
-                });
+                get_fun();
         });
 </script>
+<div id="gameText"></div>
 <div id="buttons">
 
 </div>

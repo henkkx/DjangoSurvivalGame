@@ -8,9 +8,9 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from Game.models import Player
-from Game.game_handler import *
 import json
 from django.views.decorators.csrf import csrf_exempt
+from Game.Scribbles_from_another_dimension import available_actions, handle
 
 
 def home(request):
@@ -117,24 +117,10 @@ def my_profile(request):
 
 
 
-def test_view(request):
-    
-    render(request, "Game/gamePage.html")
-
-
-def jsonreturn():
-    data = data = {
-        'name': 'abc',
-        'location': 'Finland',
-        'is_active': True,
-        'count': 999
-    }
-    return JsonResponse(data)
-    return render(request, 'Game/my_profile.html', {})
 def my_test(request):
     return render(request, "Game/gamePage.html",{})
 
-def test_view(request):
+def get_actions(request):
     return available_actions()
 
 def test_view2(request):
@@ -144,3 +130,4 @@ def test_view2(request):
 def post_data(request):
     if request.method == "POST":
         handle(request.body)
+    return HttpResponse("Placeholder")
