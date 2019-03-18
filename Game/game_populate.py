@@ -28,69 +28,64 @@ stick
 sword
 burned note (x2)
 """
-zack = PC("Zack", 1,[0, 0, 0])
+zack = PC("Zack", 1, [0, 0, 0])
+class MasterOfPuppets:
+    def __init__(self):
+        self.objects = self.init_objects()
+        self.NPCs = self.init_NPCs()
+        self.creatures = self.init_creatures()
+        self.rooms = self.init_rooms()
+        self.buildings = self.init_buildings()
 
-def init_objects():
-    output = {}
-    output["stick"]= Weapon("Stick", "A wooden stick, sturdy.", 1, 20, 5)
-    output["sword"] = Weapon("Sword", "A simple, standard medival sword", 1, 30, 5)
+    def init_objects(self):
+        output = {}
+        output["stick"]= Weapon("Stick", "A wooden stick, sturdy.", 1, 20, 5)
+        output["sword"] = Weapon("Sword", "A simple, standard medival sword", 1, 30, 5)
 
-    #Changed final arguments to match object constuctor parameters
-    output["bread"] = Food("Bread", "An apparently fresh loaf of bread, smells like it just came out...of the oven",
-                       1, 40, 5)
-    output["health potion"] = Food("Health Potion", "It's small, it's red, come on this is in every game. Hm, maybe ours is green.",
-                       1, 50, 0)
-    output["burned note 1"] = Lore("Burned note #1", "A slightly burned piece of paper with scribbled writing. Looks like you wrote it",
-                       1, "Why would I do that? How could I let this happen even?")
-    output["burned note 2"] = Lore("Burned note #2", "A slightly burned piece of paper with scribbled writing. Looks like you wrote it",
-                       1, "Oh my god, the house burned out with the Doug still inside, and it's my fault")
-    return output
+        #Changed final arguments to match object constuctor parameters
+        output["bread"] = Food("bread", "An apparently fresh loaf of bread, smells like it just came out...of the oven",
+                           1, 40, 5)
+        output["Health potion"] = Food("Health Potion", "It's small, it's red, come on this is in every game. Hm, maybe ours is green.",
+                           1, 50, 0)
+        output["burned note 1"] = Lore("burned note #1", "A slightly burned piece of paper with scribbled writing. Looks like you wrote it",
+                           1, "Why would I do that? How could I let this happen even?")
+        output["burned note 2"] = Lore("burned note #2", "A slightly burned piece of paper with scribbled writing. Looks like you wrote it",
+                           1, "Oh my god, the house burned out with the Doug still inside, and it's my fault")
+        return output
 
+    def init_NPCs(self):
+        output = {}
+        output['Doug'] = NPC("Doug", "Your childhood dog, Doug", "Doug is a cross-breed labrador with german shepherd. Very playful",
+                          150, "friendly", [Lore("Doug's collar", "It looks like it is painted red over green.",
+                                                 1, "It used to be green, but as a kid you thought I'd be collar\
+                                                                 if it was red, so you painted over it with a marker")])
+        return output
 
-def init_NPCs():
-    output = {}
-    output['doug'] = NPC("Doug", "Your childhood dog, Doug", "Doug is a cross-breed labrador with german shepherd. Very playful",
-                      150, "friendly", [Lore("Doug's collar", "It looks like it is painted red over green.",
-                                             1, "It used to be green, but as a kid you thought I'd be collar\
-                                                             if it was red, so you painted over it with a marker")])
-    return output
+    def init_creatures(self):
+        output = {}
+        output['Charred fur rat'] = Rat("Charred fur rat", zack.level)
+        return output
 
+    def init_rooms(self):
+        output = {}
+        output["kitchen"] = Room("kitchen", {"doug": self.NPCs["Doug"]}, {}, {"bread": self.objects["bread"]}, "You can smell spices, and a hint of both \
+        garlic & onion. There are utensils & plates all around",0)
+        output["bedroom"] = Room("bedroom", {}, {"Charred fur rat": self.creatures['Charred fur rat']}, {"Health potion": self.objects["Health potion"]}, "You are in a bedroom, single bed. Sheets indicate a child\
+        slept here. In the corner a rat is munching on something",0)
+        return output
 
-def init_creatures():
-    output = {}
-    output['rat'] = Rat("Charred fur rat", zack.level)
-    return output
+    def init_buildings(self):
+        output = {}
+        output["Roofless house"] = Building('Roofless House', "This house is made of stone. It's roof has fallen because it's old.",
+                                [self.rooms["kitchen"], self.rooms["bedroom"]], [1,1])
+        return output
 
-
-def init_rooms():
-    output = {}
-    output["kitchen"] = Room("kitchen", {"doug": NPCs["doug"]}, {}, {"bread": objects["bread"]}, "You can smell spices, and a hint of both \
-    garlic & onion. There are utensils & plates all around",0)
-    output["bedroom"] = Room("bedroom", {}, {"rat": creatures['rat']}, {"health potion": objects["health potion"]}, "You are in a bedroom, single bed. Sheets indicate a child\
-    slept here. In the corner a rat is munching on something",0)
-    return output
-
-
-def init_buildings():
-    output = {}
-    output["roofless house"] = Building('Roofless House', "This house is made of stone. It's roof has fallen because it's old.",
-                            [rooms["kitchen"], rooms["bedroom"]], [1,1])
-    return output
-
-
-objects = init_objects()
-NPCs = init_NPCs()
-creatures = init_creatures()
-rooms = init_rooms()
-buildings = init_buildings()
-
-
-def build_game():
-    objects = init_objects()
-    NPCs = init_NPCs()
-    creatures = init_creatures()
-    rooms = init_rooms()
-    buildings = init_buildings()
-    world = {"objects": objects, "NPCs": NPCs, "creatures": creatures, "rooms": rooms,
-             "buildings": buildings, "player": zack}
-    return world
+    def build_game(self):
+        # objects = init_objects()
+        # NPCs = init_NPCs()
+        # creatures = init_creatures()
+        # rooms = init_rooms()
+        # buildings = init_buildings()
+        world = {"objects": self.objects, "NPCs": self.NPCs, "creatures": self.creatures, "rooms": self.rooms,
+                 "buildings": self.buildings, "player": zack}
+        return world
