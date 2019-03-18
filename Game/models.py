@@ -12,7 +12,7 @@ class Player(models.Model):
     most_kills = models.IntegerField(default=0)
     most_people = models.IntegerField(default=0)
     most_exp = models.IntegerField(default=0)
-    current_game = {'inventory': [], "position": []}
+    current_game = {'inventory': [], 'stats': {}, 'maps': {}}
     stats = {"kills": 0, "houses": 0, "people": 0}
 
     '''
@@ -59,7 +59,7 @@ class Achievement(models.Model):
     badge = models.ForeignKey(Badge)
     # following should save current DD-MM-YYYY date
     now = datetime.datetime.now()
-    date_awarded = models.DateField(default=now.strftime("%d-%m-%Y"))
+    date_awarded = models.DateField(default=now.strftime("%Y-%m-%d"))
 
     def __str__(self):
         return "Player {0} has the {1} badge. Achieved on {2}".format(self.player,
