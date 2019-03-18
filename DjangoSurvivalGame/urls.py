@@ -20,6 +20,7 @@ from django.conf.urls import include
 from django.conf.urls.static import static
 from Game import views
 from registration.backends.simple.views import RegistrationView
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, user):
@@ -32,3 +33,5 @@ urlpatterns = [
     url(r'^accounts/register/$', MyRegistrationView.as_view(), name = 'registration_register'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()
