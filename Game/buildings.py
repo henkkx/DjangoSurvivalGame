@@ -108,7 +108,7 @@ class Room:
     #helper method which returns a list of creatures in the room of the same type.
     def get_creatures(self, kind):
         creature_list =[]
-        for creature in self.creatures:
+        for creature in self.creatures.values():
             if creature.get_type() == kind:
                 creature_list.append(creature)
 
@@ -117,7 +117,7 @@ class Room:
     #helper method which returns a list of objects in the room of the same type.
     def get_objects(self, kind):
         objects_list =[]
-        for objec in self.objects:
+        for objec in self.objects.values():
             if objec.get_type() == kind:
                 objects_list.append(objec)
 
@@ -145,12 +145,12 @@ class Room:
             else:
                 ", ".join((objects_text, obj))
 
-        if len(self.people) == 0:
-            return "{0}. Inside are the following items:{1}".format(self.name, objects_text)
-        elif len(self.people) == 1:
-            return "{0}. Inside is {1}\nAlso the following items:{2}".format(self.name, persons_text, objects_text)
+        if len(self.NPCs) == 0:
+            return "{0}. Inside are the following items: {1}".format(self.name, objects_text)
+        elif len(self.NPCs) == 1:
+            return "{0}. Inside is {1}\nAlso the following items: {2}".format(self.name, persons_text, objects_text)
         # not necessary to check for just 1 item, definitely won't be 0 ( not point having the room)
-        return "{0}. Inside are:\n{1}\nAlso the following items:{2}".format(self.name, persons_text, objects_text)
+        return "{0}. Inside are:\n{1}\nAlso the following items: {2}".format(self.name, persons_text, objects_text)
 
 
 #room test
