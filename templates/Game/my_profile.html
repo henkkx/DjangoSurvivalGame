@@ -7,5 +7,19 @@
 
 <button id="test">this is a test</button>
 
+<div>
+    {{ user.username }}'s Stats
+    <ul>
+        <li>Games Played: {{ games_played }}</li>
+        <li>Most Kills: {{ most_kills }}</li>
+        <li>Longest Survived: {{ longest_survived }}</li>
+        <li>Most Experience: {{ most_exp }}</li>
+    </ul>
+</div>
+
+<div>
+<img src="{{ image.image.url }}" width="500px"/>
+</div>
+
 
 {% endblock %}
