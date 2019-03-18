@@ -3,4 +3,5 @@ db.sqlite3
 *.pyc
 *.pyo
 .DS_Store
+.vsCode
 DjangoSurvivalGame.iml

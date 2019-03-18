@@ -22,7 +22,7 @@ LOGIN_URL = '/Game/login/'
 REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
-LOGIN_REDIRECT_URL = '/Game/'
+LOGIN_REDIRECT_URL = '/home'
 LOGIN_URL = '/accounts/login/'
 
 # Quick-start development settings - unsuitable for production
