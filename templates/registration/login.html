@@ -2,24 +2,41 @@
 {% load staticfiles %}
 
 {% block head_css %}
-  <link rel="stylesheet" href="/static/css/register.css">
+  <link rel="stylesheet" href="/static/css/login.css">
 {% endblock %}
 {% block content %}
 
-<!-- <div class="container__child signup__form">
-  <form action="#">
+<div class="banner"style="margin-top:0px">
+    <div class="container">
+     <div class="row">
+         <div id="login-header" >
+          <h1 class="lg-text">LOGIN</h1>
+          <p class="image-aboutus-para">One Step Away From An Adventure</p>
+        </div>
+     </div>
+ </div>
+ </div>
+
+<div class="container__child signup__form">
+  <form class="form-signin" role="form" method="post" action=".">
+      {% csrf_token %}
+
     <div class="form-group">
+      <label for="inputUsername" class="sr-only"> Username </label>
+      <input class="form-control" type="text" name="username" id="id_username" placeholder="Your Username" required />
+    </div>
+    <!-- <div class="form-group">
       <label for="email">Email</label>
       <input class="form-control" type="text" name="email" id="email" placeholder="user@example.com" required />
-    </div>
+    </div> -->
     <div class="form-group">
       <label for="password">Password</label>
-      <input class="form-control" type="password" name="password" id="password" placeholder="********" required />
+      <input class="form-control" type="password" name="password" id="id_password" placeholder="********" required />
     </div>
     <div class="m-t-lg">
       <ul class="list-inline">
         <li>
-          <input class="btn btn--form" type="submit" value="Login" />
+          <input class="btn btn--form" value="Submit" type="submit" value="Login" />
         </li>
         <li>
           <a class="signup__link" href="{% url 'registration_register' %}">Not a member yet? Create an account</a>
@@ -28,13 +45,8 @@
     </div>
   </form>
 </div>
-</div> -->
 
-
-<div class="jumbotron">
-      <h1 class="display-3">Login</h1>
-</div>
-  <form class="form-signin" role="form" method="post" action=".">
+  <!-- <form class="form-signin" role="form" method="post" action=".">
       {% csrf_token %}
       <h2 class="form-signin-heading">Please sign in</h2>
       <label for="inputUsername" class="sr-only">Username</label>
@@ -45,6 +57,6 @@
               placeholder="Password" required>
       <button class="btn btn-lg btn-primary" type="submit"
               value="Submit">Sign in</button>
-  </form>
+  </form> -->
 
 {% endblock %}
