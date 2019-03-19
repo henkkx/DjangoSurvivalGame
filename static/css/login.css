@@ -103,6 +103,13 @@ h2 {
     padding: 2.5rem;
     background: #fafafa;
 }
+
+/* .form-signin{
+    width: 20%;
+    position: absolute;
+    left: 30%;
+} */
+
 label {
     font-size: .85rem;
     text-transform: uppercase;
