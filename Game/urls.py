@@ -23,11 +23,11 @@ urlpatterns = [
     url(r'^home', views.home, name="home"),
     url(r'^about', views.about, name='about'),
     url(r'^instructions', views.instructions, name='instructions'),
-    #url(r'^sign_up', views.sign_up, name='sign_up'),
-    url(r'^game', views.my_test, name='game'),
+    url(r'^game', views.game, name='game'),
     url(r'^my_profile', views.my_profile, name='my_profile'),
     url(r'^get_actions', views.get_actions, name="get_actions"),
-    url(r'^post_data', views.post_data, name="post_data")
+    url(r'^post_data', views.post_data, name="post_data"),
+    url(r'^initialise', views.initialise, name="initialise"),
 ]
 
 '''
