@@ -103,10 +103,11 @@ body {
       padding: 2.5rem;
       background: #fafafa;
   }
+
   label {
       font-size: .85rem;
       text-transform: uppercase;
-      color: #ccc;
+      color: rgb(146, 134, 134);
   }
   .form-control {
       background-color: transparent;
