@@ -11,12 +11,9 @@ from Game.models import Player, Achievement
 from Game.game_handler import *
 import json
 from django.views.decorators.csrf import csrf_exempt
-<<<<<<< HEAD
 from Game.Scribbles_from_another_dimension import available_actions, handle, initialise
-=======
 from Game.Scribbles_from_another_dimension import available_actions, handle
 from django.shortcuts import redirect
->>>>>>> 88faa543bf16061117e739936a0c376f7aeafbea
 
 
 def home(request):
@@ -129,7 +126,6 @@ def my_profile(request):
         contxt["achievements"] = list(Achievement.objects.filter(player=player))
         if player.picture:
             contxt["picture"] = player.picture
-<<<<<<< HEAD
     return render(request, 'Game/my_profile.html', contxt)
 
 # @csrf_exempt
@@ -141,27 +137,25 @@ def my_profile(request):
 #         player_temp = Player.objects.get_or_create(user=request.user)[0]
 #         print(player_temp, "___----")
 #         initialise(request.user.username)
-=======
 
-        form = Profile({'picture': player.picture})
-
-        if request.method == 'POST':
-
-            image = request.FILES.get('picture', False)
-
-            if image is False:
-                return HttpResponseRedirect(reverse("my_profile"))
-
-            player.picture = image
-            player.save()
-            return HttpResponseRedirect(reverse("my_profile"))
-        else:
-            print(form.errors)
-
-        contxt["form"] = form
-    
-    return render(request, 'Game/my_profile.html', contxt)
->>>>>>> 88faa543bf16061117e739936a0c376f7aeafbea
+    # form = Profile({'picture': player.picture})
+    #
+    # if request.method == 'POST':
+    #
+    #     image = request.FILES.get('picture', False)
+    #
+    #     if image is False:
+    #         return HttpResponseRedirect(reverse("my_profile"))
+    #
+    #     player.picture = image
+    #     player.save()
+    #     return HttpResponseRedirect(reverse("my_profile"))
+    # else:
+    #     print(form.errors)
+    #
+    # contxt["form"] = form
+    #
+    # return render(request, 'Game/my_profile.html', contxt)
 
 
 # def my_test(request):
