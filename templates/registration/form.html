@@ -14,21 +14,45 @@
 {% for field in form %}
     {% if field.is_hidden %}
         {{ field }}
-    {% else %}
-    <div class="form-group {% if field.errors %}has-error{% endif %}" id="group_{{ field.name }}">
+    {% elif field.name == "password1" or field.name == "password2" %}
+        <div class="form-group {% if field.errors %}has-error{% endif %}" id="group_{{ field.name }}">
+            <label for="id_{{ field.name }}">{{ field.label }}</label>
+            <input class="form-control" type="password" name="{{ field.name }}" id="id_{{ field.name }}" placeholder="********" required />
+            <!-- {{ field }} -->
+        </div>
+            {% if field.errors %}
+                {% for error in field.errors %}
+                <p class="help-block"><span class="text-danger">{{ error|escape }}</span></p>
+                {% endfor %}
+            {% endif %}
+    {% elif field.name == "username" %}
+        
+        <div class="form-group {% if field.errors %}has-error{% endif %}" id="group_{{ field.name }}">
+            
             <label for="id_{{ field.name }}" class="control-label">{{ field.label }}</label>
-
-            {{ field }}
+            <input class="form-control" type="text" name="{{ field.name }}" id="group_{{ field.name }}" placeholder="{{ field.label }}" required />
+            <!-- {{ field }} -->
+        </div>
+            {% if field.errors %}
+                {% for error in field.errors %}
+                <p class="help-block"><span class="text-danger">{{ error|escape }}</span></p>
+                {% endfor %}
+            {% endif %}
+    {% else %}
+        <div class="form-group {% if field.errors %}has-error{% endif %}" id="group_{{ field.name }}">
+    
+            <label for="id_{{ field.name }}" class="control-label">{{ field.label }}</label>
+            <input class="form-control" type="text" name="{{ field.name }}" id="group_{{ field.name }}" placeholder="user@example.com" required />
+            <!-- {{ field }} -->
 
             {% if field.errors %}
                 {% for error in field.errors %}
                 <p class="help-block"><span class="text-danger">{{ error|escape }}</span></p>
                 {% endfor %}
             {% endif %}
-
-            {% if field.help_text %}
+            <!-- {% if field.help_text %}
                 <p class="help-block">{{ field.help_text }}</p>
-            {% endif %}
+            {% endif %} -->
         </div>
     {% endif %}
 {% endfor %}

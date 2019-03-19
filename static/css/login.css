@@ -99,8 +99,9 @@ h2 {
 
 
 .signup__form {
+    
+    /* padding: 2.5rem; */
     padding-top: 0;
-    padding: 2.5rem;
     background: #fafafa;
 }
 
@@ -113,7 +114,7 @@ h2 {
 label {
     font-size: .85rem;
     text-transform: uppercase;
-    color: #ccc;
+    color: rgb(146, 134, 134);
 }
 .form-control {
     background-color: transparent;

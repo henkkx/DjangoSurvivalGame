@@ -17,93 +17,21 @@
  </div>
  </div>
 
-<div class="container__child signup__form">
-  <form class="form-signin" role="form" method="post" action=".">
+ <div class="container__child signup__form">
+  <form class="form-signin" action="." method="post">
       {% csrf_token %}
-      {{ form.as_p }}
-
-    <div class="form-group">
-      <label for="inputUsername" class="sr-only"> Username </label>
-      <input class="form-control" type="text" name="username" id="id_username" placeholder="Your Username" required />
-    </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input class="form-control" type="text" name="email" id="email" placeholder="user@example.com" required />
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input class="form-control" type="password" name="password" id="id_password" placeholder="********" required />
-    </div>
-    <div class="m-t-lg">
-      <ul class="list-inline">
-        <li>
-          <input class="btn btn--form" value="Submit" type="submit" value="Register" />
-        </li>
-        <li>
-          <a class="signup__link" href="{% url 'auth_login' %}">Already a member? Sign in here</a>
-        </li>
-      </ul>
-    </div>
+      {% include 'registration/form.html' with form=form %}
+      <div class="m-t-lg">
+          <ul class="list-inline">
+            <li>
+              <input class="btn btn--form" value="Submit" type="submit" value="Register" />
+            </li>
+            <li>
+              <a class="signup__link" href="{% url 'auth_login' %}">Already a member? Sign in here</a>
+            </li>
+          </ul>
+        </div>
   </form>
 </div>
-
-<!-- <div class="signup__container">
-<div class="container__child signup__thumbnail">
-  <div class="thumbnail__logo">
-    <h1 class="logo__text">SurvivalGame</h1>
-  </div>
-  <div class="thumbnail__content text-center">
-    <h1 class="heading--primary"> Are you ready for an adventure? </h1>
-    <h2 class="heading--secondary"></h2>
-  </div> -->
-<!--
-  <div class="signup__overlay"></div>
-</div> -->
-
-<!-- 
-<div class="container__child signup__form">
-  <form method="POST">
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input class="form-control" type="text" name="username" id="username" placeholder="choose a name for your character" required />
-    </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input class="form-control" type="text" name="email" id="email" placeholder="user@example.com" required />
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input class="form-control" type="password" name="password" id="password" placeholder="********" required />
-    </div>
-    <div class="form-group">
-      <label for="passwordRepeat">Repeat Password</label>
-      <input class="form-control" type="password" name="passwordRepeat" id="passwordRepeat" placeholder="********" required />
-    </div>
-    <div class="m-t-lg">
-      <ul class="list-inline">
-        <li>
-          <input class="btn btn--form" type="submit" value="Register" />
-        </li>
-        <li>
-          <a class="signup__link" href="{% url 'auth_login' %}">Already a member? Log in here</a>
-        </li>
-      </ul>
-    </div>
-  </form>
-</div>
-</div> -->
-
-<!-- <div class='col-sm-6 col-sm-offset-3 text-center'>
-<h1>Register</h1>
-<hr/>
-<form class='text-left' method="post" action="{% url 'registration_register' %}">
-{% csrf_token %}
-{{ form.as_p }}
-
-<input type="submit" value="Register" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
-<p>Did you need to <a href='{% url "auth_login" %}'>Login</a>?
-</div> -->
 
 {% endblock %}
