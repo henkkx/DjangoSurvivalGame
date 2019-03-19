@@ -38,11 +38,27 @@
      <img src="{{ picture.url }}" width="500px" onerror="this.style.display='none'"/>
 </div>
 <div>
-    <form method="post" action="my_profile" enctype="multipart/form-data">
+    <form id="imageupload" method="post" action="my_profile" enctype="multipart/form-data">
         {% csrf_token %}
+         <li> Edit Your Profile Picture</li>
         {{ form.as_p }}
-        <input type="submit" value="Update" />
+        <input type="submit" value="Upload New Profile Picture" onclick="NoImageSelect() "/>
     </form>
+    <script>
+ function NoImageSelect() {
+  if (document.getElementById("id_picture").files.length == 0) {
+    alert("Please Select An Image To Upload");
+  }
+  if (
+    !document
+      .getElementById("id_picture")
+      .files[0].name.match(/.(jpg|jpeg|png|gif)$/i)
+  ) {
+    alert("The file selected is not of an Image type");
+  }
+}
+
+    </script>
 </div>
 <div>
     <table>
