@@ -48,21 +48,23 @@ body {
   background-repeat: no-repeat;
   opacity: 0;
   z-index: 0;
-  animation: imageAnimation 50s linear infinite;
+  animation: imageAnimation 30s linear infinite;
+  
 }
 
 .slideshow li:nth-child(1) {
-  background-image: url(../images/landing.jpg)
+  background-image: url(../images/bridge.jpg)
 }
-/* .slideshow li:nth-child(2) {
+.slideshow li:nth-child(2) {
   background-image: url();
   animation-delay: 10s;
+  background-image: url(../images/townNight.jpg)
 }
 .slideshow li:nth-child(3) {
-  background-image: url();
   animation-delay: 20s;
+  background-image: url(../images/tunnel.jpg)
 
-} */
+}
 
 @keyframes imageAnimation {
   0% {
