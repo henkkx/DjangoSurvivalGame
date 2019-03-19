@@ -12,25 +12,17 @@ class Player(models.Model):
     most_kills = models.IntegerField(default=0)
     most_people = models.IntegerField(default=0)
     most_exp = models.IntegerField(default=0)
-    current_game = {'inventory': [], "position": []}
+    current_game = {"player": None}
     stats = {"kills": 0, "houses": 0, "people": 0}
 
-    '''
-    Just have this to remember how to pickle in & out when I create the function later
-    pickle_out = open("dict.pickle","wb")
-    pickle.dump(example_dict, pickle_out)
-    pickle_out.close()
-    pickle_in = open("dict.pickle","rb")
-    example_dict = pickle.load(pickle_in)
-    '''
 
-    def save_game(self):
-        # pickle out data
-        pass
-
-    def load_game(self):
-        # pickle in data
-        pass
+    # def save_game(self):
+    #     # pickle out data
+    #     pass
+    #
+    # def load_game(self):
+    #     # pickle in data
+    #     pass
 
     def __str__(self):
         return self.user.username
