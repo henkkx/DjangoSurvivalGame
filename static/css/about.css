@@ -170,7 +170,7 @@ i {
 
 #team {
     /* background: #eee !important; */
-    background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(https://cdn.pixabay.com/photo/2015/11/17/18/59/architecture-1048092_960_720.jpg);
+    background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url("../images/teamBg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;

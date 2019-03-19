@@ -13,6 +13,7 @@ body {
 }
 
 
+
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
@@ -45,14 +46,18 @@ body {
 
 #reviews{
   padding-top: 6em;
+  margin-bottom: 6em;
 }
+
+
 
 /* MARKETING CONTENT
 -------------------------------------------------- */
 
 /* Center align the text within the three columns below the carousel */
 .marketing .col-lg-4 {
-  margin-bottom: 1.5rem;
+  margin-top: 4rem; 
+  margin-bottom: 12rem;
   text-align: center;
 }
 .marketing h2 {
@@ -64,18 +69,44 @@ body {
 }
 
 
-/*  LEADERBOARDS
+/* 
+
+LEADERBOARDS
 ------------------------------------------
 */
 
+
+
+#leaderboard_section{
+  background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url("../images/leaderboard.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  margin-top: 100px;
+  height: 600px;
+}
+
+section .section-title {
+  font-size: 48px;
+  padding-top: 50px; 
+  text-align: center;
+  color: #fff;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+
 .leaderboard {
   position: relative;
-  top: 50%;
+  /* margin-left: 20px;  */
+  margin-top: 50px;
+  margin-left: 50px;
+  /*
+  top: 80%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   width: 500px;
-  height: 308px;
+  height: 308px; */
   background: -webkit-linear-gradient(top, #3a404d, #181c26);
   background: linear-gradient(to bottom, #3a404d, #181c26);
   border-radius: 10px;
@@ -158,6 +189,7 @@ body {
   z-index: 2;
   display: block;
   text-align: right;
+  color: #e1e1e1;
 }
 .leaderboard ol li::after {
   content: '';
@@ -245,6 +277,11 @@ body {
 }
 
 
+#days_survived{
+  position: relative;
+  top: 0;
+  left: 0;
+}
 
 
 

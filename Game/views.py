@@ -34,13 +34,20 @@ def home(request):
 
     # playerList = PC.objects.order_by('-most_kills')[:5]
 
+    context_dict = {}
+
+    context_dict["players_kills"] = Player.objects.order_by('-most_kills')[:5]
+    context_dict["players_survived"] = Player.objects.order_by('-most_days_survived')[:5]
+
     if request.method == "POST":
 
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         user = authenticate(username=username, password=password)
-        can_continue = False
+        context_dict["can_continue"] = False
+
+
         # this variable may not be needed, we can check straight from the .html file to render
         # the "Continue" button, we'll see
         if user:
@@ -48,7 +55,7 @@ def home(request):
                 login(request, user)
                 # if user.has_save_file:
                 #     can_continue = True
-                return render(request, 'Game/home.html', {'can_continue': can_continue})
+                return render(request, 'Game/home.html', context_dict)
             else:
                 return HttpResponse("Account disabled, you cheater")
         else:
@@ -60,7 +67,7 @@ def home(request):
 
     else:
 
-        return render(request, 'Game/home.html', {"players": ""})
+        return render(request, 'Game/home.html', context_dict)
 
 
 def landing_page(request):
