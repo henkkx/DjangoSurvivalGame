@@ -140,7 +140,6 @@ def inspect(player, entity=None):
 #             print("A swift an decisive slaughter Ghandi would be honored to witness such a spectacle")
 def fight(creature):
     global response
-    print("fitinh")
     for c in player.room.creatures.values():
         if c.name == creature:
             creature = c
@@ -150,20 +149,25 @@ def fight(creature):
     for weapon in player.inventory["Weapon"]:
         if weapon.dmg > player_damage:
             player_damage = weapon.dmg
-    while True:
-        creature.hp -= player_damage
-        if creature.hp <= 0:
-            response = "You killed a {0} </br> You now have {1} hp".format(creature.name, player.hp)
-            player.room.creatures.pop(creature.name)
-            return True
-        player.hp -= creature.ap
-        if player.hp <= 0:
-            response = "YOU DIED"
-            return False
+    if not (player_damage <= 0 and creature.ap <= 0):
+        while True:
+            creature.hp -= player_damage
+            if creature.hp <= 0:
+                response = "You killed a {0} </br> You now have {1} hp".format(creature.name, player.hp)
+                player.room.creatures.pop(creature.name)
+                return True
+            player.hp -= creature.ap
+            if player.hp <= 0:
+                response = "YOU DIED"
+                return False
+    else:
+        response = "You can't fight with that creature because you both deal no damage," \
+                   " as in you literally heal each other, odd."
 
 
 # Allows the user to pick_up an item from the current room
 def pick_up(player, object_name):
+    global response
     if player.room is None:
         return "You are not in a room"
     room_objects = player.room.objects
@@ -178,9 +182,10 @@ def pick_up(player, object_name):
                 #player.add_item() returns true or false depending on whether or not the object could be added.
                 if valid:
                     room_objects.pop(object_name)
-                    return "Added {0} to inventory.".format(object_name)
+                    response = "Added {0} to inventory.".format(object_name)
+                    break
                 else:
-                    return "You already have a {0} in your inventory.".format(object_name)
+                    response = "You already have a {0} in your inventory.".format(object_name)
             
         return "No object with that name in the current room\nYou can see the name of objects by inspecting them using inspect <object_type>"
     else:
@@ -189,7 +194,7 @@ def pick_up(player, object_name):
 
 #Allows the player to drop an object to the floor
 def drop(player, object_name):
-
+    global response
     if player.room == None:
         return "You must be within a room to drop an item"
 
@@ -203,7 +208,7 @@ def drop(player, object_name):
     #player.remove_item() returns true or false depending on whether or not the object could be removed.
     if objec:
         player.room.objects[objec.name] = objec
-        return "You dropped {0}.".format(object_name)
+        response = "You dropped {0}.".format(object_name)
     else:
         return "You dont have an object called {0} in your inventory".format(object_name)
 
@@ -254,7 +259,10 @@ def exit_current():
     if player.position[2] == 0: # if on ground floor
         player.position = [0, player.position[1]+1, 0]
         player.room = None
-        return True
+        response = ""
+        for bld in world["buildings"]:
+            if bld.position[1] == player.position[1]:
+                response += bld.description
         # which means back to main road (0) on the level we are (player.position), placeholder ground floor (0)
     return False
 
@@ -272,10 +280,11 @@ def move_room(room):  # room is the room name
 
 
 def move_floor(building, move):
+    global response
     if move == "up":
         if building.can_go_up(player.position[2]):
             player.position[2] += 1
-            return True
+            response = ""
     if move == "down":
         if building.can_go_down(player.position[2]):
             player.position[2] -= 1
@@ -354,17 +363,18 @@ def converse(npc):
     global response
     for n in world["NPCs"].values():
         if npc == n.name:
-            response = n.desc_L
-            print(response, "repsonse here")
+            response = n.conversation
 
 def consume(player, food_name):
+    global response
+    response = "Got into consume"
     if player.inventory["Food"] == []:
-        return "You arent carrying any food."
+        response = "You aren't carrying any food."
 
     food_list = player.inventory["Food"]
     for food in food_list:
         if food.name == food_name:
-            return player.eat(food)
+            response = player.eat(food)
         
     return "You dont have any food items with the name {0}".format(food_name)
 
@@ -387,6 +397,8 @@ def handle(text_in):
         converse(cmds[2])
     elif cmds[0] == "Drop":
         drop(player, " ".join(cmds[1:]))
+    elif cmds[0] == "Consume":
+        consume(player, " ".join(cmds[1:]))
 
 
 __ = MasterOfPuppets()
