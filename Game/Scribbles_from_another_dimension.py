@@ -29,7 +29,8 @@ player_model = None
 
 def initialise(inp):
     global player_model
-    player_model = Player.objects.get_or_create(user=User.objects.get(username=inp))
+    print(player_model,"- player model")
+    player_model = Player.objects.get_or_create(user=User.objects.get(username=inp))[0]
 
 #This function displays information about the specified object or creature.
 #If no arguments are passed the current room will be described.
@@ -422,6 +423,10 @@ def handle(text_in):
         print(player, "This is the player Continue is using")
     elif cmds[0] == "Inventory":
         response = player.get_inventory()
+    elif cmds[0] == "Floor":
+        move_floor(cmds[1])
+
+    print(Achievement.objects.get(player=player_model))
 
 
 
