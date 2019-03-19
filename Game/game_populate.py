@@ -58,7 +58,10 @@ class MasterOfPuppets:
         output['Doug'] = NPC("Doug", "Your childhood dog, Doug", "Doug is a cross-breed labrador with german shepherd. Very playful",
                           150, "friendly", [Lore("Doug's collar", "It looks like it is painted red over green.",
                                                  1, "It used to be green, but as a kid you thought I'd be collar\
-                                                                 if it was red, so you painted over it with a marker")])
+                                                                 if it was red, so you painted over it with a marker")],
+                             "Doug is very happy to see you, he is wagging his tail.</br>"
+                             "You recall that you use to be an unreliable kid. You were playing with Doug once and you threw the ball</br>"
+                             "in the road, Doug chased it, a car hit him. Why do the worse memories come to you?")
         return output
 
     def init_creatures(self):
