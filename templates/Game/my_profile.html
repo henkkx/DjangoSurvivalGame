@@ -28,16 +28,44 @@
 <div>
     {{ user.username }}'s Stats
     <ul>
+<<<<<<< HEAD
         <li>Games Played: {{ games_played }}</li>
         <li>Most Kills: {{ most_kills }}</li>
         <li>Most Experience: {{ most_exp }}</li>
+=======
+        <li>Games Played: {{ games }}</li>
+        <li>Most Kills: {{ kills }}</li>
+        <li>Longest Survived: {{ longest_survived }}</li>
+        <li>Most Experience: {{ exp }}</li>
+>>>>>>> 88faa543bf16061117e739936a0c376f7aeafbea
     </ul>
 </div>
-
-<div>
-    <img src="{{ picture.url }}" width="500px"/>
+<div id = image>
+     <img src="{{ picture.url }}" width="500px" onerror="this.style.display='none'"/>
 </div>
+<div>
+    <form id="imageupload" method="post" action="my_profile" enctype="multipart/form-data">
+        {% csrf_token %}
+         <li> Edit Your Profile Picture</li>
+        {{ form.as_p }}
+        <input type="submit" value="Upload New Profile Picture" onclick="NoImageSelect() "/>
+    </form>
+    <script>
+ function NoImageSelect() {
+  if (document.getElementById("id_picture").files.length == 0) {
+    alert("Please Select An Image To Upload");
+  }
+  if (
+    !document
+      .getElementById("id_picture")
+      .files[0].name.match(/.(jpg|jpeg|png|gif)$/i)
+  ) {
+    alert("The file selected is not of an Image type");
+  }
+}
 
+    </script>
+</div>
 <div>
     <table>
         <tr>

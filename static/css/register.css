@@ -3,7 +3,11 @@
 body {
   font: 100% / 1.414 "Open Sans", "Roboto", arial, sans-serif;
 }
-a,
+
+
+
+
+/* a,
 [type="submit"] {transition: all .25s ease-in;}
 .signup__container {
   position: absolute;
@@ -96,4 +100,4 @@ label {
   color: #999;
   &:focus,
   &:hover {color: darken(#999, 13%);}
-}
+} */
