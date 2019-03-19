@@ -5,7 +5,7 @@ except:
 
 
 class PC:
-    def __init__(self, name, level, position=None, hp=100,):
+    def __init__(self, name, level=1, position=[0, 0, 0], hp=100,):
         self.name = name
         self.hp = hp
         self.max_hp = hp
@@ -44,7 +44,7 @@ class PC:
         for kind in self.inventory:
             items = self.inventory[kind]
             if items:
-                output.append("You have {0} {1} item(s):".format(len(items), kind))
+                output.append("</br>You have {0} {1} item(s):".format(len(items), kind))
                 for item in items:
                     output.append(item.__str__())
                 output.append("")

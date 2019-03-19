@@ -123,8 +123,6 @@ class Room:
 
         return objects_list
 
-    
-
     def __str__(self):
         '''
         The following loops are to create a more readable version of the people & objects in the room.

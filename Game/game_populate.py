@@ -29,6 +29,8 @@ sword
 burned note (x2)
 """
 zack = PC("Zack", 1, [0, 0, 0])
+
+
 class MasterOfPuppets:
     def __init__(self):
         self.objects = self.init_objects()
