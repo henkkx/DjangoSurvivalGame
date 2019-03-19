@@ -61,7 +61,7 @@
      </a>
    </div>
 
-
+</main>
    <!-- Marketing messaging and featurettes
    ================================================== -->
    <!-- Wrap the rest of the page in another container to center all the content. -->
@@ -72,7 +72,7 @@
      <div class="row">
        <div class="col-lg-4">
          <img class="rounded-circle" src="static/images/ign.png" alt="Generic placeholder image" width="140" height="140">
-         <h2>IGN: "A Master piece!"" 5/7</h2>
+         <h2>IGN: "A Master piece!" 5/7</h2>
          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
        </div><!-- /.col-lg-4 -->
@@ -92,38 +92,55 @@
 
 
      <!-- adding leaderboards below -->
+  </div>
+    </hr>
 
-     <div class="leaderboard">
-      <h1>
-        Top Players
-        <svg class="ico-cup">
-          <use xlink:href="#cup"></use>
-        </svg>
-      </h1>
-      <ol>
-        <li>
-          <mark>Jerry Wood</mark>
-          <small>315</small>
-        </li>
-        <li>
-          <mark>Brandon Barnes</mark>
-          <small>301</small>
-        </li>
-        <li>
-          <mark>Raymond Knight</mark>
-          <small>292</small>
-        </li>
-        <li>
-          <mark>Trevor McCormick</mark>
-          <small>245</small>
-        </li>
-        <li>
-          <mark>Andrew Fox</mark>
-          <small>203</small>
-        </li>
-      </ol>
+  
+    <section id="leaderboard_section" class="pb-5"> 
+     <div class="leaderboard_container">
+        <h1 class="section-title h1">Leaderboards</h5>
+        <div class="row">
+            <div class="leaderboard col-lg-5" id="kills">
+                <h1>
+                  Most kills
+                  <svg class="ico-cup">
+                    <use xlink:href="#cup"></use>
+                  </svg>
+                </h1>
+                <ol>
+                    {% for player in players_kills %}
+                      <li>
+                        <mark> {{ player.user }}</mark>
+                        <small>{{ player.most_kills }}</small>
+                      </li>
+                    {% endfor %}
+                </ol>
+            </div>
+
+            <div class="col-lg-1">
+
+            </div>
+
+            <div class="leaderboard col-lg-5" id = "days_survived">
+                  <h1>
+                    Most Days Survived
+                    <svg class="ico-cup">
+                      <use xlink:href="#cup"></use>
+                    </svg>
+                  </h1>
+                  <ol>
+                      {% for player in players_survived %}
+                        <li>
+                          <mark> {{ player.user }}</mark>
+                          <small>{{ player.most_days_survived }}</small>
+                        </li>
+                      {% endfor %}
+                  </ol>
+            </div>
+      </div>
     </div>
-
+  </section>  
+    
 
 
 {% endblock %}
