@@ -5,13 +5,13 @@ converse
 fight
 interact
 """
-import time
 try:
     from buildings import Building, Room
     from people import PC, NPC
     from creatures import Zombie, Spider
     from objects import Weapon, Lore, Food
     from game_populate import MasterOfPuppets
+    from models import *
 except:
     # imports are different on Mac & on Windows so we have to do this
     from Game.buildings import Building, Room
@@ -19,19 +19,22 @@ except:
     from Game.creatures import Zombie, Spider
     from Game.objects import Weapon, Lore
     from Game.game_populate import MasterOfPuppets
+    from Game.models import *
 import json
 from django.http import HttpResponse
 
 response = "Welcome to our world, adventurer"
-houses = {}
-road_objects = {}  # probably won't use this, but better have it and delete later
-road_people = {}  # again, probably won't be used we'll see
-world = {'buildings': houses, 'objects': road_objects, 'people': road_people}
+player_model = None
 
+
+def initialise(inp):
+    global player_model
+    player_model = Player.objects.get_or_create(user=User.objects.get(username=inp))
 
 #This function displays information about the specified object or creature.
 #If no arguments are passed the current room will be described.
 #It makes use of the get_description method in the rooms class. Take a look.
+
 def inspect(player, entity=None):
     room = player.room
     pl = player.level
@@ -155,6 +158,10 @@ def fight(creature):
             if creature.hp <= 0:
                 response = "You killed a {0} </br> You now have {1} hp".format(creature.name, player.hp)
                 player.room.creatures.pop(creature.name)
+                if player_model.stats["kills"] != 0:
+                    player_model.stats["kills"] += 1
+                else:
+                    player_model.stats["kills"] = 1
                 return True
             player.hp -= creature.ap
             if player.hp <= 0:
@@ -250,6 +257,10 @@ def enter(building):
             break
     if building in available():
         player.position = building.position.append(0)
+        if player_model.stats["houses"] != 0:
+            player_model.stats["houses"] += 1
+        else:
+            player_model.stats["houses"] = 1
         return True
         # so enter the building the player chose , on ground floor, hence the append 0 for floor number
     return False
@@ -259,12 +270,12 @@ def exit_current():
     if player.position[2] == 0: # if on ground floor
         player.position = [0, player.position[1]+1, 0]
         player.room = None
-        response = ""
-        for bld in world["buildings"]:
+        response = "You are now on the street </br>"
+        for bld in world["buildings"].values():
             if bld.position[1] == player.position[1]:
                 response += bld.description
+    check_achievements()
         # which means back to main road (0) on the level we are (player.position), placeholder ground floor (0)
-    return False
 
 
 def move_room(room):  # room is the room name
@@ -274,7 +285,7 @@ def move_room(room):  # room is the room name
             for r in bld.rooms:
                 if room == r.name:
                     player.room = r
-                    response = str(r)
+                    response = str(r.desc)
                     return True
     return False
 
@@ -364,6 +375,10 @@ def converse(npc):
     for n in world["NPCs"].values():
         if npc == n.name:
             response = n.conversation
+            if player_model.stats["people"] != 0:
+                player_model.stats["people"] += 1
+            else:
+                player_model.stats["people"] = 1
 
 def consume(player, food_name):
     global response
@@ -380,11 +395,11 @@ def consume(player, food_name):
 
 
 def handle(text_in):
-    print("\n'"+text_in.decode("utf-8") + "'\n\n")
+    global world, player, response, player_model
     cmds = text_in.decode("utf-8").split(" ")
     output_dict = {}
     if cmds[0] == "Move":
-        move_room(cmds[1])
+        move_room(" ".join(cmds[2:]))
     elif cmds[0] == "Enter":
         enter(" ".join(cmds[1:]))
     elif cmds[0] == "Fight":
@@ -394,11 +409,20 @@ def handle(text_in):
     elif cmds[0] == "Pick":
         pick_up(player, " ".join(cmds[1:]))
     elif cmds[0] == "Talk":
-        converse(cmds[2])
+        converse(" ".join(cmds[2:]))
     elif cmds[0] == "Drop":
         drop(player, " ".join(cmds[1:]))
     elif cmds[0] == "Consume":
         consume(player, " ".join(cmds[1:]))
+    elif cmds[0] == "New":
+        world = __.build_game()
+        player = PC("PC")
+    elif cmds[0] == "Continue":
+        player = player_model.current_game
+        print(player, "This is the player Continue is using")
+    elif cmds[0] == "Inventory":
+        response = player.get_inventory()
+
 
 
 __ = MasterOfPuppets()
@@ -413,10 +437,11 @@ def available_actions():
     global response
     data_post = {}
     '''REMEMBER TO CHANGE THE TOWER POSITION BELOW '''
+    data_post["Inventory"] = " "
     data_post["text"] = response
     tower = Building.tower
     if player.position[0] != 0 or player.position[:-1] == [0, 5]:  # so if the player is in a building.
-        data_post["Move"] = []
+        data_post["Move to"] = []
         if player.room is not None:  # these are only done if we actually are in a room
             if not (player.room.objects == {} or player.room.objects is None):
                 data_post["Pick"] = []
@@ -435,7 +460,7 @@ def available_actions():
         current_building = world["buildings"]["Roofless house"]
         for room in current_building.rooms:
             if room.pos == player.position[2] and room.name != player.room.name:
-                data_post['Move'].append(room.name)
+                data_post['Move to'].append(room.name)
         if current_building.can_go_up(player.position[2]):
             data_post['Floor up'] = ' '
         if current_building.can_go_down(player.position[2]):
@@ -459,7 +484,8 @@ def available_actions():
                 data_post['enter'] = []
                 if building.position == player.position[:-1]:
                     data_post["Enter"].append(building.name)
-    data_post["Exit"] = ' '
+    if player.position[2] == 0 and player.position[0] != 0:
+        data_post["Exit"] = " "
     return HttpResponse(json.dumps(data_post))
 
 
@@ -470,6 +496,12 @@ def can_enter_buildings():
             output.append(bld)
     return output
 
+
+def check_achievements():
+    global player_model
+    for bdg in Badge.objects.all():
+        if player_model.stats[bdg.badge_type] >= bdg.criteria:
+            Achievement.create(player=player_model, badge=bdg)
 
 
 

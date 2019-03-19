@@ -34,7 +34,7 @@ class Weapon(Objects):
         
     #self.__name__ prints the class name.
     def __str__(self):
-        return ("Type: {0}, Name: {1}, damage: {2} range: {3} size: {4}\nDescripition: {5}".format(self.__class__.__name__, self.name, self.dmg, self.raange, self.size, self.desc))
+        return ("</br>Name: {1}, Damage: {2} Range: {3} Size: {4} Descripition: {5}".format(self.__class__.__name__, self.name, self.dmg, self.raange, self.size, self.desc))
 
     def read(self):
         return ("Not sure how you plan on reading a weapon")
