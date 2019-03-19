@@ -69,6 +69,8 @@ class PC:
         return inventory_list
 
     def eat(self, food):
+        if self.hunger >= self.max_hunger and self.hp >= self.max_hp:
+            return "Did not consume since it would have no effect."
         self.remove_item(food.name)
         if (self.hunger + food.nutrients) > self.max_hunger:
             self.hunger = self.max_hunger
@@ -79,18 +81,19 @@ class PC:
             self.hp = self.max_hp
         else:
             self.hp += food.hp_regen
-        
+
         return "Ate {0}. Hunger is now {1}/{2}. Health is now {3}/{4}".format(food.name, self.hunger, self.max_hunger, self.hp, self.max_hp)
 
 
 class NPC:
-    def __init__(self, name, short_description, long_description, hp, allegiance, inventory):
+    def __init__(self, name, short_description, long_description, hp, allegiance, inventory, conversation):
         self.name = name
         self.desc_S = short_description
         self.desc_L = long_description
         self.hp = hp
         self.allegiance = allegiance
         self.inventory = inventory
+        self.conversation = conversation
         try:
             if inventory is None:
                 self.ap = 10

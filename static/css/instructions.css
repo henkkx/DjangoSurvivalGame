@@ -1,6 +1,6 @@
 /* BANNER  */
 .image-howto-banner {
-  background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)),url(https://cdn.pixabay.com/photo/2016/11/29/04/17/bonfire-1867275_960_720.jpg);
+  background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)),url(../images/campfire.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -11,7 +11,7 @@
 }
 
 .image-howto-sm-banner {
-  background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(https://cdn.pixabay.com/photo/2018/05/04/10/30/team-3373638_960_720.jpg);
+  background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(../images/campfire.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
