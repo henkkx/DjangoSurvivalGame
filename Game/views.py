@@ -12,6 +12,7 @@ from Game.game_handler import *
 import json
 from django.views.decorators.csrf import csrf_exempt
 from Game.Scribbles_from_another_dimension import available_actions, handle
+from django.shortcuts import redirect
 
 
 def home(request):
@@ -127,9 +128,25 @@ def my_profile(request):
         contxt["achievements"] = list(Achievement.objects.filter(player=player))
         if player.picture:
             contxt["picture"] = player.picture
+
+        form = Profile({'picture': player.picture})
+
+        if request.method == 'POST':
+
+            image = request.FILES.get('picture', False)
+
+            if image is False:
+                return HttpResponseRedirect(reverse("my_profile"))
+
+            player.picture = image
+            player.save()
+            return HttpResponseRedirect(reverse("my_profile"))
+        else:
+            print(form.errors)
+
+        contxt["form"] = form
     
-    
-    return render(request, 'Game/my_profile.html', contxt )
+    return render(request, 'Game/my_profile.html', contxt)
 
 
 

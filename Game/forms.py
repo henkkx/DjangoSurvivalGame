@@ -15,6 +15,8 @@ class UserForm(forms.ModelForm):
 
 class Profile(forms.ModelForm):
 
+    picture = forms.ImageField(required=False)
+
     class Meta:
         model = Player
         fields = {'picture'}

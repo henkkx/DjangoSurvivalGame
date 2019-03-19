@@ -28,17 +28,22 @@
 <div>
     {{ user.username }}'s Stats
     <ul>
-        <li>Games Played: {{ games_played }}</li>
-        <li>Most Kills: {{ most_kills }}</li>
+        <li>Games Played: {{ games }}</li>
+        <li>Most Kills: {{ kills }}</li>
         <li>Longest Survived: {{ longest_survived }}</li>
-        <li>Most Experience: {{ most_exp }}</li>
+        <li>Most Experience: {{ exp }}</li>
     </ul>
 </div>
-
-<div>
-    <img src="{{ picture.url }}" width="500px"/>
+<div id = image>
+     <img src="{{ picture.url }}" width="500px" onerror="this.style.display='none'"/>
 </div>
-
+<div>
+    <form method="post" action="my_profile" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update" />
+    </form>
+</div>
 <div>
     <table>
         <tr>
