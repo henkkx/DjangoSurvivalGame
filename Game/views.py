@@ -27,6 +27,7 @@ from django.views.decorators.csrf import csrf_exempt
 from Game.Scribbles_from_another_dimension import available_actions, handle, initialise
 from Game.Scribbles_from_another_dimension import available_actions, handle
 from django.shortcuts import redirect
+import os
 
 
 def home(request):
@@ -154,6 +155,9 @@ def my_profile(request):
             image = request.FILES.get('picture', False)
 
             if image is False:
+                os.remove(player.picture.path)
+                player.picture = None
+                player.save()
                 return HttpResponseRedirect(reverse("my_profile"))
 
             player.picture = image

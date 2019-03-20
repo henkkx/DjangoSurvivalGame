@@ -19,6 +19,7 @@
 </div>
 <div>
     <form id="imageupload" method="post" action="my_profile" enctype="multipart/form-data">
+        <input type="submit" value="Remove Your Profile Picture" onclick="return confirm('Are you sure?');" "/>
         {% csrf_token %}
          <li> Edit Your Profile Picture</li>
         {{ form.as_p }}
