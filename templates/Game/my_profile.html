@@ -1,30 +1,10 @@
 {% extends 'Game/base.html' %}
 {% block head_css %}
 <script src="/static/js/testajax.js"></script>
-<!--- This was my attempt to make the table look nice --->
-<style>
-    table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    }
-
-    td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-</style>
+<link rel="stylesheet" href="static/css/my_profile.css">
 {% endblock %}
 
 {% block content %}
-
-<button id="test">this is a test</button>
-
 <div>
     {{ user.username }}'s Stats
     <ul>
@@ -62,16 +42,24 @@
 }
     </script>
 </div>
-<div>
+<div id="achievements-table">
     <table>
         <tr>
             <th>Badge Name</th>
             <th>Date Awarded</th>
+            <th>Description</th>
+            <th>Icon</th>
         </tr>
         {% for achievement in achievements %}
         <tr>
             <td>{{ achievement.badge.name }}</td>
             <td>{{ achievement.date_awarded }}</td>
+            <td>{{ achievement.badge.description }}</td>
+            {% if achievement.badge.icon %}
+                <td><img src="{{ achievement.badge.icon.url }}"/></td>
+            {% else %}
+                <td>Img_Error</td>
+            {% endif %}
         </tr>
         {% endfor %}
     </table>
