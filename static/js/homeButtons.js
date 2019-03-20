@@ -1,5 +1,10 @@
 
 $(document).ready(function(){
+
+    $("ol li").click(function(){
+      location.href = $(this).find("a").attr("href");
+    });
+
     // Add smooth scrolling to all links
     $(".btn").on('click', function(event) {
         
