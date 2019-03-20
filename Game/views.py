@@ -145,7 +145,7 @@ def profile(request, user=None):
         try:
             player = Player.objects.get(user=User.objects.get(username = user))
         except:
-            return HttpResponse("The Player whose profile you are looking for does not exist.")
+            return HttpResponse("The Player whose profile you are looking for does not exist")
             
         
     #print(player)
@@ -161,10 +161,11 @@ def profile(request, user=None):
 
     if request.method == 'POST':
 
-        image = request.FILES.get('picture', False)
+        image = request.FILES.get('file-input', False)
 
         if image is False:
-            os.remove(player.picture.path)
+            if player.picture:
+                os.remove(player.picture.path)
             player.picture = None
             player.save()
             return HttpResponseRedirect(reverse("profile"))

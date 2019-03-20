@@ -6,7 +6,11 @@
 {% endblock %}
 
 {% block content %}
-<div>
+<div id= "name">
+{{ name }}'s Sanctuary
+</div>
+
+<div id = "stats">
     {{ name }}'s Stats
     <ul>
         <li>Games Played: {{ games }}</li>
@@ -24,7 +28,7 @@
 {% if user.username == name %}
 <div id="Buttons">
     <div id="display-upload">
-        <button onclick="showUploadOptions()">Upload New Image</button>
+        <button id="displayB">Upload New Image</button>
     </div>
 
     {% if picture %}
@@ -39,10 +43,13 @@
     <div id="image-upload">
         <form id="imageupload" method="post" action="profile" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
+            <p>
+                <input id="file-input" type="file" name="file-input">
+                <label for="file-input">Select File</label> 
+            </p>
             <input type="submit" value="Upload New Profile Picture" onclick="return NoImageSelect() "/>
         </form>
-        <button onclick="hideUploadOptions()">Cancel</button>
+        <button id="cancelB">Cancel</button>
     </div>
 </div>
 {% endif %}
