@@ -1,3 +1,5 @@
+
+<!--Form to customize the HTML of the fields of the default django-registration-redux registration form -->
 {% if form.errors %}
     <div class="alert alert-danger">
         <p class="text-danger">Please correct the errors below!</p>
@@ -15,6 +17,7 @@
     {% if field.is_hidden %}
         {{ field }}
     {% elif field.name == "password1" or field.name == "password2" %}
+    <!-- CUSTOMIZE PASSWORD FIELDS -->
         <div class="form-group {% if field.errors %}has-error{% endif %}" id="group_{{ field.name }}">
             <label for="id_{{ field.name }}">{{ field.label }}</label>
             <input class="form-control" type="password" name="{{ field.name }}" id="id_{{ field.name }}" placeholder="********" required />
@@ -26,7 +29,7 @@
                 {% endfor %}
             {% endif %}
     {% elif field.name == "username" %}
-        
+        <!-- CUSTOMIZE USERNAME FIELDS -->
         <div class="form-group {% if field.errors %}has-error{% endif %}" id="group_{{ field.name }}">
             
             <label for="id_{{ field.name }}" class="control-label">{{ field.label }}</label>
@@ -39,6 +42,7 @@
                 {% endfor %}
             {% endif %}
     {% else %}
+        <!-- CUSTOMIZE THE EMAIL FIELD -->
         <div class="form-group {% if field.errors %}has-error{% endif %}" id="group_{{ field.name }}">
     
             <label for="id_{{ field.name }}" class="control-label">{{ field.label }}</label>

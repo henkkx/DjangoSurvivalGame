@@ -58,7 +58,7 @@ body {
 .slideshow li:nth-child(2) {
   background-image: url();
   animation-delay: 10s;
-  background-image: url(../images/townNight.jpg)
+  background-image: url(../images/greyTown.jpg)
 }
 .slideshow li:nth-child(3) {
   animation-delay: 20s;
