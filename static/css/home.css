@@ -16,9 +16,10 @@ body {
   color: #5a5a5a;
 }
 
-.footer{
-  position: relative;
-  bottom: -5em;
+.footer {
+    height: 50px;
+    margin-top: -50px;
+  
 }
 
 
