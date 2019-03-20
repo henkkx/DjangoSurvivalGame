@@ -20,3 +20,10 @@ function showUploadOptions() {
     display_button.style.display ="none";
     upload.style.display = "block";
 }
+
+function hideUploadOptions() {
+    var display_button = document.getElementById("display-upload");
+    var upload = document.getElementById("image-upload");
+    display_button.style.display ="block";
+    upload.style.display = "none";
+}

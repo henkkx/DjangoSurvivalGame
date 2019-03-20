@@ -1,11 +1,34 @@
-    
+
+
+#Buttons {
+    position: absolute;
+    left: 75px ;
+    top: 500;
+    width: 500px;
+    height: auto;
+    margin: auto;
+    padding: 10px;
+}
+
+#display-upload {
+    float: left;
+}
+#image-delete {
+    height: auto;
+}
+
+
+
+
+
+
+
 #achievements-table {
     position: absolute;
     right: 75px ;
     top: 100px;
     width: 600px;
 }    
-
 
 
 #achievements-table table {
