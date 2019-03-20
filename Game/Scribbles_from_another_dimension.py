@@ -270,6 +270,7 @@ def enter(building):
         new_pos = building.position[:]
         new_pos.append(0)
         player.position = new_pos
+        response = "In {0} there are the following rooms:</br>".format(building.name)
         for room in building.rooms:
             if room.pos == 0:
                 response += room.name + "</br>"
