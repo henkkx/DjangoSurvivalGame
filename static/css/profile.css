@@ -1,13 +1,69 @@
 
+/* This handles the players stat's */
+/* Some inspiration from https://codepen.io/secondfret/pen/mIBqf */
+#stats {
+    position: absolute;
+    right: 120px;
+    width: 800px;
+}
+
+#stats ul {
+    float: left;
+    width: 400px;
+    list-style-type: none;
+}
+
+#stats li {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 20px;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #cccå;
+    
+}
+
+#stats li:hover{
+    font-size: 30px;
+    background: #f6f6f6;
+}
+
+
+
+
+/* This handles the profile picture division. it contains the profile image  division and associated buttons division*/
+
+#profilePic {
+    position: absolute;
+    left: 18px ;
+    top: 100px;
+    width: 500px;
+}
+
+#profilePic p {
+    font-size: 18;
+    font-weight: 500; 
+    
+}
+
+/* This handles the profile image division */
+#image {
+    position: relative;
+}
+
+#image img {
+    width: 400px;
+    height: 400px;
+    
+}
+
 /* Below all operate on the position and other aspects of the buttons */
 #Buttons {
-    position: absolute;
-    left: 75px ;
-    top: 500;
-    width: 500px;
+    position: relative;
     height: auto;
     margin: auto;
-    padding: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #display-upload {
@@ -18,6 +74,7 @@
 }
 
 button, input{
+    min-width: 50%;
     color: #444444;
     background: #F3F3F3;
     border: 1px #DADADA solid;
@@ -94,9 +151,9 @@ button:active, input:active {
 /*Below is the styling for the achievement table*/
 #achievements-table {
     position: absolute;
-    right: 75px ;
-    top: 100px;
-    width: 600px;
+    right: 120px ;
+    top: 300px;
+    width: 800px;
     height: 500px;
     overflow: auto;
 }    
