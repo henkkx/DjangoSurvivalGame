@@ -24,6 +24,7 @@ class Objects(ABC):
 
 #The following are all subclasses for the Objects superclass
 
+
 class Weapon(Objects):
     def __init__(self, name, desc, size, dmg, raange):
         super().__init__(name, desc, size)
@@ -38,6 +39,7 @@ class Weapon(Objects):
 
     def read(self):
         return ("Not sure how you plan on reading a weapon")
+
 
 class Lore(Objects):
     def __init__(self, name, desc, size, text):
@@ -54,17 +56,15 @@ class Lore(Objects):
     def read(self):
         return (self.text)
 
+
 class Food(Objects):
     def __init__(self, name, desc, size, nutrients, hp_regen):
         super().__init__(name, desc, size)
         self.nutrients = nutrients
         self.hp_regen = hp_regen
-        #nutrients is a place holder until we work out how the eating sytem works
-        
-        
+        # nutrients is a place holder until we work out how the eating sytem works
 
-        
-    #self.__name__ prints the class name.
+    # self.__name__ prints the class name.
     def __str__(self):
         return ("Type: {0} item, Name: {1}, Size: {2}, Nutrional Value: {3}, Health Regen: {4}\nDescription: {5}".format(self.__class__.__name__, self.name, self.size, self.nutrients, self. hp_regen, self.desc))
 
