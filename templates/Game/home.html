@@ -105,12 +105,11 @@
      <div class="leaderboard_container">
         <h1 class="section-title h1">Leaderboards</h5>
         <div class="row">
-            <div class="leaderboard col-lg-5" id="kills">
+            <div class="leaderboard col-sm" id="kills">
                 <h1>
                   Most kills
-                  <svg class="ico-cup">
-                    <use xlink:href="#cup"></use>
-                  </svg>
+                  
+                  
                 </h1>
                 <ol>
                     {% for player in players_kills %}
@@ -122,16 +121,12 @@
                 </ol>
             </div>
 
-            <div class="col-lg-1">
+           
 
-            </div>
-
-            <div class="leaderboard col-lg-5" id = "days_survived">
+            <div class="leaderboard col-sm" id = "days_survived">
                   <h1>
                     Most Days Survived
-                    <svg class="ico-cup">
-                      <use xlink:href="#cup"></use>
-                    </svg>
+                  
                   </h1>
                   <ol>
                       {% for player in players_survived %}

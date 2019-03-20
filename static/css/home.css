@@ -95,7 +95,7 @@ LEADERBOARDS
   background-size: cover;
   background-position: center center;
   margin-top: 100px;
-  height: 600px;
+  height: 900px;
 }
 
 section .section-title {
@@ -111,12 +111,15 @@ section .section-title {
   position: relative;
   /* margin-left: 20px;  */
   margin-top: 50px;
-  margin-left: 50px;
-  background: -webkit-linear-gradient(top, #3a404d, #181c26);
-  background: linear-gradient(to bottom, #3a404d, #181c26);
+  margin-left: 30px;
+  margin-right: 30px; 
+  background: -webkit-linear-gradient(top, #293349, #102763);
+  background: linear-gradient(to bottom, #293349, #102763);
   border-radius: 10px;
   box-shadow: 0 7px 30px rgba(62, 9, 11, 0.3);
 }
+
+
 .leaderboard h1 {
   font-size: 18px;
   color: #e1e1e1;
@@ -130,21 +133,16 @@ section .section-title {
   margin-right: 6px;
   vertical-align: baseline;
 }
-.leaderboard ol {
-  counter-reset: leaderboard;
-}
+
+
 .leaderboard ol li {
   position: relative;
   z-index: 1;
   font-size: 14px;
   counter-increment: leaderboard;
   padding: 18px 10px 18px 50px;
-  cursor: pointer;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-  -webkit-transform: translateZ(0) scale(1, 1);
-          transform: translateZ(0) scale(1, 1);
-}
+} 
+
 .leaderboard ol li::before {
   content: counter(leaderboard);
   position: absolute;
@@ -255,6 +253,7 @@ section .section-title {
   background: #c24448;
   border-radius: 0 0 10px 10px;
 }
+
 .leaderboard ol li:nth-child(5)::after {
   background: #c24448;
   box-shadow: 0 -2.5px 0 rgba(0, 0, 0, 0.12);
@@ -264,8 +263,9 @@ section .section-title {
   top: -9px;
   bottom: auto;
   border-top: none;
-  border-bottom: 8px solid #993639;
+  border-bottom: 8px solid #993639; 
 }
+
 .leaderboard ol li:hover {
   z-index: 2;
   overflow: visible;
@@ -288,26 +288,21 @@ section .section-title {
   left: 0;
 }
 
-
-
-/* RESPONSIVE CSS
--------------------------------------------------- */
-
-@media (min-width: 40em) {
-  /* Bump up size of carousel content */
-  .carousel-caption p {
-    margin-bottom: 1.25rem;
-    font-size: 1.25rem;
-    line-height: 1.4;
-  }
-
-  .featurette-heading {
-    font-size: 50px;
-  }
+#days_survived li:nth-child(1){
+  background: #409e01;
+}
+#days_survived li:nth-child(2){
+  background: #358102;
+}
+#days_survived li:nth-child(3){
+  background: #2a6801;
+}
+#days_survived li:nth-child(4){
+  background: #245801;
+}
+#days_survived li:nth-child(5){
+  background: #215001;
 }
 
-@media (min-width: 62em) {
-  .featurette-heading {
-    margin-top: 7rem;
-  }
-}
+
+
