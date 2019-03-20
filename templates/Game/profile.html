@@ -1,6 +1,6 @@
 {% extends 'Game/base.html' %}
 {% block head_css %}
-<link rel="stylesheet" href="static/css/my_profile.css">
+<link rel="stylesheet" href="static/css/profile.css">
 <script src="/static/js/imageValidation.js"></script>
 {% endblock %}
 
@@ -23,10 +23,17 @@
     <button onclick="showUploadOptions()">Upload New Image</button>
 </div>
 
+{% if picture %}
+<div id="image-delete">
+    <form method="post" action="profile" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="submit" value="Remove Your Profile Picture" onclick="return confirm('Are you sure?');"/>
+    </form>
+</div>
+{% endif %}
 
 <div id="image-upload">
-    <form id="imageupload" method="post" action="my_profile" enctype="multipart/form-data">
-        <input type="submit" value="Remove Your Profile Picture" onclick="return confirm('Are you sure?');"/>
+    <form id="imageupload" method="post" action="profile" enctype="multipart/form-data">
         {% csrf_token %}
          <li> Edit Your Profile Picture</li>
         {{ form.as_p }}
