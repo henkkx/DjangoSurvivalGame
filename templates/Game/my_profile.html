@@ -1,7 +1,7 @@
 {% extends 'Game/base.html' %}
 {% block head_css %}
-<script src="/static/js/testajax.js"></script>
 <link rel="stylesheet" href="static/css/my_profile.css">
+<script src="/static/js/imageValidation.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -24,23 +24,6 @@
         {{ form.as_p }}
         <input type="submit" value="Upload New Profile Picture" onclick="return NoImageSelect() "/>
     </form>
-    <script>
- function NoImageSelect() {
-  if (document.getElementById("id_picture").files.length == 0) {
-    alert("Please Select An Image To Upload");
-    return false;
-  }
-  if (
-    !document
-      .getElementById("id_picture")
-      .files[0].name.match(/.(jpg|jpeg|png|gif)$/i)
-  ) {
-    alert("The file selected is not of an Image type");
-    return false;
-  }
-  return true;
-}
-    </script>
 </div>
 <div id="achievements-table">
     <table>
