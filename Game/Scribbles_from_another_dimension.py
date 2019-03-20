@@ -298,7 +298,7 @@ def exit_current():
         for bld in world["buildings"].values():
             if bld.position[1] == player.position[1]:
                 response += bld.description + "</br>"
-    player_model.current_game["player"] = player
+    player_model.current_game = PC("PC", position=player.position[:], inventory=player.inventory.copy())
     check_achievements()
         # which means back to main road (0) on the level we are (player.position), placeholder ground floor (0)
 
@@ -339,10 +339,10 @@ def converse(npc):
     for n in world["NPCs"].values():
         if npc == n.name:
             response = n.conversation
-            if player_model.stats["people"] != 0:
-                player_model.stats["people"] += 1
+            if player_model.stats["npcs"] != 0:
+                player_model.stats["npcs"] += 1
             else:
-                player_model.stats["people"] = 1
+                player_model.stats["npcs"] = 1
 
 
 def consume(food_name):
@@ -381,9 +381,9 @@ def handle(text_in):
         consume(" ".join(cmds[1:]))
     elif cmds[0] == "New":
         game_initialisation()
-    elif cmds[0] == "Continue":
+    elif cmds[0] == "Load":
         load_game()
-        print(player, "This is the player Continue is using")
+        print(player.position, "This is the player Load is using")
     elif cmds[0] == "Inventory":
         response = player.get_inventory()
     elif cmds[0] == "Floor":
@@ -398,7 +398,8 @@ def game_initialisation():
     world = __.build_game()
     game_over = False
     if world["player"]:
-        player = world['player']
+        player = world["player"]
+        player.inventory = {"Weapon": [world['objects']['Stick']], "Lore": [], "Food": []}
     else:
         player = PC("PC")
     response = initialisation_response
@@ -410,9 +411,14 @@ initialisation_response = "You are in a... place, surrounded by fog.</br>" \
                "It slowly opens, creating a path which you follow.</br>" \
                "After a few minutes of walking, you see the fog opening up a bit wider. You can see two buildings.</br>"
 
+
 def load_game():
     global player, world, response, player_model
-    player = player_model.current_game["player"]
+    if player_model.current_game is not None:
+        player = player_model.current_game
+        print(player)
+    else:
+        response = "No game to load"
 
 # player = build_game()
 # player.position = [0, 0, 0]
@@ -420,8 +426,6 @@ def load_game():
 
 def available_actions():
     global response
-    # if player.position ==[0, 0, 0]:
-    #     response = initialisation_response
     if game_over:
         return json.dumps({"Game over": "Game Over"});
     check_achievements()
@@ -446,13 +450,22 @@ def available_actions():
                     data_post["Talk to"].append(npc.name)
         # from here on out, it's where we can move IF in a room, so it doesn't matter if we are in a room ,
         # just that we are in a building
-        for bld in world["buildings"].values():
-            print(player.position[:-1], bld.position, " here left")
-            if player.position[:-1] == bld.position:
-                current_building = bld
-                # current_building = world["buildings"]["Roofless house"]
+        try:
+            for bld in world["buildings"].values():
+                if player.position[:-1] == bld.position:
+                    current_building = bld
+                    # current_building = world["buildings"]["Roofless house"]
+        except:
+            print("Error in finding current building, default to Family house")
+            current_building = world["buildings"]["Family house"]
+
         for room in current_building.rooms:
-            if room.pos == player.position[2] and room.name != player.room.name:
+            current_room = "default"
+            try:
+                current_room = player.room.name
+            except:
+                print("Player is not in a building/room")
+            if room.pos == player.position[2] and room.name != current_room:
                 data_post['Move to'].append(room.name)
         if current_building.can_go_up(player.position[2]):
             data_post['Floor up'] = ' '
@@ -460,7 +473,7 @@ def available_actions():
             data_post['Floor down'] = ' '
         data_post["Drop"] = []
         for cat in player.inventory:
-            if player.inventory[cat] != []:
+            if player.inventory[cat] != [] and current_room != "default":
                 for item in player.inventory[cat]:
                     data_post["Drop"].append(item.name)
         if player.inventory["Lore"] != {}:

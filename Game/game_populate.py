@@ -8,27 +8,8 @@ except:
     from objects import *
     from people import PC, NPC
     from creatures import *
-"""
-Will try to include the names of all the objects ( by category) here, or in another file later so that we actually know
-what is going on without reading the whole script
 
-Buildings:
-roofless house
-
-NPCS:
-doug
-
-Creatures:
-rat
-
-Objects:
-bread
-health potion
-stick
-sword
-burned note (x2)
-"""
-zack = PC("Zack", 1, [0, 0, 0])
+player = PC("PC")
 
 
 class MasterOfPuppets:
@@ -88,7 +69,7 @@ class MasterOfPuppets:
 
     def init_creatures(self):
         output = {}
-        output['Charred fur rat'] = Rat("Charred fur rat", zack.level)
+        output['Charred fur rat'] = Rat("Charred fur rat", player.level)
         return output
 
     def init_rooms(self):
@@ -109,15 +90,17 @@ class MasterOfPuppets:
                                 [self.rooms["Kitchen"], self.rooms["Bedroom"]], [1, 0])
         output["Family house"] = Building("Family house", "This is a very standard family house. Looks relatively big, probably 3-4 bedrooms, maybe a guest house. Seems like it's freshly painted",
                                           [self.rooms["Living room"], self.rooms["Attic"]], [2, 0])
+        output["TestBLD1"] = Building("TestBLD1", "Test house mate", [self.rooms["Attic"]], [1, 1])
+        output["TestBLD2"] = Building("TestBLD2", "Test house mate", [self.rooms["Living room"]], [2, 1])
         return output
 
     def build_game(self):
-        # objects = init_objects()
-        # NPCs = init_NPCs()
-        # creatures = init_creatures()
-        # rooms = init_rooms()
-        # buildings = init_buildings()
+        self.objects = self.init_objects()
+        self.NPCs = self.init_NPCs()
+        self.creatures = self.init_creatures()
+        self.rooms = self.init_rooms()
+        self.buildings = self.init_buildings()
         world = {"objects": self.objects, "NPCs": self.NPCs, "creatures": self.creatures, "rooms": self.rooms,
-                 "buildings": self.buildings, "player": zack}
+                 "buildings": self.buildings, "player": player}
         world["player"].position = [0, 0, 0]
         return world

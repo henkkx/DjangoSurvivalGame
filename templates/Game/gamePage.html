@@ -20,10 +20,6 @@
                     $(".actionBtn").remove();
                     get_fun();
                     scroll()
-                    if (inp === "newBtn".firstChild.nodeValue || inp === "New game"){
-                        alert("ok")
-                        $("gameText").remove();
-                    }
                 }
             })
         }
@@ -37,7 +33,6 @@
                     url: "/get_actions",
                     dataType: "json",
                     success: function (data) {
-                        var text = data["text"];
                         for (var i in data) {
                             if (i != "text") {
                                 for (var j in data[i]) {
@@ -60,10 +55,8 @@
         scroll_view.scrollTop=scroll_view.scrollHeight;
     }
 </script>
-<div id="gameText" style="overflow:scroll; height:500px;"></div>
+<div id="gameText" style="overflow:scroll; height:400px;"></div>
 <div id="buttons">
-</div>
-<div id="new/load">
 </div>
 </br>
 </br>
