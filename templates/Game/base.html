@@ -39,9 +39,11 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
       </li>
+      {% if user.is_authenticated %}
       <li class="nav-item">
         <a class="nav-link" href="{% url 'game' %}">Play now</a>
       </li>
+      {% endif %}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Learn more
@@ -104,9 +106,9 @@
 
 
 <!-- This is where the footer begins -->
-<footer class = "footer">
+<!-- <footer class = "footer">
   <div>
       DjangoSurvivalGame &copy; Henrik, Marios, Ensi, Matthew
   </div>
-</footer>
+</footer> -->
 </html>

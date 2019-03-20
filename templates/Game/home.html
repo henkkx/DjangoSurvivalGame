@@ -105,39 +105,35 @@
      <div class="leaderboard_container">
         <h1 class="section-title h1">Leaderboards</h5>
         <div class="row">
-            <div class="leaderboard col-lg-5" id="kills">
+            <div class="leaderboard col-sm" id="kills">
                 <h1>
                   Most kills
-                  <svg class="ico-cup">
-                    <use xlink:href="#cup"></use>
-                  </svg>
+                  
+                  
                 </h1>
                 <ol>
                     {% for player in players_kills %}
-                      <li>
-                        <a href="{% url 'profile' player.user %}"><mark> {{ player.user }} </mark></a>
-                        <small>{{ player.most_kills }}</small>
+
+                      <li >
+                        <a class="btn-lg" href="{% url 'profile' player.user %}"><mark> {{ player.user }} </mark></a>
+                        <p>{{ player.most_kills }}</p>
                       </li>
                     {% endfor %}
                 </ol>
             </div>
 
-            <div class="col-lg-1">
+           
 
-            </div>
-
-            <div class="leaderboard col-lg-5" id = "days_survived">
+            <div class="leaderboard col-sm" id = "days_survived">
                   <h1>
                     Most Days Survived
-                    <svg class="ico-cup">
-                      <use xlink:href="#cup"></use>
-                    </svg>
+                  
                   </h1>
                   <ol>
                       {% for player in players_survived %}
                         <li>
-                          <a href="{% url 'profile' player.user %}"><mark> {{ player.user }} </mark></a>    
-                          <small>{{ player.most_days_survived }}</small>
+                          <a class= btn-lg href="{% url 'profile' player.user %}"><mark> {{ player.user }} </mark></a>    
+                          <p>{{ player.most_days_survived }}</small>
                         </li>
                       {% endfor %}
                   </ol>
