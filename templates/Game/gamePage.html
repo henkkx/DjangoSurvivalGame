@@ -20,8 +20,16 @@
                     $(".actionBtn").remove();
                     get_fun();
                     scroll()
+                    if (inp === "newBtn".firstChild.nodeValue || inp === "New game"){
+                        alert("ok")
+                        $("gameText").remove();
+                    }
                 }
             })
+        }
+        function buffer_fun(inp){
+            $("#gameText").text("");
+            post_fun(inp)
         }
         function get_fun(){
             $.ajax({
@@ -54,6 +62,14 @@
 </script>
 <div id="gameText" style="overflow:scroll; height:500px;"></div>
 <div id="buttons">
+</div>
+<div id="new/load">
+</div>
+</br>
+</br>
+</br>
+<button id="newBtn" onClick=buffer_fun(this.firstChild.nodeValue)>New game</button> </br>
+<button id="loadBtn" onClick=post_fun(this.firstChild.nodeValue)>Load last checkpoint</button>
 
 </div>
 

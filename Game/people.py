@@ -107,15 +107,15 @@ class NPC:
     def get_short(self):
         return self.desc_S #returns a shorter description displayed upon entering the room.
 
-player = PC("Ban", 10)
-sword = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 10, 2)
-cake = Food("Cake", "A delicious sponge cake", 1, 5, 10)
-print(player.add_item(sword))
-print(player.add_item(sword))
-print(player.add_item(cake))
-print(player.add_item(cake))
-player.hp -= 15
-player.hunger -= 10
-print(player.get_inventory())
-print(player.eat(cake))
-print(player.get_inventory())
+# player = PC("Ban", 10)
+# sword = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 10, 2)
+# cake = Food("Cake", "A delicious sponge cake", 1, 5, 10)
+# print(player.add_item(sword))
+# print(player.add_item(sword))
+# print(player.add_item(cake))
+# print(player.add_item(cake))
+# player.hp -= 15
+# player.hunger -= 10
+# print(player.get_inventory())
+# print(player.eat(cake))
+# print(player.get_inventory())
