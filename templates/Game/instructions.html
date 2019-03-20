@@ -3,6 +3,7 @@
 
 {% block head_css %}
       <link rel="stylesheet" href="/static/css/instructions.css">
+      <script src="../../static/js/aboutUsScroll.js"></script>
 
 {% endblock %}
 
@@ -13,79 +14,86 @@
   <div class="container">
    <div class="row">
        <div class="col-md-12">
-        <h1 class="lg-text">GET STARTED</h1>
+        <h1 class="lg-text">How the game works</h1>
         <p class="image-para">Learn the rules and start playing today</p>
-        <a class="btn btn-lg btn-primary" id ="readMoreButton" href="#team" role="button">Learn more</a>
+        <a class="btn btn-lg btn-primary" id ="readMoreButton" href="#creatures" role="button">Learn more</a>
       </div>
    </div>
 </div>
 </div>
 
 
-<!-- START THE FEATURETTES -->
+<!-- Page Content -->
+<div class="container objects">
 
-<!-- <hr class="featurette-divider"> -->
-<div class="featurette-container">
-  <div class="row featurette" id=#features>
-    <div class="col-md-7">
-      <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-      <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+    <!-- Project One -->
+    <div class="row">
+      <div class="col-md-4">
+        <a href="#">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="static/images/house.jpg" alt="">
+        </a>
+      </div>
+      <div class="col-md-2">
+        <h3>Houses</h3>
+        <p> In the game, there are a number of houses or buildings. The player can choose to enter a house. Each of these houses has a number of different rooms.</p>
+        
+      </div>
+
+      <div class="col-md-4">
+          <a href="#">
+            <img class="img-fluid rounded mb-3 mb-md-0" src="../../static/images/room.jpg" alt="">
+          </a>
+        </div>
+        <div class="col-md-2">
+          <h3>Rooms</h3>
+          <p> The rooms in the buildings may be occupied by other humans or creatures that may or may not be hostile. There are also various different items in the rooms, which can be picked up by the player.</p>
+          
+        </div>
+
     </div>
-    <div class="col-md-5">
-      <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+    <!-- /.row -->
+
+
+    <hr>
+
+    <!-- Project Three -->
+    <div class="row">
+      <div class="col-md-4">
+        <a href="#">
+          <!-- <img class="img-fluid rounded mb-3 mb-md-0" src="../../static/images/dog.jpg" alt=""> -->
+        </a>
+      </div>
+      <div class="col-md-2" id = creatures>
+        <h3>Other humans/ creatures</h3>
+        <p> The player may choose to talk to them  or to fight them</p>
+        
+      </div>
+
+      <div class="col-md-4">
+          <a href="#">
+            <img class="img-fluid rounded mb-3 mb-md-0" src="../../static/images/weapon.jpg" alt="">
+          </a>
+        </div>
+        <div class="col-md-2">
+          <h3>Items</h3>
+          <p>The rooms contain items such as weapongs or food. The player can pick up these items once he has defeated whatever monster occupied the room.</p>
+          
+        </div>
+
     </div>
+    <!-- /.row -->
+
+    <hr>
+
+    <!-- Project Four -->
+    <div class="row">
+
+      
+    </div>
+    <!-- /.row -->
+
+    <hr>
+
   </div>
-
-  <hr class="featurette-divider">
-
-  <div class="row featurette">
-    <div class="col-md-7 order-md-2">
-      <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-      <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-    </div>
-    <div class="col-md-5 order-md-1">
-      <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-    </div>
-  </div>
-
-  <hr class="featurette-divider">
-
-  <div class="row featurette">
-    <div class="col-md-7">
-      <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-      <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-    </div>
-    <div class="col-md-5">
-      <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-    </div>
-  </div>
-
-  <hr class="featurette-divider">
-</div>
-<!-- /END THE FEATURETTES -->
-
-<div class="row marketing">
-    <div class="col-lg-6">
-      <h4>Subheading</h4>
-      <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-      <h4>Subheading</h4>
-      <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-      <h4>Subheading</h4>
-      <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-    </div>
-
-    <div class="col-lg-6">
-      <h4>Subheading</h4>
-      <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-      <h4>Subheading</h4>
-      <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-      <h4>Subheading</h4>
-      <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-    </div>
-  </div>
-</div>
+  <!-- /.container -->
 {% endblock %}
