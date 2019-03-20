@@ -134,7 +134,7 @@ def game(request):
 
 
 @login_required
-def my_profile(request):
+def profile(request):
 
     contxt = {}
     #retrieve associated player object and pass important stats to template
@@ -155,21 +155,20 @@ def my_profile(request):
             image = request.FILES.get('picture', False)
 
             if image is False:
-                if player.picture:
-                    os.remove(player.picture.path)
+                os.remove(player.picture.path)
                 player.picture = None
                 player.save()
-                return HttpResponseRedirect(reverse("my_profile"))
+                return HttpResponseRedirect(reverse("profile"))
 
             player.picture = image
             player.save()
-            return HttpResponseRedirect(reverse("my_profile"))
+            return HttpResponseRedirect(reverse("profile"))
         else:
             print(form.errors)
 
         contxt["form"] = form
 
-    return render(request, 'Game/my_profile.html', contxt)
+    return render(request, 'Game/profile.html', contxt)
 
 # @csrf_exempt
 # def initialise(request):

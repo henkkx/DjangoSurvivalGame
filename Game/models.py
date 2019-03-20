@@ -12,7 +12,7 @@ class Player(models.Model):
     most_kills = models.IntegerField(default=0)
     most_people = models.IntegerField(default=0)
     most_exp = models.IntegerField(default=0)
-    current_game = {"player": None}
+    current_game = None
     stats = {"kills": 0, "days": 0, "npcs": 0}
 
 
