@@ -155,7 +155,8 @@ def my_profile(request):
             image = request.FILES.get('picture', False)
 
             if image is False:
-                os.remove(player.picture.path)
+                if player.picture:
+                    os.remove(player.picture.path)
                 player.picture = None
                 player.save()
                 return HttpResponseRedirect(reverse("my_profile"))
