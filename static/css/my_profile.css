@@ -31,3 +31,7 @@
     height: 50px; 
     width: 50px;
 }
+
+#image-upload {
+    display: none;
+}
