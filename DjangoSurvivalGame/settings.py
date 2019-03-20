@@ -34,9 +34,13 @@ SECRET_KEY = '#1xv4u)e8h71anau9(0+32916-sxmq$p-lqwntin%)_qbi7_#x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = ['scribbleswad2.pythonanywhere.com',
                  'localhosts',
                  '127.0.0.1']
+=======
+ALLOWED_HOSTS = ['ScribblesWAD2.pythonanywhere.com', 'localhost', '127.0.0.1']
+>>>>>>> aeed628c850c54744b6fb7327e7ccd4ef45f67b9
 
 ROOT_URLCONF = 'DjangoSurvivalGame.urls'
 # Application definition
