@@ -143,7 +143,7 @@ def profile(request, user=None):
         player = Player.objects.get_or_create(user=request.user)[0]
     else:
         try:
-            player = Player.objects.get(user=User.objects.get(username = user))
+            player = Player.objects.get(user=User.objects.get(username=user))
         except:
             return HttpResponse("The Player whose profile you are looking for does not exist.")
             
@@ -153,6 +153,8 @@ def profile(request, user=None):
     contxt["games"] = player.games_played
     contxt["kills"] = player.most_kills
     contxt["exp"] = player.most_exp
+    contxt["days"] = player.most_days_survived
+    print(contxt, "CONTEXT DICT")
     contxt["achievements"] = list(Achievement.objects.filter(player=player))
     if player.picture:
         contxt["picture"] = player.picture

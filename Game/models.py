@@ -13,7 +13,7 @@ class Player(models.Model):
     most_people = models.IntegerField(default=0)
     most_exp = models.IntegerField(default=0)
     current_game = None
-    stats = {"kills": 0, "days": 0, "npcs": 0}
+    stats = {"kills": 0, "days": 0, "npcs": 0, "exp": 0}
 
 
     # def save_game(self):

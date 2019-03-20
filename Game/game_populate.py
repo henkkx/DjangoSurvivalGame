@@ -74,6 +74,7 @@ class MasterOfPuppets:
 
     def init_rooms(self):
         output = {}
+        output["default"] = Room("default", {}, {}, {}, "", -100)
         output["Kitchen"] = Room("Kitchen", {"Doug": self.NPCs["Doug"]}, {}, {"Bread": self.objects["Bread"]}, "You can smell spices, and a hint of both \
         garlic & onion. There are utensils & plates all around",0)
         output["Bedroom"] = Room("Bedroom", {}, {"Charred fur rat": self.creatures['Charred fur rat']}, {"Health Potion": self.objects["Health Potion"]}, "You are in a bedroom, single bed. Sheets indicate a child\
