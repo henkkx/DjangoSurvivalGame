@@ -5,7 +5,7 @@ except:
 
 
 class PC:
-    def __init__(self, name, level=1, position=[0, 0, 0], hp=100,):
+    def __init__(self, name, level=1, position=[0, 0, 0], hp=100, inventory={"Weapon": [], "Lore": [], "Food": []}):
         self.name = name
         self.hp = hp
         self.max_hp = hp
@@ -14,7 +14,7 @@ class PC:
         self.position = position
         self.room = None
         self.level = level
-        self.inventory = {"Weapon": [], "Lore": [], "Food": []}
+        self.inventory = inventory
 
     def __str__(self):
         return "Player {0} has {1}/{2} hp".format(self.name, self.hp, self.max_hp)
