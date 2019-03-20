@@ -450,11 +450,15 @@ def available_actions():
                     data_post["Talk to"].append(npc.name)
         # from here on out, it's where we can move IF in a room, so it doesn't matter if we are in a room ,
         # just that we are in a building
-        for bld in world["buildings"].values():
-            print(player.position[:-1], bld.position, " here left")
-            if player.position[:-1] == bld.position:
-                current_building = bld
-                # current_building = world["buildings"]["Roofless house"]
+        try:
+            for bld in world["buildings"].values():
+                if player.position[:-1] == bld.position:
+                    current_building = bld
+                    # current_building = world["buildings"]["Roofless house"]
+        except:
+            print("Error in finding current building, default to Family house")
+            current_building = world["buildings"]["Family house"]
+
         for room in current_building.rooms:
             current_room = "default"
             try:
