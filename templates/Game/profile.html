@@ -52,18 +52,27 @@
             <th>Description</th>
             <th>Icon</th>
         </tr>
-        {% for achievement in achievements %}
-        <tr>
-            <td>{{ achievement.badge.name }}</td>
-            <td>{{ achievement.date_awarded }}</td>
-            <td>{{ achievement.badge.description }}</td>
-            {% if achievement.badge.icon %}
-                <td><img src="{{ achievement.badge.icon.url }}"/></td>
-            {% else %}
-                <td>Img_Error</td>
-            {% endif %}
-        </tr>
-        {% endfor %}
+        {% if achievements %}
+            {% for achievement in achievements %}
+            <tr>
+                <td>{{ achievement.badge.name }}</td>
+                <td>{{ achievement.date_awarded }}</td>
+                <td>{{ achievement.badge.description }}</td>
+                {% if achievement.badge.icon %}
+                    <td><img src="{{ achievement.badge.icon.url }}"/></td>
+                {% else %}
+                    <td>Img_Error</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>No</td>
+                <td>Achievements</td>
+                <td>Git</td>
+                <td>Gud</td>
+            </tr>
+        {% endif %}
     </table>
 </div>
 

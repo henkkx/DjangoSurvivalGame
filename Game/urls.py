@@ -29,7 +29,6 @@ urlpatterns = [
     url(r'^get_actions', views.get_actions, name="get_actions"),
     url(r'^post_data', views.post_data, name="post_data"),
     url(r'^initialise', views.initialise, name="initialise"),
-    url(r'^WrongPage', views.WrongPage, name="WrongPage"),
 ]
 
 '''

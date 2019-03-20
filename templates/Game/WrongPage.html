@@ -1,9 +1,10 @@
 {% extends 'Game/base.html' %}
 {% block content %}
-<div class="layout__item gel-10/12@m gel-8/12@l">
+<div id="error" class="layout__item gel-10/12@m gel-8/12@l">
     <div class="error-message">
         <h2 class="gel-trafalgar gill-sans gel-mb+"><i aria-hidden="true" class="gelicon gelicon--alert gel-great-primer gel-mr"></i>Sorry, but we can’t find this page</h2>
         <p class="gel-pica gel-mb+">Unfortunately, the page you are looking for is not available.</p>
-        <p class="gel-pica gel-mb+">You may have typed the web address incorrectly. Please check the address you entered.</p> <a href="javascript:history.back()" class="gel-pica-bold error-message__link">Back to previous page</a> </div>
+        <p class="gel-pica gel-mb+">You may have typed the web address incorrectly. Please check the address you entered.</p> <a href="javascript:history.back()" class="gel-pica-bold error-message__link">Back to previous page</a>
+    </div>
 </div>
 {% endblock %}
