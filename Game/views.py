@@ -120,6 +120,8 @@ def about(request):
 #                    'profile_form': profile_form,
 #                    'registered': registered})
 
+def WrongPage(request):
+    return render(request, 'Game/WrongPage.html')
 
 @login_required
 def user_logout(request):
@@ -145,7 +147,7 @@ def profile(request, user=None):
         try:
             player = Player.objects.get(user=User.objects.get(username=user))
         except:
-            return HttpResponse("The Player whose profile you are looking for does not exist.")
+            return HttpResponseRedirect(reverse("WrongPage"))
             
         
     #print(player)

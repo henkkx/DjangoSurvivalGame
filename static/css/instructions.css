@@ -13,12 +13,12 @@ body {
 
 
 
-/* 
+
 .image-howto-banner {
-  background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)),url(../images/campfire.jpg);
+  background: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.7)),url(../images/mountains.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
+  background-position: center 70%;
   color: #fff;
   padding-top: 110px;
   padding-bottom:110px;
@@ -26,7 +26,7 @@ body {
 }
 
 .image-howto-sm-banner {
-  background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(../images/campfire.jpg);
+  background: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.7)), url(../images/campfire.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -36,8 +36,13 @@ body {
 }
 
 .container{
-  padding-top: 100px;
-  margin-top: 80px;
-} */
+  padding-top: 80px;
+
+}
+
+.objects{
+  margin-top: 20px;
+  
+}
 /* Featurettes
 ------------------------- */
