@@ -19,9 +19,14 @@
                 success: function(){
                     $(".actionBtn").remove();
                     get_fun();
-                    scroll()
+                    scroll();
+                    scroll();
                 }
             })
+        }
+        function buffer_fun(inp){
+            $("#gameText").text("");
+            post_fun(inp)
         }
         function get_fun(){
             $.ajax({
@@ -29,7 +34,6 @@
                     url: "/get_actions",
                     dataType: "json",
                     success: function (data) {
-                        var text = data["text"];
                         for (var i in data) {
                             if (i != "text") {
                                 for (var j in data[i]) {
@@ -52,8 +56,14 @@
         scroll_view.scrollTop=scroll_view.scrollHeight;
     }
 </script>
-<div id="gameText" style="overflow:scroll; height:500px;"></div>
+<div id="gameText" style="overflow:scroll; height:400px;"></div>
 <div id="buttons">
+</div>
+</br>
+</br>
+</br>
+<button id="newBtn" onClick=buffer_fun(this.firstChild.nodeValue)>New game</button> </br>
+<button id="loadBtn" onClick=post_fun(this.firstChild.nodeValue)>Load last checkpoint</button>
 
 </div>
 

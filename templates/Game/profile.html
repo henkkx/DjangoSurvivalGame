@@ -1,0 +1,80 @@
+{% extends 'Game/base.html' %}
+{% block head_css %}
+<link rel="stylesheet"  type="text/css" href="../../static/css/profile.css">
+<link rel="stylesheet" type="text/css" href="../../static/css/styles.css">
+<script src="/static/js/imageValidation.js"></script>
+{% endblock %}
+
+{% block content %}
+<div>
+    {{ name }}'s Stats
+    <ul>
+        <li>Games Played: {{ games }}</li>
+        <li>Most Kills: {{ kills }}</li>
+        <li>Longest Survived: {{ longest_survived }}</li>
+        <li>Most Experience: {{ exp }}</li>
+    </ul>
+</div>
+
+<div id = image>
+     <img src="{{ picture.url }}" width="250px"  height="250px" onerror="this.style.display='none'"/>
+</div>
+
+{% if user.username == name %}
+<div id="display-upload">
+    <button onclick="showUploadOptions()">Upload New Image</button>
+</div>
+
+{% if picture %}
+<div id="image-delete">
+    <form method="post" action="profile" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="submit" value="Remove Your Profile Picture" onclick="return confirm('Are you sure?');"/>
+    </form>
+</div>
+{% endif %}
+
+<div id="image-upload">
+    <form id="imageupload" method="post" action="profile" enctype="multipart/form-data">
+        {% csrf_token %}
+         <li> Edit Your Profile Picture</li>
+        {{ form.as_p }}
+        <input type="submit" value="Upload New Profile Picture" onclick="return NoImageSelect() "/>
+    </form>
+</div>
+{% endif %}
+
+<div id="achievements-table">
+    <table>
+        <tr>
+            <th>Badge Name</th>
+            <th>Date Awarded</th>
+            <th>Description</th>
+            <th>Icon</th>
+        </tr>
+        {% if achievements %}
+            {% for achievement in achievements %}
+            <tr>
+                <td>{{ achievement.badge.name }}</td>
+                <td>{{ achievement.date_awarded }}</td>
+                <td>{{ achievement.badge.description }}</td>
+                {% if achievement.badge.icon %}
+                    <td><img src="{{ achievement.badge.icon.url }}"/></td>
+                {% else %}
+                    <td>Img_Error</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>No</td>
+                <td>Achievements</td>
+                <td>Git</td>
+                <td>Gud</td>
+            </tr>
+        {% endif %}
+    </table>
+</div>
+
+
+{% endblock %}

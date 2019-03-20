@@ -115,7 +115,7 @@
                 <ol>
                     {% for player in players_kills %}
                       <li>
-                        <mark> {{ player.user }}</mark>
+                        <a href="{% url 'profile' player.user %}"><mark> {{ player.user }} </mark></a>
                         <small>{{ player.most_kills }}</small>
                       </li>
                     {% endfor %}
@@ -136,7 +136,7 @@
                   <ol>
                       {% for player in players_survived %}
                         <li>
-                          <mark> {{ player.user }}</mark>
+                          <a href="{% url 'profile' player.user %}"><mark> {{ player.user }} </mark></a>    
                           <small>{{ player.most_days_survived }}</small>
                         </li>
                       {% endfor %}

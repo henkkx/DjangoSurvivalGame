@@ -27,6 +27,7 @@ from django.views.decorators.csrf import csrf_exempt
 from Game.Scribbles_from_another_dimension import available_actions, handle, initialise
 from Game.Scribbles_from_another_dimension import available_actions, handle
 from django.shortcuts import redirect
+import os
 
 
 def home(request):
@@ -133,38 +134,50 @@ def game(request):
 
 
 @login_required
-def my_profile(request):
+def profile(request, user=None):
 
+    print(user)
     contxt = {}
     #retrieve associated player object and pass important stats to template
-    if request.user.is_authenticated:
+    if not user:
         player = Player.objects.get_or_create(user=request.user)[0]
-        print(player)
-        contxt["games"] = player.games_played
-        contxt["kills"] = player.most_kills
-        contxt["exp"] = player.most_exp
-        contxt["achievements"] = list(Achievement.objects.filter(player=player))
-        if player.picture:
-            contxt["picture"] = player.picture
+    else:
+        try:
+            player = Player.objects.get(user=User.objects.get(username = user))
+        except:
+            return HttpResponse("The Player whose profile you are looking for does not exist.")
+            
+        
+    #print(player)
+    contxt["name"] = player.user.username
+    contxt["games"] = player.games_played
+    contxt["kills"] = player.most_kills
+    contxt["exp"] = player.most_exp
+    contxt["achievements"] = list(Achievement.objects.filter(player=player))
+    if player.picture:
+        contxt["picture"] = player.picture
 
-        form = Profile({'picture': player.picture})
+    form = Profile({'picture': player.picture})
 
-        if request.method == 'POST':
+    if request.method == 'POST':
 
-            image = request.FILES.get('picture', False)
+        image = request.FILES.get('picture', False)
 
-            if image is False:
-                return HttpResponseRedirect(reverse("my_profile"))
-
-            player.picture = image
+        if image is False:
+            os.remove(player.picture.path)
+            player.picture = None
             player.save()
-            return HttpResponseRedirect(reverse("my_profile"))
-        else:
-            print(form.errors)
+            return HttpResponseRedirect(reverse("profile"))
 
-        contxt["form"] = form
+        player.picture = image
+        player.save()
+        return HttpResponseRedirect(reverse("profile"))
+    else:
+        print(form.errors)
 
-    return render(request, 'Game/my_profile.html', contxt)
+    contxt["form"] = form
+
+    return render(request, 'Game/profile.html', contxt)
 
 # @csrf_exempt
 # def initialise(request):

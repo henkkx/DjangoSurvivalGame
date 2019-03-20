@@ -1,0 +1,39 @@
+    
+#achievements-table {
+    position: absolute;
+    right: 75px ;
+    top: 100px;
+    width: 600px;
+}    
+
+
+
+#achievements-table table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#achievements-table td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#achievements-table tr:nth-child(even) {
+        background-color: #dddddd;
+}
+
+#achievements-table img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px; 
+    width: 50px;
+}
+
+
+#image-upload {
+    display: none;
+}
+

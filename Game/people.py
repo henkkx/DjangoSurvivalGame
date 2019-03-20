@@ -5,7 +5,7 @@ except:
 
 
 class PC:
-    def __init__(self, name, level=1, position=[0, 0, 0], hp=100,):
+    def __init__(self, name, level=1, position=[0, 0, 0], hp=100, inventory={"Weapon": [], "Lore": [], "Food": []}):
         self.name = name
         self.hp = hp
         self.max_hp = hp
@@ -14,7 +14,7 @@ class PC:
         self.position = position
         self.room = None
         self.level = level
-        self.inventory = {"Weapon": [], "Lore": [], "Food": []}
+        self.inventory = inventory
 
     def __str__(self):
         return "Player {0} has {1}/{2} hp".format(self.name, self.hp, self.max_hp)
@@ -107,15 +107,15 @@ class NPC:
     def get_short(self):
         return self.desc_S #returns a shorter description displayed upon entering the room.
 
-player = PC("Ban", 10)
-sword = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 10, 2)
-cake = Food("Cake", "A delicious sponge cake", 1, 5, 10)
-print(player.add_item(sword))
-print(player.add_item(sword))
-print(player.add_item(cake))
-print(player.add_item(cake))
-player.hp -= 15
-player.hunger -= 10
-print(player.get_inventory())
-print(player.eat(cake))
-print(player.get_inventory())
+# player = PC("Ban", 10)
+# sword = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 10, 2)
+# cake = Food("Cake", "A delicious sponge cake", 1, 5, 10)
+# print(player.add_item(sword))
+# print(player.add_item(sword))
+# print(player.add_item(cake))
+# print(player.add_item(cake))
+# player.hp -= 15
+# player.hunger -= 10
+# print(player.get_inventory())
+# print(player.eat(cake))
+# print(player.get_inventory())

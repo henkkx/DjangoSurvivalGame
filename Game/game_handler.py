@@ -51,10 +51,6 @@ def handle(text_in):
 
 __ = MasterOfPuppets()
 world = __.build_game()
-player = world['player']
-player.room = world["rooms"]["bedroom"]
-player.position = [1, 1, 0]
-player.inventory["Weapon"].append(Weapon("stick", "A stick", 5, 20, 5))
 
 
 def available_actions():

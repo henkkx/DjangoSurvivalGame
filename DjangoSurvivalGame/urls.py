@@ -24,7 +24,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, user):
-        return '/my_profile'
+        return '/profile'
 
 app_name = 'Game'
 urlpatterns = [
