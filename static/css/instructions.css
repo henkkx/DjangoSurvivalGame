@@ -1,22 +1,17 @@
 /* BANNER  */
 
 body {
-  /* background: url('../images/townNight.jpg') no-repeat center center fixed; */
+  /* background: url('../images/oldTownNight.jpg') no-repeat center center fixed; */
+  background-color: #fff;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
+  /* color: aliceblue; */
   
 }
 
-.container{
-  /* text-shadow: 3px 3px #424242; */
-}
 
-.img{
-  height: 250px;
-  width: 500px;
-}
 
 /* 
 .image-howto-banner {
