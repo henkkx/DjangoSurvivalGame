@@ -120,6 +120,8 @@ def about(request):
 #                    'profile_form': profile_form,
 #                    'registered': registered})
 
+def WrongPage(request):
+    return render(request, 'Game/WrongPage.html')
 
 @login_required
 def user_logout(request):
@@ -134,39 +136,48 @@ def game(request):
 
 
 @login_required
-def profile(request):
+def profile(request, user=None):
 
+    print(user)
     contxt = {}
     #retrieve associated player object and pass important stats to template
-    if request.user.is_authenticated:
+    if not user:
         player = Player.objects.get_or_create(user=request.user)[0]
-        print(player)
-        contxt["games"] = player.games_played
-        contxt["kills"] = player.most_kills
-        contxt["exp"] = player.most_exp
-        contxt["achievements"] = list(Achievement.objects.filter(player=player))
-        if player.picture:
-            contxt["picture"] = player.picture
+    else:
+        try:
+            player = Player.objects.get(user=User.objects.get(username = user))
+        except:
+            return HttpResponseRedirect(reverse("WrongPage"))
+            
+        
+    #print(player)
+    contxt["name"] = player.user.username
+    contxt["games"] = player.games_played
+    contxt["kills"] = player.most_kills
+    contxt["exp"] = player.most_exp
+    contxt["achievements"] = list(Achievement.objects.filter(player=player))
+    if player.picture:
+        contxt["picture"] = player.picture
 
-        form = Profile({'picture': player.picture})
+    form = Profile({'picture': player.picture})
 
-        if request.method == 'POST':
+    if request.method == 'POST':
 
-            image = request.FILES.get('picture', False)
+        image = request.FILES.get('picture', False)
 
-            if image is False:
-                os.remove(player.picture.path)
-                player.picture = None
-                player.save()
-                return HttpResponseRedirect(reverse("profile"))
-
-            player.picture = image
+        if image is False:
+            os.remove(player.picture.path)
+            player.picture = None
             player.save()
             return HttpResponseRedirect(reverse("profile"))
-        else:
-            print(form.errors)
 
-        contxt["form"] = form
+        player.picture = image
+        player.save()
+        return HttpResponseRedirect(reverse("profile"))
+    else:
+        print(form.errors)
+
+    contxt["form"] = form
 
     return render(request, 'Game/profile.html', contxt)
 
