@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^about', views.about, name='about'),
     url(r'^instructions', views.instructions, name='instructions'),
     url(r'^game', views.game, name='game'),
+    url(r'^profile/(?P<user>[\w\-]+)', views.profile, name='profile'),
     url(r'^profile', views.profile, name='profile'),
     url(r'^get_actions', views.get_actions, name="get_actions"),
     url(r'^post_data', views.post_data, name="post_data"),
