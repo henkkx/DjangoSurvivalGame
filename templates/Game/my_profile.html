@@ -14,10 +14,16 @@
         <li>Most Experience: {{ exp }}</li>
     </ul>
 </div>
+
 <div id = image>
-     <img src="{{ picture.url }}" width="500px" onerror="this.style.display='none'"/>
+     <img src="{{ picture.url }}" width="250px"  height="250px" onerror="this.style.display='none'"/>
 </div>
-<div>
+
+<div id="display-upload">
+    <button onclick="showUploadOptions()">Upload New Image</button>
+</div>
+
+<div id="image-upload">
     <form id="imageupload" method="post" action="my_profile" enctype="multipart/form-data">
         <input type="submit" value="Remove Your Profile Picture" onclick="return confirm('Are you sure?');" "/>
         {% csrf_token %}
@@ -26,6 +32,7 @@
         <input type="submit" value="Upload New Profile Picture" onclick="return NoImageSelect() "/>
     </form>
 </div>
+
 <div id="achievements-table">
     <table>
         <tr>

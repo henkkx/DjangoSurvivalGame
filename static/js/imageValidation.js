@@ -13,3 +13,10 @@ function NoImageSelect() {
   }
   return true;
 }
+
+function showUploadOptions() {
+    var display_button = document.getElementById("display-upload");
+    var upload = document.getElementById("image-upload");
+    display_button.style.display ="none";
+    upload.style.display = "block";
+}
