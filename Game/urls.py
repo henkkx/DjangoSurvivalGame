@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from Game import views
 
+
 urlpatterns = [
     url(r'^$', views.landing_page, name='landing_page'),
     url(r'^landing_page', views.landing_page, name=''),

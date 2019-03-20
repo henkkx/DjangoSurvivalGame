@@ -30,11 +30,18 @@ response = "Welcome to our world, adventurer"
 player_model = None
 
 
-
 def initialise(inp):
     global player_model
-    print(player_model, "- player model")
     player_model = Player.objects.get_or_create(user=User.objects.get(username=inp))[0]
+    # if not player_model.most_people:
+    #     player_model.most_people = 0
+    # if not player_model.most_exp:
+    #     player_model.most_exp = 0
+    # if not player_model.most_days_survived:
+    #     player_model.most_days_survived = 0
+    # if not player_model.most_kills:
+    #     player_model.most_kills = 0
+    print("initialised")
     game_initialisation()
 
 #This function displays information about the specified object or creature.
@@ -42,112 +49,44 @@ def initialise(inp):
 #It makes use of the get_description method in the rooms class. Take a look.
 
 
-def inspect(player, entity=None):
-    room = player.room
-    pl = player.level
-    if room is None:
-        return "You are on the street"
-    if entity is None:
-        return room.get_description()
+# def inspect(player, entity=None):
+#     room = player.room
+#     pl = player.level
+#     if room is None:
+#         return "You are on the street"
+#     if entity is None:
+#         return room.get_description()
+#
+#     #if there are creatures in the room that match the entity then output info about these creatures
+#     #if not move on to objects
+#     if room.creatures:
+#
+#         #Get all creatures with matching type
+#         creatures = room.get_creatures(entity)
+#         if creatures:
+#
+#             #Display information for all creatures whose type matches entity. Includes level comparison for each
+#             output = ["There are {0} {1}(s):".format(len(creatures), entity)]
+#             for creature in creatures:
+#                 output.append("{0}.  {1}".format(creature.__str__(), creature.level_comp(pl)))
+#
+#             return "\n".join(output)
+#
+#     if room.objects:
+#
+#         #Get all objects with matching type
+#         objects = room.get_objects(entity)
+#         if objects:
+#
+#             #Display information for all creatures whose type matches entity. Includes level comparison for each
+#             output = ["There are {0} {1}(s):".format(len(objects), entity)]
+#             for objec in objects:
+#                 output.append("{0}.".format(objec.__str__()))
+#             return "\n".join(output)
+#
+#     return "There are no entities matching {0}".format(entity)
 
-    #if there are creatures in the room that match the entity then output info about these creatures
-    #if not move on to objects
-    if room.creatures:
-        
-        #Get all creatures with matching type
-        creatures = room.get_creatures(entity)
-        if creatures:
-            
-            #Display information for all creatures whose type matches entity. Includes level comparison for each
-            output = ["There are {0} {1}(s):".format(len(creatures), entity)]
-            for creature in creatures:
-                output.append("{0}.  {1}".format(creature.__str__(), creature.level_comp(pl)))
 
-            return "\n".join(output)
-
-    if room.objects:
-        
-        #Get all objects with matching type
-        objects = room.get_objects(entity)
-        if objects:
-            
-            #Display information for all creatures whose type matches entity. Includes level comparison for each
-            output = ["There are {0} {1}(s):".format(len(objects), entity)]
-            for objec in objects:
-                output.append("{0}.".format(objec.__str__()))
-            return "\n".join(output)
-
-    return "There are no entities matching {0}".format(entity)
-
-
-# def fight(weapon, creatures, launch):
-#
-#     enemyap = 0
-#     enemyhp = 0
-#     userap = weapon.dmg
-#     userhp = player.hp
-#
-#     # Methods can be altered to introduce block,dodge etc
-#     def enemyattack(userhp,usertype = None):
-#         print("The enemy launches a quick attack dealing " + str(enemyap) + " damage to you\n")
-#         userhp -= enemyap
-#         return userhp
-#
-#     def attack(enemyhp,usertype = None):
-#         print("You launch a stunning attack, majestic in motion dealing " + str(userap) + " damage with your weapon\n")
-#         enemyhp -= userap
-#         return enemyhp
-#
-#     # Fight Start Dependant On Person Who Starts It
-#     if launch is True:
-#         print("You have launched an attack\n")
-#     else:
-#         print("You are stunned as a barrage of quick strikes are directed towards you\n")
-#         userhp -= 20
-#
-#     # If Multiple Creatures are involved in the fight
-#     if type(creatures) == list:
-#         for creature in creatures:
-#             enemyhp += creature.hp
-#             enemyap += creature.ap
-#             enemyap *= (3/4) # To ensure not scale enemy damage up 1 to 1
-#     else:
-#         enemyap = creatures.ap
-#         enemyhp = creatures.hp
-#
-#         print("Fight Time.")
-#
-#     while enemyhp > 0 and player.hp > 0:
-#
-#         if userhp < 1:
-#             print("A disgraceful showing, a place in hell is reserved for the likes of you")
-#             return
-#
-#         print("Your HP: " + str(userhp))
-#         print("Enemy HP: " + str(enemyhp))
-#
-#         print(".........\n")
-#         time.sleep(0.5)  # Maybe we could do something with time.sleep in combat
-#         print("1 - Attack")
-#         print("2 - Leave")
-#
-#         #print("3 - Block")
-#         #print("4 - Dodge")
-#
-#         cmdlist = ['1', '2'] #,'3','4']
-#         cmd = getcmd(cmdlist)
-#
-#         if cmd == "1":
-#             enemyhp = attack(enemyhp)
-#         elif cmd == "2":
-#             print("You leave as fast as you can, leonidas appears, hurling abuse towards you"
-#                   " COWARD HE SCREAMS, COWARD as you panter away head hung in shame")
-#             return
-#
-#         if enemyhp > 0:
-#             userhp = enemyattack(userhp)
-#         elif enemyhp < 1:
-#             print("A swift an decisive slaughter Ghandi would be honored to witness such a spectacle")
 def fight(creature):
     global response, game_over, player
     for c in player.room.creatures.values():
@@ -257,14 +196,15 @@ def available():
 
 
 def enter(building):
-    global response, player_model, player
+    global response, player_model, player, world
     response = ""
-    for bld in world["buildings"].values():
-        print(bld.position)
-        print(bld.name in building)
-        if bld.name in building:
-            building = bld
-            break
+    try:
+        for bld in world["buildings"].values():
+            if bld.name in building:
+                building = bld
+                break
+    except:
+        game_initialisation()
 
     if building in available():
         new_pos = building.position[:]
@@ -299,10 +239,11 @@ def exit_current():
         for bld in world["buildings"].values():
             if bld.position[1] == player.position[1]:
                 response += bld.description + "</br>"
+    player.room = world['rooms']['default']
     player_model.current_game = PC("PC", position=player.position[:], inventory=player.inventory.copy())
+    player_model.save()
     check_achievements()
         # which means back to main road (0) on the level we are (player.position), placeholder ground floor (0)
-
 
 
 def move_room(room):  # room is the room name
@@ -363,6 +304,9 @@ def consume(food_name):
 def handle(text_in):
     global world, player, response, player_model
     cmds = text_in.decode("utf-8").split(" ")
+    if not player_model:
+        response = "No Player, click 'Play Now'"
+        return;
     output_dict = {}
     if cmds[0] == "Move":
         move_room(" ".join(cmds[2:]))
@@ -391,16 +335,37 @@ def handle(text_in):
         move_floor(cmds[1])
     elif cmds[0] == "Game":
         response = "The game is over. Click new game to start another"
+    elif cmds[0] == "Read":
+        response = world["objects"][" ".join(cmds[1:])].text
+
+
+def check_stats():
+    if player_model.most_kills < player_model.stats["kills"]:
+        player_model.most_kills = player_model.stats["kills"]
+        player_model.stats["kills"] = 0
+    if player_model.most_people < player_model.stats["npcs"]:
+        player_model.most_people = player_model.stats["npcs"]
+        player_model.stats["npcs"] = 0
+    if player_model.most_days_survived < player_model.stats["days"]:
+        player_model.most_days_survived = player_model.stats["days"]
+        player_model.stats["days"] = 0
+    if player_model.most_exp < player_model.stats["exp"]:
+        player_model.most_exp = player_model.stats["exp"]
+        player_model.stats["exp"] = 0
+    player_model.save()
 
 
 def game_initialisation():
     global world, game_over, player, response
+    check_stats()
     __ = MasterOfPuppets()
     world = __.build_game()
     game_over = False
     if world["player"]:
         player = world["player"]
         player.inventory = {"Weapon": [world['objects']['Stick']], "Lore": [], "Food": []}
+        player.position = [0, 0, 0]
+        player.room = world['rooms']['default']
     else:
         player = PC("PC")
     response = initialisation_response
@@ -416,8 +381,8 @@ initialisation_response = "You are in a... place, surrounded by fog.</br>" \
 def load_game():
     global player, world, response, player_model
     if player_model.current_game is not None:
-        player = player_model.current_game
-        print(player)
+        player = PC("PC", position=player_model.current_game.position[:], inventory=player_model.current_game.inventory.copy())
+        player_model.save()
     else:
         response = "No game to load"
 
@@ -426,7 +391,7 @@ def load_game():
 
 
 def available_actions():
-    global response
+    global player_model, response
     if game_over:
         return json.dumps({"Game over": "Game Over"});
     check_achievements()
