@@ -22,18 +22,18 @@ badges = [
      'badge_type': 'kills'},
 
     {'name': 'Welcome to the rest of your life',
-     'description': 'You have entered a house for the first time',
+     'description': 'You have spent 1 in game day, or in other words managed to click the exit button',
      'criteria': 0,
-     'badge_type': 'houses'},
+     'badge_type': 'days'},
     {'name': 'Again and again',
      'description': "You've been busy, hope you've taken your lesson",
      'criteria': 10,
-     'badge_type': 'houses'},
+     'badge_type': 'days'},
     {'name': 'Well, you like the game...',
      'description': 'Never thought someone would play enough to get this.\
                     Seriously do you need help?',
      'criteria': 100,
-     'badge_type': 'houses'},
+     'badge_type': 'days'},
 
     {'name': 'Beginning of the end',
      'description': 'You have started exploring the world',
