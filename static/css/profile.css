@@ -19,7 +19,6 @@
     font-size: 20px;
     border-bottom: 1px solid #ccc;
     border-right: 1px solid #cccå;
-    
 }
 
 #stats li:hover{
@@ -41,7 +40,7 @@
 
 #profilePic p {
     font-size: 18;
-    font-weight: 500; 
+    font-weight: 500;
     
 }
 

@@ -256,6 +256,7 @@ def move_floor(move):
             response = ""
     for room in building.rooms:
         response += room.name + ", "
+    player.room = world["rooms"]["default"]
 
 
 def converse(npc):
