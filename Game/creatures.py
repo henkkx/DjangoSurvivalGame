@@ -68,9 +68,10 @@ class hellhound(Creature):
 class Ghoul(Creature):
 
     def __init__(self, name, pl, desc="A ghoul"):
-        hp = 4 * pl
-        ap = 3 * pl
-        super().__init__(name, desc, hp, ap, ["Silver","Fire"], ["Magic"], pl)
+        hp = 30 * pl
+        ap = 10 * pl
+        xp = 100
+        super().__init__(name, desc, hp, ap, ["Silver","Fire"], ["Magic"], pl, xp)
 
     def __str__(self):
         return (
@@ -96,9 +97,10 @@ class Witch(Creature):
 class Vampire(Creature):
 
     def __init__(self, name, pl):
-        hp = 7 * pl
-        ap = 4 * pl
-        super().__init__(name, hp, ap, ["Silver", "Water", "Garlic", "Fire"], ["Magic", "Poison"], pl)
+        hp = 100 * pl
+        ap = 20 * pl
+        xp = 300
+        super().__init__(name, hp, ap, ["Silver", "Water", "Garlic", "Fire"], ["Magic", "Poison"], pl, xp)
 
     def __str__(self):
         return (

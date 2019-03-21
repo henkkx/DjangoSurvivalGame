@@ -118,21 +118,40 @@ class MasterOfPuppets:
 
     def init_creatures(self):
         output = {}
+        # yes in the end there is no correlation between creature name & class, we are using it for stats though
         output['Charred fur rat'] = Rat("Charred fur rat", player.level)
         output["The Hound of Buskerville"] = Ghoul("The Hound of Buskerville", player.level)
+        output["Ghoul"] = Ghoul("A.., humanoid that walks with it's hands? A ghoul or something? It screams 'STOP IT' in a childlike voice." , player.level)
+        output["Android"] = Vampire("An hostile android", player.level)
         return output
 
     def init_rooms(self):
         output = {}
+        # place holder in order to avoid errors
         output["default"] = Room("default", {}, {}, {}, "", -100)
-        output["Kitchen"] = Room("Kitchen", {"Doug": self.NPCs["Doug"]}, {}, {"Bread": self.objects["Bread"]}, "You can smell spices, and a hint of both \
+
+        '''Burned house rooms'''
+        output["Burned Kitchen"] = Room("Burned Kitchen", {"Doug": self.NPCs["Doug"]}, {}, {"Bread": self.objects["Bread"]}, "You can smell spices, and a hint of both \
         garlic & onion. There are utensils & plates all around",0)
-        output["Bedroom"] = Room("Bedroom", {}, {"Charred fur rat": self.creatures['Charred fur rat']}, {"Health Potion": self.objects["Health Potion"]}, "You are in a bedroom, single bed. Sheets indicate a child\
+        output["Burned Bedroom"] = Room("Burned Bedroom", {}, {"Charred fur rat": self.creatures['Charred fur rat']}, {"Health Potion": self.objects["Health Potion"]}, "You are in a bedroom, single bed. Sheets indicate a child\
         slept here. In the corner a rat is munching on something",0)
+        output["Burned Roof"] = Room("Burned Roof", {}, {"The Hound of Burskerville": self.creatures["The Hound of Buskerville"]}, {"Spear": self.objects["Spear"]},
+                                 "The roof of the house is hardly there, since it was burned down. The far side is however is still there. You can see a dog playing with what looks like a stick.",1 )
+
+        '''Family house rooms'''
         output["Living room"] = Room("Living room", {"Tony": self.NPCs["Tony"]}, {}, {"Bread": self.objects['Bread']},
                                      "The room reminds you of the living room of a childhood friend of yours. You don't remember who though.",0)
         output["Attic"] = Room("Attic", {}, {},{"Tony's journal": self.objects["Tony's journal"]},
-                               "A standard Attic, a poster reading 'Who Watches The Watchmen' halfs hangs on one side",1)
+                               "A standard Attic, a poster reading 'Who Watches The Watchmen' half hangs on one side",1)
+        output["Game room"] = Room("Game room", {}, {"Ghoul": self.creatures["Ghoul"]},{},
+                                   "Tony's game room. He used to have a lot of games as a kid."
+                                   " Now that you are older you realise that's what you get for your parents not giving you enough of their time."
+                                   " You hope you were a good enough friend to somehow make up for that")
+
+        '''Bar rooms'''
+        output["Main room"] = Room("Main room", {"Barwoman": self.NPCs["Barwoman"]}, {}, {"Pint of beer": self.objects["Pint of beer"]})
+
+        '''University building rooms'''
 
         #-----------------------------------------Neibolt House Rooms -----------------------------------------------------#
 
@@ -201,11 +220,13 @@ class MasterOfPuppets:
     def init_buildings(self):
         output = {}
         output["Roofless house"] = Building('Roofless house', "This house is made of stone. It's roof has fallen because it's old.",
-                                [self.rooms["Kitchen"], self.rooms["Bedroom"]], [1, 0])
+                                [self.rooms["Burned Kitchen"], self.rooms["Burned Bedroom"], self.rooms["Burned Roof"]], [1, 0])
         output["Family house"] = Building("Family house", "This is a very standard family house. Looks relatively big, probably 3-4 bedrooms, maybe a guest house. Seems like it's freshly painted",
-                                          [self.rooms["Living room"], self.rooms["Attic"]], [2, 0])
-        output["TestBLD1"] = Building("TestBLD1", "Test house mate", [self.rooms["Attic"]], [1, 1])
-        output["TestBLD2"] = Building("TestBLD2", "Test house mate", [self.rooms["Living room"]], [2, 1])
+                                          [self.rooms["Living room"], self.rooms["Attic"], self.rooms["Game room"]], [2, 0])
+        output["Bar"] = Building("Bar", "A modern bar, the road-side walls are mostly glass. It seems almost empty", [self.rooms["Attic"]], [1, 1])
+        output["University building"] = Building("University building", "It's a small building with only a few rooms you can recall, but you used to be in it a LOT for assignments during your studies",
+                                                     [self.rooms["Living room"]], [2, 1])
+
         output["Neibolt House"] = Building("Neibolt House", "The house on the left it seems so familiar, but also so vague, it seems so inviting", [self.rooms["Neibolt Hallway"],self.rooms["Neibolt Bedroom"]
             ,self.rooms["Neibolt Basement"], self.rooms["Neibolt Lavatory"], self.rooms["Neibolt Kitchen"], self.rooms["Neibolt Attic"]], [1, 2])
         output["Innocent House"] = Building("Innocent House",

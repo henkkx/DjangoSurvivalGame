@@ -5,11 +5,11 @@ except:
 
 
 class PC:
-    def __init__(self, name, level=1, position=[0, 0, 0], hp=100, inventory={"Weapon": [], "Lore": [], "Food": []}):
+    def __init__(self, name, level=1, position=[0, 0, 0], hp=100, inventory={"Weapon": [], "Lore": [], "Food": []}, hunger=50):
         self.name = name
         self.hp = hp
         self.max_hp = hp
-        self.hunger = 50
+        self.hunger = hunger
         self.max_hunger = 50
         self.position = position
         self.room = None

@@ -1,14 +1,12 @@
 function post_fun(inp) {
-    // NOTE IMPORTANT: this function will go to the error branch because it get's no response
-    // for now at least, it DOES post the data though
     $.ajax({
         type: "POST",
         url: "/post_data",
         data: inp,
         success: function(){
+            scroll()
             $(".actionBtn").remove();
             get_fun();
-            scroll();
             scroll();
         }
     })
@@ -16,6 +14,7 @@ function post_fun(inp) {
 function buffer_fun(inp){
     $("#gameText").text("");
     post_fun(inp)
+    scroll()
 }
 function get_fun(){
     $.ajax({
@@ -34,6 +33,7 @@ function get_fun(){
                     }
                 }
         });
+    scroll()
 }
 $(document).ready(function() {
     get_fun();
