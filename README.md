@@ -1,4 +1,4 @@
-#DjangoSurvivalGame
+#Scribbles From Another Dimensions
 
 
 Description:
@@ -34,3 +34,38 @@ Visitors to the site:
 - Need to be able to view the leaderboard
 - Read the instructions of the game
 - Be able to register
+
+## Installing / Getting started
+
+Python 3.5 or greater is required.
+
+```shell
+pip install -r requirements.txt
+python DjangoSurvivalGame/manage.py runserver
+```
+
+These commands will install all the required python modules and begin the Django webserver.
+
+## Developing
+
+### Built With
+Bootstrap CSS, jQuery, Javascript, AJAX, JSON, Python
+
+### Prerequisites
+https://www.python.org/downloads/
+
+## Tests
+
+### Running Tests
+```shell
+python manage.py test
+```
+
+## Database
+
+SQLite 
+
+
+
+
+
