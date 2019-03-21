@@ -5,6 +5,7 @@ except:
 
 
 class PC:
+    ''' This is the player object the game is using'''
     def __init__(self, name, level=1, position=[0, 0, 0], hp=100, inventory={"Weapon": [], "Lore": [], "Food": []}, hunger=50):
         self.name = name
         self.hp = hp
@@ -84,7 +85,7 @@ class PC:
 
         return "Ate {0}. Hunger is now {1}/{2}. Health is now {3}/{4}".format(food.name, self.hunger, self.max_hunger, self.hp, self.max_hp)
 
-
+# The NPC objects
 class NPC:
     def __init__(self, name, short_description, long_description, hp, allegiance, inventory, conversation):
         self.name = name
@@ -107,15 +108,3 @@ class NPC:
     def get_short(self):
         return self.desc_S #returns a shorter description displayed upon entering the room.
 
-# player = PC("Ban", 10)
-# sword = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 10, 2)
-# cake = Food("Cake", "A delicious sponge cake", 1, 5, 10)
-# print(player.add_item(sword))
-# print(player.add_item(sword))
-# print(player.add_item(cake))
-# print(player.add_item(cake))
-# player.hp -= 15
-# player.hunger -= 10
-# print(player.get_inventory())
-# print(player.eat(cake))
-# print(player.get_inventory())

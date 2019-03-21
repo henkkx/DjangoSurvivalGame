@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 
 
+''' Below you will see a lot of useless stuff like vulnerabilities, in terms of that we don't use them
+    We intended to but did not have enough time. Left them in and might update later'''
 class Creature(ABC):
 
     def __init__(self, name, desc, hp, ap, vulnerability, immune, pl, xp=50):
@@ -136,23 +138,3 @@ class Zombie(Creature):
             "{0} (Name: {1}, Health Points: {2},  Attack Points: {3}, Weaknesses: {4}, Strengths: {5}, Level: {6})".format(
                 self.__class__.__name__, self.name, self.hp, self.ap, self.vulnerability, self.immune,
                 self.power_level))
-
-
-#Class Tests
-"""
-spider = Spider("Shelob", 5)
-print(spider.__str__())
-hellhound = hellhound("buster",10)
-print(hellhound.__str__())
-ghoul = ghoul("hy",10)
-print(ghoul.__str__())
-Vampire = Vampire("er",10)
-print(Vampire.__str__())
-Witch = Witch("sd",10)
-print(Witch.__str__())
-Rat = Rat("3d",10)
-print(Rat.__str__())
-Zombie = Zombie("timmy",10)
-print(Zombie.__str__())
-print(Zombie.get_type())
-"""

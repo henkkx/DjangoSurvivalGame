@@ -10,7 +10,9 @@ except:
     from creatures import *
 
 player = PC("PC")
-
+'''
+This just the population script, it is based on of course the object files (objects.py, people.py, buildings.py)
+Yes we did throw PEP8 out of the window in the line lengths , but that's because it is just text'''
 
 class MasterOfPuppets:
     def __init__(self):
@@ -178,18 +180,18 @@ class MasterOfPuppets:
         garlic & onion. There are utensils & plates all around",0)
         output["Burned Bedroom"] = Room("Burned Bedroom", {}, {"Charred fur rat": self.creatures['Charred fur rat']}, {"Health Potion": self.objects["Health Potion"]}, "You are in a bedroom, single bed. Sheets indicate a child\
         slept here. In the corner a rat is munching on something",0)
-        output["Burned Roof"] = Room("Burned Roof", {}, {"The Hound of Burskerville": self.creatures["The Hound of Buskerville"]}, {"Spear": self.objects["Spear"]},
+        output["Burned Roof"] = Room("Burned Roof", {}, {"The Hound of Buskerville": self.creatures["The Hound of Buskerville"]}, {"Spear": self.objects["Spear"]},
                                  "The roof of the house is hardly there, since it was burned down. The far side is however is still there. You can see a dog playing with what looks like a stick.",1 )
 
         '''Family house rooms'''
         output["Living room"] = Room("Living room", {"Tony": self.NPCs["Tony"]}, {}, {"Bread": self.objects['Bread']},
                                      "The room reminds you of the living room of a childhood friend of yours. You don't remember who though.",0)
         output["Attic"] = Room("Attic", {}, {},{"Tony's journal": self.objects["Tony's journal"]},
-                               "A standard Attic, a poster reading 'Who Watches The Watchmen' half hangs on one side",1)
-        output["Game room"] = Room("Game room", {}, {'''"Ghoul": self.creatures["Ghoul"]'''},{},
+                               "A standard Attic, a poster reading 'Who Watches The Watchmen' half hangs on one side", 1)
+        output["Game room"] = Room("Game room", {}, {'''"Ghoul": self.creatures["Ghoul"]'''}, {},
                                    "Tony's game room. He used to have a lot of games as a kid."
                                    " Now that you are older you realise that's what you get for your parents not giving you enough of their time."
-                                   " You hope you were a good enough friend to somehow make up for that")
+                                   " You hope you were a good enough friend to somehow make up for that", 0)
 
         '''Bar rooms'''
         output["Main room"] = Room("Main room", {"Barwoman": self.NPCs["Barwoman"]}, {}, {"Pint of beer": self.objects["Pint of beer"], "Cocktail": self.objects["Cocktail"]},
