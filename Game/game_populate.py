@@ -91,7 +91,6 @@ class MasterOfPuppets:
                                      "The room reminds you of the living room of a childhood friend of yours. You don't remember who though.",0)
         output["Attic"] = Room("Attic", {}, {},{"Tony's journal": self.objects["Tony's journal"]},
                                "A standard Attic, a poster reading 'Who Watches The Watchmen' halfs hangs on one side",1)
-        output[""]
         return output
 
     def init_buildings(self):
