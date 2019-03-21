@@ -6,43 +6,58 @@
 {% endblock %}
 
 {% block content %}
-<div>
-    {{ name }}'s Stats
+<div id= "name">
+{{ name }}'s Sanctuary
+</div>
+
+<div id = "stats">
+    <h1>{{ name }}'s Stats</h1>
     <ul>
         <li>Games Played: {{ games }}</li>
         <li>Most Kills: {{ kills }}</li>
+    </ul>
+    <ul>
         <li>Longest Survived: {{ days }}</li>
         <li>Most Experience: {{ exp }}</li>
     </ul>
 </div>
 
-<div id = image>
-     <img src="{{ picture.url }}" width="250px"  height="250px" onerror="this.style.display='none'"/>
-</div>
+<div id="profilePic">
+    <p>{{ name }}'s Profile Picture:</p>
+    <div id = "image">
+         <img src="{{ picture.url }}" alt="{{ name }}'s profile picture" onerror="this.style.display='none'"/>
+    </div>
 
-{% if user.username == name %}
-<div id="display-upload">
-    <button onclick="showUploadOptions()">Upload New Image</button>
-</div>
 
-{% if picture %}
-<div id="image-delete">
-    <form method="post" action="profile" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="submit" value="Remove Your Profile Picture" onclick="return confirm('Are you sure?');"/>
-    </form>
-</div>
-{% endif %}
+    {% if user.username == name %}
+    <div id="Buttons">
+        <div id="display-upload">
+            <button id="displayB">Upload New Image</button>
+        </div>
 
-<div id="image-upload">
-    <form id="imageupload" method="post" action="profile" enctype="multipart/form-data">
-        {% csrf_token %}
-         <li> Edit Your Profile Picture</li>
-        {{ form.as_p }}
-        <input type="submit" value="Upload New Profile Picture" onclick="return NoImageSelect() "/>
-    </form>
+        {% if picture %}
+        <div id="image-delete">
+            <form method="post" action="profile" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="submit" value="Remove Your Profile Picture" onclick="return confirm('Are you sure?');"/>
+            </form>
+        </div>
+        {% endif %}
+
+        <div id="image-upload">
+            <form id="imageupload" method="post" action="profile" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>
+                    <input id="file-input" type="file" name="file-input">
+                    <label for="file-input">Select File</label> 
+                </p>
+                <input type="submit" value="Upload New Profile Picture" onclick="return NoImageSelect() "/>
+            </form>
+            <button id="cancelB">Cancel</button>
+        </div>
+    </div>
+    {% endif %}
 </div>
-{% endif %}
 
 <div id="achievements-table">
     <table>

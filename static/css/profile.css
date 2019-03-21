@@ -1,11 +1,162 @@
+
+/* This handles the players stat's */
+/* Some inspiration from https://codepen.io/secondfret/pen/mIBqf */
+#stats {
+    position: absolute;
+    right: 120px;
+    width: 800px;
+}
+
+#stats ul {
+    float: left;
+    width: 400px;
+    list-style-type: none;
+}
+
+#stats li {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 20px;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #cccå;
     
+}
+
+#stats li:hover{
+    font-size: 30px;
+    background: #f6f6f6;
+}
+
+
+
+
+/* This handles the profile picture division. it contains the profile image  division and associated buttons division*/
+
+#profilePic {
+    position: absolute;
+    left: 18px ;
+    top: 100px;
+    width: 500px;
+}
+
+#profilePic p {
+    font-size: 18;
+    font-weight: 500; 
+    
+}
+
+/* This handles the profile image division */
+#image {
+    position: relative;
+}
+
+#image img {
+    width: 400px;
+    height: 400px;
+    
+}
+
+/* Below all operate on the position and other aspects of the buttons */
+#Buttons {
+    position: relative;
+    height: auto;
+    margin: auto;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#display-upload {
+    float: left;
+}
+#image-delete {
+    height: auto;
+}
+
+button, input{
+    min-width: 50%;
+    color: #444444;
+    background: #F3F3F3;
+    border: 1px #DADADA solid;
+    padding: 5px 10px;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 9pt;
+    outline: none;
+}
+
+
+button:hover, input:hover {
+    border: 1px #C6C6C6 solid;
+    box-shadow: 1px 1px 1px #EAEAEA;
+    color: #333333;
+    background: #F7F7F7;
+}
+
+button:active, input:active {
+    box-shadow: inset 1px 1px 1px #DFDFDF;   
+}
+
+
+/*This hides the regular file input button so that we can replace it with a better styled one.*/
+#file-input {
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+#file-input + label {
+    max-width: 80%;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+    color: black;
+    border: 2px solid currentColor;
+}
+
+
+#file-input:focus + label,
+#file-input + label:hover {
+    color: gainsboro;
+}
+
+/*This handles the name div */
+
+#name {
+    margin-left: 18px;
+    font-size: 24;
+    font-weight: 700; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Below is the styling for the achievement table*/
 #achievements-table {
     position: absolute;
-    right: 75px ;
-    top: 100px;
-    width: 600px;
+    right: 120px ;
+    top: 300px;
+    width: 800px;
+    height: 500px;
+    overflow: auto;
 }    
-
 
 
 #achievements-table table {
@@ -36,4 +187,3 @@
 #image-upload {
     display: none;
 }
-
