@@ -1,3 +1,5 @@
+
+//Ensures that an image file has been selected before allowing the file-input form from being submitted.
 function NoImageSelect() {
   if (document.getElementById("file-input").files.length == 0) {
     alert("Please Select An Image To Upload");
@@ -14,6 +16,8 @@ function NoImageSelect() {
   return true;
 }
 
+//Shows the buttons and inputs for uploading a new profile picture and hides the button which calls it.
+//Also hides the remove profile picture button if appropriate
 function showUploadOptions() {
     var display_button = document.getElementById("display-upload");
     var upload = document.getElementById("image-upload");
@@ -25,6 +29,9 @@ function showUploadOptions() {
     }
 }
 
+//Hides the buttons and inputs for uploading a new profile picture.
+//also reveals the button which can re-reveal the now hidden buttons and inputs for uploading a profile picture.
+//reveals the remove profile picture btton if appropriate.
 function hideUploadOptions() {
     var display_button = document.getElementById("display-upload");
     var upload = document.getElementById("image-upload");
