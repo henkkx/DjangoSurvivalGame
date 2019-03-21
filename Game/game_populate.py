@@ -186,16 +186,20 @@ class MasterOfPuppets:
                                      "The room reminds you of the living room of a childhood friend of yours. You don't remember who though.",0)
         output["Attic"] = Room("Attic", {}, {},{"Tony's journal": self.objects["Tony's journal"]},
                                "A standard Attic, a poster reading 'Who Watches The Watchmen' half hangs on one side",1)
-        output["Game room"] = Room("Game room", {}, {"Ghoul": self.creatures["Ghoul"]},{},
+        output["Game room"] = Room("Game room", {}, {'''"Ghoul": self.creatures["Ghoul"]'''},{},
                                    "Tony's game room. He used to have a lot of games as a kid."
                                    " Now that you are older you realise that's what you get for your parents not giving you enough of their time."
                                    " You hope you were a good enough friend to somehow make up for that")
 
         '''Bar rooms'''
+<<<<<<< HEAD
         output["Main room"] = Room("Main room", {"Barwoman": self.NPCs["Barwoman"]}, {}, {"Pint of beer": self.objects["Pint of beer"], "Cocktail": self.objects["Cocktail"]},
                                    "It's the main room of the bar, there is a counter with a bar, stools, booths, a pool table one one end")
         output["Bar toilets"] = Room("Bar toilets", {}, {}, {"Toilet notebook": self.objects["Toilet notebook"]},
                                      "You enter the toilets of the bar. Pretty standard, clean for a bar just off campus. There is a notebook on top of the sink")
+=======
+        output["Main room"] = Room("Main room", {'''"Barwoman": self.NPCs["Barwoman"]'''}, {}, {'''"Pint of beer": self.objects["Pint of beer"]'''},"j")
+>>>>>>> 3e01c5def7291b5c68e97ee0c5862bbb028a96ed
 
         '''University building rooms'''
         output['Lab room'] = Room("Lab room", {}, {"Thug": self.creatures["Thug"]}, {"Newspaper segment": self.objects["Newspaper segment"]}, "A standard computer lab room")

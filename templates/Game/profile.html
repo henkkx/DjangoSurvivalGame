@@ -3,6 +3,7 @@
 <link rel="stylesheet"  type="text/css" href="../../static/css/profile.css">
 <link rel="stylesheet" type="text/css" href="../../static/css/styles.css">
 <script src="/static/js/imageValidation.js"></script>
+{% load staticfiles %}
 {% endblock %}
 
 {% block content %}
@@ -10,7 +11,17 @@
 {{ name }}'s Sanctuary
 </div>
 
-<div id = "stats">
+
+<div class = "container"> 
+    <div class="row">
+
+
+
+
+    </div>
+</div>
+
+<div id = "stats" class=>
     <h1>{{ name }}'s Stats</h1>
     <ul>
         <li>Games Played: {{ games }}</li>
@@ -25,7 +36,11 @@
 <div id="profilePic">
     <p>{{ name }}'s Profile Picture:</p>
     <div id = "image">
-         <img src="{{ picture.url }}" alt="{{ name }}'s profile picture" onerror="this.style.display='none'"/>
+        {% if picture %}
+        <img src="{{ picture.url }}" alt="{{ name }}'s profile picture" onerror="this.style.display='none'"/>
+        {% else %}
+        <img src="{% static "images/ImageNotFound.png" %}" alt="No Picture Uploaded" onerror="this.style.display='none'"/>
+        {% endif %}
     </div>
 
 
