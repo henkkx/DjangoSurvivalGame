@@ -39,9 +39,10 @@ class MasterOfPuppets:
 
         #Changed final arguments to match object constuctor parameters
         output["Bread"] = Food("Bread", "An apparently fresh loaf of bread, smells like it just came out...of the oven",
-                           1, 40, 5)
+                           1, 40, 20)
         output["Health Potion"] = Food("Health Potion", "It's small, it's red, come on this is in every game. Hm, maybe ours is green.",
                            1, 50, 0)
+        output["Oat bar"] = Food("Oat bar", "An oat bar with raisins", 1, 20, 15)
         output["Burned note 1"] = Lore("Burned note #1", "A slightly burned piece of paper with scribbled writing. Looks like you wrote it",
                            1, "Why would I do that? How could I let this happen even?")
         output["Burned note 2"] = Lore("Burned note #2", "A slightly burned piece of paper with scribbled writing. Looks like you wrote it",
@@ -51,6 +52,11 @@ class MasterOfPuppets:
                               "You can clearly however, now, tell that his character wasn't equipped to take that. He mentions your name a few times.</br>"
                               "He says that you were good to him, helped him fell like he wasn't useless, says he could tell that sometimes,</br>"
                               "you didn't want to play with him because others you tease you for it, but you usually still did. He was more perceptive than you thought back then.")
+        output["Crumbled note"] = Lore("Crumbled note", "A piece of paper with something written in it, crumbled up in a ball",
+                                       1, "You recognise the handwritting but you are not sure where from:</br>"
+                                          "Today was one of the bad days again, all the other kids made fun of me.</br>"
+                                          "All except one, the one kid that has been good to me")
+
 
         #------ Neibolt -------
 
@@ -107,24 +113,72 @@ class MasterOfPuppets:
                              "'Very good, just wanted to let you know, when we were kids you helped me a lot, with the others messing with me and all that.</br>"
                              "You are confused, Tony looks just like you remembered him when you were kids, but talks of that time as if it was the past.</br>"
                              "As finished his sentence he turns back around, as if he doesn't realise you are there anymore.")
+
+        #-----------------------------Neibolt-----------------------------------------
+
+        output["Pennywise"] = NPC("Pennywise","Pennywise the clown","Pennywise the familiar monster that plauged your dreams as"
+                                    " a child, trying to lure you in untill one night it stopped",1000,"Menacing",[]
+                                  ,"The clown slowly turns and stares directly at me, his eyes so vivid, his tongue like that of a"
+                                   " lizard licks his shark like teeth. 'Welcome back, its been a while' he remarks '27 years, 27 long"
+                                   " years, i've been lusting for your blood ever since you escaped my grasp as a child, but the master"
+                                   " has a plan for you'. What could that mean who is the master, why does he still remember me, what is this place,"
+                                   " he speaks up once again 'Don't worry once the master is done with you, ill be coming for you', in an instance"
+                                   " he runs towards me teeth gleaning and mouth wide open, i'm startled scared but then as quick as he sprinted towards"
+                                   " me, he vanishes into thin air leaving behind a mysterious shawdow repeating the conversation we just had")
+
+        output["Playing Girl"] = NPC("Playing Girl","A young girl playing in the garden","A small young girl, about 3 years old"
+                                    " dressed in red with a flower headband",10,"friendly",[],"I attempt to speak to her, she turns around swiftly,"
+                                    " 'hi there my names Emma, and im playing with my mummy & daddy, we are going to my auntie Jills house tonight to see"
+                                    " all my friends i can't wait, whats your name', you hear a bang, you look away, you turn back she is not there anymore"
+                                    " all that remains is a little red flower resembling the one on her head band ")
+
+        output["Dead Girl"] = NPC("Dead Girl","The lifeless body of a young girl","A young girl thrown from the car she looks lifeless & numb",1,"Evil"
+                                  ,[],"you rush over to the lifeless body, in an instance it turns and faces you, it begins"
+                                            " to laugh menacingly before uttering the words, 'You killed them,you have taken what is not yours"
+                                            " to take, i will be seeing you' and in an instance your startled as the life appears to return to the young girl"
+                                            " briefly she mutters 'Am i okay, wheres mummy & daddy', you try to comfort her as she passes away, tears"
+                                            " raining from your eyes")
+
         return output
 
     def init_creatures(self):
         output = {}
+        # yes in the end there is no correlation between creature name & class, we are using it for stats though
         output['Charred fur rat'] = Rat("Charred fur rat", player.level)
+        output["The Hound of Buskerville"] = Ghoul("The Hound of Buskerville", player.level)
+        output['Ghost Girl'] = Ghoul("Ghost Girl",player.level+2,"The ghost of a young girl in a red dress & flower headband")
+        output['Large Red Spider'] = Ghoul("Large Red Spider",player.level,"A large red spider, probably the size of a ruller")
+        output['Raven'] = Rat("Raven",player.level)
+        output['Sphinx'] = Ghoul("Sphinx",player.level)
         return output
 
     def init_rooms(self):
         output = {}
+        # place holder in order to avoid errors
         output["default"] = Room("default", {}, {}, {}, "", -100)
-        output["Kitchen"] = Room("Kitchen", {"Doug": self.NPCs["Doug"]}, {}, {"Bread": self.objects["Bread"]}, "You can smell spices, and a hint of both \
+
+        '''Burned house rooms'''
+        output["Burned Kitchen"] = Room("Burned Kitchen", {"Doug": self.NPCs["Doug"]}, {}, {"Bread": self.objects["Bread"]}, "You can smell spices, and a hint of both \
         garlic & onion. There are utensils & plates all around",0)
-        output["Bedroom"] = Room("Bedroom", {}, {"Charred fur rat": self.creatures['Charred fur rat']}, {"Health Potion": self.objects["Health Potion"]}, "You are in a bedroom, single bed. Sheets indicate a child\
+        output["Burned Bedroom"] = Room("Burned Bedroom", {}, {"Charred fur rat": self.creatures['Charred fur rat']}, {"Health Potion": self.objects["Health Potion"]}, "You are in a bedroom, single bed. Sheets indicate a child\
         slept here. In the corner a rat is munching on something",0)
+        output["Burned Roof"] = Room("Burned Roof", {}, {"The Hound of Burskerville": self.creatures["The Hound of Buskerville"]}, {"Spear": self.objects["Spear"]},
+                                 "The roof of the house is hardly there, since it was burned down. The far side is however is still there. You can see a dog playing with what looks like a stick.",1 )
+
+        '''Family house rooms'''
         output["Living room"] = Room("Living room", {"Tony": self.NPCs["Tony"]}, {}, {"Bread": self.objects['Bread']},
                                      "The room reminds you of the living room of a childhood friend of yours. You don't remember who though.",0)
         output["Attic"] = Room("Attic", {}, {},{"Tony's journal": self.objects["Tony's journal"]},
-                               "A standard Attic, a poster reading 'Who Watches The Watchmen' halfs hangs on one side",1)
+                               "A standard Attic, a poster reading 'Who Watches The Watchmen' half hangs on one side",1)
+        output["Game room"] = Room("Game room", {}, {'''"Ghoul": self.creatures["Ghoul"]'''},{},
+                                   "Tony's game room. He used to have a lot of games as a kid."
+                                   " Now that you are older you realise that's what you get for your parents not giving you enough of their time."
+                                   " You hope you were a good enough friend to somehow make up for that")
+
+        '''Bar rooms'''
+        output["Main room"] = Room("Main room", {'''"Barwoman": self.NPCs["Barwoman"]'''}, {}, {'''"Pint of beer": self.objects["Pint of beer"]'''},"j")
+
+        '''University building rooms'''
 
         #-----------------------------------------Neibolt House Rooms -----------------------------------------------------#
 
@@ -133,7 +187,7 @@ class MasterOfPuppets:
                                 " A red ballon seems to be leading you there. Stairs lead to the second floor, they look unsafe"
                                                                         " falling apart",0)
 
-        output["Neibolt Basement"] = Room("Neibolt Basement",{},{},{"Paper Plane":self.objects["Paper Plane"]},"The ballon leads you to the basement, there is a creature just in the shadow, he "
+        output["Neibolt Basement"] = Room("Neibolt Basement",{"Pennywise": self.NPCs["Pennywise"]},{},{"Paper Plane":self.objects["Paper Plane"]},"The ballon leads you to the basement, there is a creature just in the shadow, he "
                                                                       "seems to be lying down, His eyes fiery yellow, teeth as sharp as claws, "
                                                                       "his voice soothing & inviting, he resembles the creature that plaged your dreams as"
                                                                       " a child, he throws a paperplane towards you",-1)
@@ -146,20 +200,23 @@ class MasterOfPuppets:
                                          "The toilet seems to be working, Hmmm intresting [FLUSH] blood appears to flowing instead of water, unnerving "
                                          "There seems to be some tooth paste and a brush here also",1)
 
-        output["Neibolt Kitchen"] = Room("Neibolt Kitchen", {}, {}, {"Jam Sandwich": self.objects["Jam Sandwich"]},"Hmmm this kitchen, it reminds you of home, there seems to be a sandwich on the table, You look up "
-                                        "BLOOD smeered all over roof, it reads Welcome Home, What could this mean" ,0)
+        output["Neibolt Kitchen"] = Room("Neibolt Kitchen", {}, {"Large Red Spider": self.creatures['Large Red Spider']}, {"Jam Sandwich": self.objects["Jam Sandwich"]},"Hmmm this kitchen, it reminds you of home, there seems to be a sandwich on the table, You look up "
+                                        "BLOOD smeered all over roof, it reads Welcome Home, What could this mean, "
+                                        "A large red spider, probably the size of a ruller, lays on the table moving around the room, it seems strong"
+                                                                                                                   " best to keep away" ,0)
 
-        output["Neibolt Attic"] = Room("Neibolt Attic", {}, {}, {"Attic Photo": self.objects["Attic Photo"],"Silver Sword": self.objects["Silver Sword"]},
-                                         "The attic creaks, you hear movement below like a dog pancing quickly, Thats no dog no that fast "
+        output["Neibolt Attic"] = Room("Neibolt Attic", {}, {"Sphinx": self.creatures['Sphinx']}, {"Attic Photo": self.objects["Attic Photo"],"Silver Sword": self.objects["Silver Sword"]},
+                                         "The attic creaks, you hear movement below like a dog pancing quickly, Thats not a dog not that fast "
+                                         " Your startled in front of you there a appears to be sphinx muttering a riddle, "
                                          "There appears to be something shining off in the distance, a silver glimmer & and a photo", 2)
 
         # ---------------------------------------Murder House (Innocent House)---------------------------------------------------#
 
-        output["Innocent Hallway"] = Room("Innocent Hallway", {}, {}, {},
+        output["Innocent Hallway"] = Room("Innocent Hallway", {}, {"Raven":self.creatures["Raven"]}, {},
                                          "This hallway, it appears to be warped, portals seem to be placed at each stairway they appear "
-                                         "to give off a reverberating humming sound", 0)
+                                         "to give off a reverberating humming sound, A raven stands strong its pupils a glistening red", 0)
 
-        output["Innocent Garden"] = Room("Innocent Garden", {}, {}, {},
+        output["Innocent Garden"] = Room("Innocent Garden", {"Playing Girl": self.NPCs["Playing Girl"]}, {}, {},
                                          "The portal sent me to a garden, a memory seems to be playing, a young girl seems to be playing with her"
                                          " family their faces they seems so familiar, There seems to be another portal decending down",-1)
 
@@ -167,9 +224,11 @@ class MasterOfPuppets:
                                          "In an instance i've arrived in a garage, there is a car, violent RED, there seems"
                                          " to be a brick in the distance, A portal looms below", -2)
 
-        output["Innocent Bedroom"] = Room("Innocent Bedroom", {}, {}, {"Bedroom Photo":self.objects["Bedroom Photo"],"Bedroom Book":self.objects["Bedroom Book"]},
+        output["Innocent Bedroom"] = Room("Innocent Bedroom", {}, {"Ghost Girl": self.creatures['Ghost Girl']}, {"Bedroom Photo":self.objects["Bedroom Photo"],"Bedroom Book":self.objects["Bedroom Book"]},
                                          "A young girls bedroom, beautiful toys litter the room, there seems to be a photo &"
-                                         " book in the room, Another portal becons from ceiling maybe i can make it with a jump ", 1)
+                                         " book in the room,In the corner of your eye you catch the glipse of what appears to be a young girl"
+                                         " hovering above the ground, dressed fully in red & wearing a flower headband"
+                                         "Another portal becons from ceiling maybe i can make it with a jump ", 1)
 
         output["Innocent Road"] = Room("Innocent Road", {}, {}, {"TimberBark": self.objects["TimberBark"]},
                                           "I seem to be have transported to a blank rural road, headlights appear in the distance, another"
@@ -177,7 +236,7 @@ class MasterOfPuppets:
                                           " a tree, i can make it with a short leap",
                                           2)
 
-        output["Innocent Place"] = Room("Innocent Place", {}, {}, {"MetalShard": self.objects["MetalShard"]},
+        output["Innocent Place"] = Room("Innocent Place", {"Dead Girl": self.NPCs["Dead Girl"]}, {}, {"MetalShard": self.objects["MetalShard"]},
                                        "There seems to be an accident, The red car"
                                        " destroyed, the driver and front passanger appear to be impaled in the car, a young girls body seems"
                                        " to be thrown from the car, she appears lifeless, a young man seems to be distraught, ITS ME THATS ME,",
@@ -193,11 +252,13 @@ class MasterOfPuppets:
     def init_buildings(self):
         output = {}
         output["Roofless house"] = Building('Roofless house', "This house is made of stone. It's roof has fallen because it's old.",
-                                [self.rooms["Kitchen"], self.rooms["Bedroom"]], [1, 0])
+                                [self.rooms["Burned Kitchen"], self.rooms["Burned Bedroom"], self.rooms["Burned Roof"]], [1, 0])
         output["Family house"] = Building("Family house", "This is a very standard family house. Looks relatively big, probably 3-4 bedrooms, maybe a guest house. Seems like it's freshly painted",
-                                          [self.rooms["Living room"], self.rooms["Attic"]], [2, 0])
-        output["TestBLD1"] = Building("TestBLD1", "Test house mate", [self.rooms["Attic"]], [1, 1])
-        output["TestBLD2"] = Building("TestBLD2", "Test house mate", [self.rooms["Living room"]], [2, 1])
+                                          [self.rooms["Living room"], self.rooms["Attic"], self.rooms["Game room"]], [2, 0])
+        output["Bar"] = Building("Bar", "A modern bar, the road-side walls are mostly glass. It seems almost empty", [self.rooms["Attic"]], [1, 1])
+        output["University building"] = Building("University building", "It's a small building with only a few rooms you can recall, but you used to be in it a LOT for assignments during your studies",
+                                                     [self.rooms["Living room"]], [2, 1])
+
         output["Neibolt House"] = Building("Neibolt House", "The house on the left it seems so familiar, but also so vague, it seems so inviting", [self.rooms["Neibolt Hallway"],self.rooms["Neibolt Bedroom"]
             ,self.rooms["Neibolt Basement"], self.rooms["Neibolt Lavatory"], self.rooms["Neibolt Kitchen"], self.rooms["Neibolt Attic"]], [1, 2])
         output["Innocent House"] = Building("Innocent House",

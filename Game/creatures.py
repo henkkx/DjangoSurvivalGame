@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class Creature(ABC):
 
-    def __init__(self, name, desc, hp, ap, vulnerability, immune, pl):
+    def __init__(self, name, desc, hp, ap, vulnerability, immune, pl, xp=50):
 
         self.name = name
         self.description = desc
@@ -12,6 +12,7 @@ class Creature(ABC):
         self.vulnerability = vulnerability
         self.immune = immune
         self.power_level = pl
+        self.xp = xp
         super().__init__()
 
     # Returns the type of the creature i.e Spider.
@@ -52,10 +53,10 @@ class Spider(Creature):
 
 class hellhound(Creature):
 
-    def __init__(self, name, pl):
+    def __init__(self, name, pl, desc="A hellhound"):
         hp = 5 * pl
         ap = 6 * pl
-        super().__init__(name, hp, ap, ["Silver","Water"], ["Fire"], pl)
+        super().__init__(name, desc, hp, ap, ["Silver","Water"], ["Fire"], pl)
 
     def __str__(self):
         return (
@@ -66,10 +67,11 @@ class hellhound(Creature):
 
 class Ghoul(Creature):
 
-    def __init__(self, name, pl):
-        hp = 4 * pl
-        ap = 3 * pl
-        super().__init__(name, hp, ap, ["Silver","Fire"], ["Magic"], pl)
+    def __init__(self, name, pl, desc="A ghoul"):
+        hp = 30 * pl
+        ap = 10 * pl
+        xp = 100
+        super().__init__(name, desc, hp, ap, ["Silver","Fire"], ["Magic"], pl, xp)
 
     def __str__(self):
         return (
@@ -95,9 +97,10 @@ class Witch(Creature):
 class Vampire(Creature):
 
     def __init__(self, name, pl):
-        hp = 7 * pl
-        ap = 4 * pl
-        super().__init__(name, hp, ap, ["Silver", "Water", "Garlic", "Fire"], ["Magic", "Poison"], pl)
+        hp = 100 * pl
+        ap = 20 * pl
+        xp = 300
+        super().__init__(name, hp, ap, ["Silver", "Water", "Garlic", "Fire"], ["Magic", "Poison"], pl, xp)
 
     def __str__(self):
         return (
@@ -112,7 +115,8 @@ class Rat(Creature):
         hp = 1 * pl
         ap = 1 * pl
         desc = "Well it's a rat what more do you want"
-        super().__init__(name, desc, hp, ap, ["None"], ["None"], pl)
+        xp = 50
+        super().__init__(name, desc, hp, ap, ["None"], ["None"], pl, xp)
 
     def __str__(self):
         return (

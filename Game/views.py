@@ -219,7 +219,7 @@ def profile(request, user=None):
 
 
 def get_actions(request):
-    return available_actions()
+    return HttpResponse(available_actions())
 
 
 @csrf_exempt

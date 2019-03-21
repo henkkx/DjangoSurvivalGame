@@ -26,6 +26,7 @@ from django.http import HttpResponse
 player = PC("PC")
 world = None
 game_over = False
+end_was_reached = False
 response = "Welcome to our world, adventurer"
 player_model = None
 
@@ -93,7 +94,7 @@ def fight(creature):
         if c.name == creature:
             creature = c
             break
-    player_damage = 0
+    player_damage = 5
     print(player.hp, player_damage, creature.hp, creature.ap)
     for weapon in player.inventory["Weapon"]:
         if weapon.dmg > player_damage:
@@ -102,7 +103,8 @@ def fight(creature):
         while True:
             creature.hp -= player_damage
             if creature.hp <= 0:
-                response = "You killed a {0} </br> You now have {1} hp".format(creature.name, player.hp)
+                response = "You killed a {0} and gained {2} xp points.</br> You now have {1} hp.".format(creature.name, player.hp, creature.xp)
+                player_model.stats["exp"] += creature.xp
                 player.room.creatures.pop(creature.name)
                 if player_model.stats["kills"] != 0:
                     player_model.stats["kills"] += 1
@@ -220,7 +222,8 @@ def enter(building):
 
 
 def exit_current():
-    global response, player_model, game_over
+    global response, player_model, game_over, end_was_reached
+    bld_check = True
     if player.position[2] == 0:  # if on ground floor
         player.position = [0, player.position[1]+1, 0]
         player.room = None
@@ -234,13 +237,18 @@ def exit_current():
                    "You can see what seems like a sun ever so slightly raising  itself up in the horizon, you keep walking, the fog keeps guiding.</br>" \
                    "As the sun sets and the fog gets darker due to the lack of light, it starts to open up in front of you.</br>" \
                    "You can now see two more buildings on your left and right.</br>" \
-                   "You can feel your belly rumbling. Your hunger is now {0}/{1} ".format(player.hunger, player.max_hunger)
+                   "You can feel your belly rumbling. Your hunger is now {0}/{1}</br> ".format(player.hunger, player.max_hunger)
         player_model.stats["days"] += 1
+
         for bld in world["buildings"].values():
             if bld.position[1] == player.position[1]:
+                bld_check = False
                 response += bld.description + "</br>"
+    if bld_check:
+        end_was_reached = True
     player.room = world['rooms']['default']
-    player_model.current_game = PC("PC", position=player.position[:], inventory=player.inventory.copy())
+    player_model.current_game = PC("PC", position=player.position[:], inventory=player.inventory.copy(),
+                                   hunger=player.hunger, hp=player.hp)
     player_model.save()
     check_achievements()
         # which means back to main road (0) on the level we are (player.position), placeholder ground floor (0)
@@ -356,32 +364,38 @@ def check_stats():
 
 
 def game_initialisation():
-    global world, game_over, player, response
+    global world, game_over, player, response, end_was_reached
     check_stats()
     __ = MasterOfPuppets()
     world = __.build_game()
     game_over = False
+    end_was_reached = False
     if world["player"]:
         player = world["player"]
         player.inventory = {"Weapon": [world['objects']['Stick']], "Lore": [], "Food": []}
         player.position = [0, 0, 0]
         player.room = world['rooms']['default']
+        player.hunger = player.max_hunger
+        player.hp = player.max_hp
     else:
         player = PC("PC")
-    response = initialisation_response
-
-
-initialisation_response = "You are in a... place, surrounded by fog.</br>" \
+    response = "You are in a... place, surrounded by fog.</br>" \
                "The fog doesn't look very thick but you can still see nothing through it.</br>" \
                "You try walking through it only to appear 10 metres on the opposite side you entered from, like a portal</br>" \
                "It slowly opens, creating a path which you follow.</br>" \
-               "After a few minutes of walking, you see the fog opening up a bit wider. You can see two buildings.</br>"
+               "After a few minutes of walking, you see the fog opening up a bit wider. You can see two buildings.</br>" \
+                "{0} </br> {1} </br>".format(world['buildings']["Roofless house"], world["buildings"]["Family house"])
+
+
 
 
 def load_game():
     global player, world, response, player_model
     if player_model.current_game is not None:
-        player = PC("PC", position=player_model.current_game.position[:], inventory=player_model.current_game.inventory.copy())
+        player = PC("PC", position=player_model.current_game.position[:],
+                    inventory=player_model.current_game.inventory.copy(),
+                    hunger=player_model.current_game.hunger,
+                    hp=player_model.current_game.hp)
         player_model.save()
     else:
         response = "No game to load"
@@ -393,7 +407,17 @@ def load_game():
 def available_actions():
     global player_model, response
     if game_over:
-        return json.dumps({"Game over": "Game Over"});
+        return json.dumps({"Game over": " ", "text": response})
+    if end_was_reached:
+        response = "As you traverse through the fog, you suddenly see a light.</br>" \
+                   "The light comes closer to reveal 2 figures, about 40cm tall each, levitating in front of you.</br>" \
+                   "One is dressed in a white robe, fair skinned with long, light brown hair. The other had red skin, no hair and horns</br>" \
+                   "An angel and a demon.</br>" \
+                   "They both ask, saying one word each:</br>" \
+                   "So, soul, where do you think you have to go from here on. Up or Down?</br>" \
+                   "The figures smile.</br>"
+        return json.dumps({"text": response})
+
     check_achievements()
     data_post = {}
     '''REMEMBER TO CHANGE THE TOWER POSITION BELOW '''
@@ -458,7 +482,7 @@ def available_actions():
                     data_post["Enter"].append(building.name)
     if player.position[2] == 0 and player.position[0] != 0:
         data_post["Exit"] = " "
-    return HttpResponse(json.dumps(data_post))
+    return json.dumps(data_post)
 
 
 def can_enter_buildings():
