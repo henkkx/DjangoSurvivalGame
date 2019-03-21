@@ -144,6 +144,8 @@ def profile(request, user=None):
     if not user:
         player = Player.objects.get_or_create(user=request.user)[0]
     else:
+        if user == request.user.username:
+            return HttpResponseRedirect(reverse("profile"))
         try:
             player = Player.objects.get(user=User.objects.get(username=user))
         except:
