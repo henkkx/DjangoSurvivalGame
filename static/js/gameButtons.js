@@ -44,6 +44,12 @@ function get_fun(){
 $(document).ready(function() {
     // the moment the page is ready, get the available actions ( view will initialise game)
     get_fun();
+    $("#newBtn").click(function(){
+        buffer_fun(this.firstChild.nodeValue);
+    });
+    $("#loadBtn").click(function(){
+        post_fun(this.firstChild.nodeValue);
+    });
 });
 
 function scroll(){
