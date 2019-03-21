@@ -1,9 +1,9 @@
 {% extends 'Game/base.html' %}
 {% block head_css %}
 {% load staticfiles %}
-<link rel="stylesheet"  type="text/css" href="{% static "css/profile.css" %}">
-<link rel="stylesheet" type="text/css" href="{% static "css/styles.css" %}">
-<script src="{% static "js/imageValidation.js" %}"></script>
+<link rel="stylesheet"  type="text/css" href="{% static 'css/profile.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+<script src="{% static 'js/imageValidation.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -13,119 +13,144 @@
 
 
 <div class="image-aboutus-banner"style="margin-top:0px">
+        
         <div class="container">
-         <div class="row">
-             <div class="col-md-12">
-              <h1 class="lg-text">{{ name }}'s Sanctuary</h1>
-              <!-- <p class="image-aboutus-para">Learn More About Us</p> -->
-              <!-- <a class="btn btn-lg btn-primary" id ="meetTeamButton" href="#team" role="button">Meet Our Team</a> -->
-            </div>
-
+            <div class="row">
+                
+                <div id="profilePic" class="col">
+                        <!-- <p>{{ name }'s Profile Picture:</p> -->
+                        <div id = "image">
+                            {% if picture %}
+                            <img src="{{ picture.url }}" alt="{{ name }}'s profile picture" onerror="this.style.display='none'"/>
+                            {% else %}
+                            <img src="{% static 'images/ImageNotFound.png' %}" alt="No Picture Uploaded" onerror="this.style.display='none'"/>
+                            {% endif %}
     
-            <div id="profilePic" class="col-sm">
-                <!-- <p>{{ name }'s Profile Picture:</p> -->
-                <div id = "image">
-                    {% if picture %}
-                    <img src="{{ picture.url }}" alt="{{ name }}'s profile picture" onerror="this.style.display='none'"/>
-                    {% else %}
-                    <img src="{% static 'images/ImageNotFound.png' %}" alt="No Picture Uploaded" onerror="this.style.display='none'"/>
-                    {% endif %}
+                            {% if user.username == name %}
+                            <div id="Buttons" class="col-lg-12">
+                                    <div id="display-upload">
+                                        <button class= "btn btn-sm btn-dark" id="displayB">Upload New Image</button>
+                                    </div>
+                            
+                                    {% if picture %}
+                                    <div id="image-delete">
+                                        <form method="post" action="profile" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <input type="submit" class="btn-sm btn-danger" value="Remove the Picture" onclick="return confirm('Are you sure?');"/>
+                                        </form>
+                                    </div>
+                                    {% endif %}
+                            
+                                    <div id="image-upload">
+                                        <form id="imageupload" method="post" action="profile" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <p>
+                                                <input class="btn-sm btn-dark"id="file-input" type="file" name="file-input">
+                                                
+                                            </p>
+                                            <input type="submit" class="btn-sm btn-dark"value="Upload New Profile Picture" onclick="return NoImageSelect() "/>
+                                        </form>
+                                        <button class="btn-sm btn-danger" id="cancelB">Cancel</button>
+                                    </div>
+                                </div>
+                                {% endif %}
+    
+                        </div>
+                    </div><br> 
+                <div class="row" id="heading">
+                    <div class="col-lg-4">
+                        <h1 class="lg-text">{{ name }}'s Sanctuary</h1>
+        
+                    </div>
                 </div>
-        </div>
-
+        
+                
+            
+    
          </div>
-     </div>
+    </div> 
 </div>
 
 
-<div class = "container"> 
-    
-    <div class ="row">
-            {% if user.username == name %}
-            <div id="Buttons" class="col-sm">
-                    <div id="display-upload">
-                        <button id="displayB">Upload New Image</button>
-                    </div>
-            
-                    {% if picture %}
-                    <div id="image-delete">
-                        <form method="post" action="profile" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <input type="submit" value="Remove Your Profile Picture" onclick="return confirm('Are you sure?');"/>
-                        </form>
-                    </div>
+<div class="container"> 
+        <!-- <h3>What We Do</h3>
+        <br> -->
+        <div class="row stats">
+                
+                
+
+
+                
+                  <!-- BADGES -->
+                
+                <div class="col-lg-6 col" id ="badges">
+                    <h1>Achievements</h1><br>
+                    <table>
+                    {% if achievements %}
+                    {% for achievement in achievements %}
+                    <tr>
+                        <td>{{ achievement.badge.name }}</td>
+                        <td>{{ achievement.date_awarded }}</td>
+                        <td>{{ achievement.badge.description }}</td>
+                        {% if achievement.badge.icon %}
+                            <td><img src="{{ achievement.badge.icon.url }}"/></td>
+                        {% else %}
+                            <td>Img_Error</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td>No</td>
+                        <td>Achievements</td>
+                        <td>Git</td>
+                        <td>Gud</td>
+                    </tr>
                     {% endif %}
-            
-                    <div id="image-upload">
-                        <form id="imageupload" method="post" action="profile" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <p>
-                                <input id="file-input" type="file" name="file-input">
-                                <label for="file-input">Select File</label> 
-                            </p>
-                            <input type="submit" value="Upload New Profile Picture" onclick="return NoImageSelect() "/>
-                        </form>
-                        <button id="cancelB">Cancel</button>
-                    </div>
+                    </table>
+                </div> 
+
+                <div class="col-lg-3">
+
                 </div>
-                {% endif %}
-    </div>
 
-    <div class="row">
-        <div class="col-sm" id="stats"></div>
-            <h1>{{ name }}'s Stats</h1>
-            <ul>
-                <li>Games Played: {{ games }}</li>
-                <li>Most Kills: {{ kills }}</li>
-            </ul>
-            <ul>
-                <li>Longest Survived: {{ days }}</li>
-                <li>Most Experience: {{ exp }}</li>
-            </ul>
+                <!-- STATS -->
+                <div class="col-sm-2" id="stats">
+                        <h1>Statistics</h1>
+                        <!-- <br> -->
 
+                        <table>
+                            <tr>
+                                <td>Games Played: </td>
+                                <td>{{ games }}</td>
+                                
+                                
+                            </tr>
 
-    </div>
+                            <tr>
+                                <td>Most Kills: </td>
+                                <td>{{ kills }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Longest Survived: </td>
+                                <td>{{ days }}</td>
+                                
+                            </tr>
+                                <td>Most Experience: </td>
+                                <td>{{ exp }}</td>
+                            <tr>
+
+                            </tr>
+                        </table>
+
+                    
+                </div>
+            </div>
+        
+
+                    
 </div>
 
-
-
-
-
-    
-    
-</div>
-
-<div id="achievements-table">
-    <table>
-        <tr>
-            <th>Badge Name</th>
-            <th>Date Awarded</th>
-            <th>Description</th>
-            <th>Icon</th>
-        </tr>
-        {% if achievements %}
-            {% for achievement in achievements %}
-            <tr>
-                <td>{{ achievement.badge.name }}</td>
-                <td>{{ achievement.date_awarded }}</td>
-                <td>{{ achievement.badge.description }}</td>
-                {% if achievement.badge.icon %}
-                    <td><img src="{{ achievement.badge.icon.url }}"/></td>
-                {% else %}
-                    <td>Img_Error</td>
-                {% endif %}
-            </tr>
-            {% endfor %}
-        {% else %}
-            <tr>
-                <td>No</td>
-                <td>Achievements</td>
-                <td>Git</td>
-                <td>Gud</td>
-            </tr>
-        {% endif %}
-    </table>
-</div>
-
-
+ 
 {% endblock %}
