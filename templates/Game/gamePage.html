@@ -7,14 +7,14 @@
 
 {% block content %}
 
-<div id="gameText" style="overflow:scroll; height:500px;"></div>
+<div id="gameText" style="overflow:scroll; height:500px; background-color:black; color:ghostwhite"></div>
 <div id="buttons">
 </div>
 </br>
 </br>
 </br>
-<button id="newBtn" onClick=buffer_fun(this.firstChild.nodeValue)>New game</button> </br>
-<button id="loadBtn" onClick=post_fun(this.firstChild.nodeValue)>Load last checkpoint</button>
+<button id="newBtn" class="btn btn-primary" onClick=buffer_fun(this.firstChild.nodeValue)>New game</button> </br>
+<button id="loadBtn" class="btn btn-primary" onClick=post_fun(this.firstChild.nodeValue)>Load last checkpoint</button>
 
 </div>
 
