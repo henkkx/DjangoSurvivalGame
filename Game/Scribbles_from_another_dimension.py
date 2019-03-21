@@ -219,7 +219,7 @@ def exit_current():
 
     # below we create a checkpoint for the user to load
     to_store = {"position": player.position[:], "inventory": player.inventory.copy(),
-                "hunger": player.hunger, "hp": player.hp}
+                "hunger": player.hunger, "hp": player.hp, "stats": player_model.stats, "text": response}
     player_model.current_game = to_store
     player_model.save()
     check_achievements()
@@ -327,16 +327,17 @@ def check_stats():
     ''' This function checks & updates the statistic of the Player model ( so the User)'''
     if player_model.most_kills < player_model.stats["kills"]:
         player_model.most_kills = player_model.stats["kills"]
-        player_model.stats["kills"] = 0
+    player_model.stats["kills"] = 0
     if player_model.most_people < player_model.stats["npcs"]:
         player_model.most_people = player_model.stats["npcs"]
-        player_model.stats["npcs"] = 0
+    player_model.stats["npcs"] = 0
     if player_model.most_days_survived < player_model.stats["days"]:
         player_model.most_days_survived = player_model.stats["days"]
-        player_model.stats["days"] = 0
+    player_model.stats["days"] = 0
     if player_model.most_exp < player_model.stats["exp"]:
         player_model.most_exp = player_model.stats["exp"]
-        player_model.stats["exp"] = 0
+    player_model.stats["exp"] = 0
+    player_model.games_played += 1
     player_model.save()
 
 
@@ -370,14 +371,18 @@ def game_initialisation():
 def load_game():
     '''Loads the last checkpoint the player(User) was at'''
     global player, world, response, player_model
+    game_initialisation()
+    player_model.games_played -= 1
     if player_model.current_game is not None:
         player = PC("PC", position=player_model.current_game["position"][:],
                     inventory=player_model.current_game["inventory"].copy(),
                     hunger=player_model.current_game['hunger'],
                     hp=player_model.current_game["hp"])
-        # player_model.save()
+        player_model.stats = player_model.current_game["stats"]
+        response = player_model.current_game["text"]
     else:
         response = "No game to load"
+    player_model.save()
 
 # player = build_game()
 # player.position = [0, 0, 0]
