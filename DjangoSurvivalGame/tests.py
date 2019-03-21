@@ -6,43 +6,21 @@ from Game.forms import *
 from Game.views import *
 from django.contrib.auth.models import User
 from Game.people import *
+from population_script import populate
 
 
 
 class DatabaseTests(TestCase):
 
     def setUp(self):
-        test_user_1 = User.objects.create_user(username="test user 1",
-                                                email='test1@mail.com',
-                                               password='limbo')
-        test_user_2 = User.objects.create_user(username="test user 2",
-                                                email='test2@mail.com',
-                                                password='limbo')
-        player1 = Player.objects.create(user=test_user_1, picture=None, games_played=10,
-                          most_days_survived=10, most_kills=10,
-                          most_people=10, most_exp=10, stats={"kills": 10, "days": 10, "npcs": 10, "exp": 10})
-        player2 = Player.objects.create(user=test_user_2, picture=None, games_played=20,
-                          most_days_survived=20, most_kills=20,
-                          most_people=20, most_exp=20, stats={"kills": 20, "days": 20, "npcs": 20, "exp": 20})
-        return player1, player2
+        populate()
 
-    #The changes this made to the stats field of the player objects seemed to persist for some reason.
-    #Even after deletion of the player object.
-    """
-    def test_players_earn_achievements(self):
-        user_nos = [1,2]
-        value = 3
-        for players_no in user_nos:
-            pl = PC(user=User.objects.get(username="test user {0}".format(players_no)))
-            for i in pl.stats:
-                pl.stats[i] += value
-                pl.stats[i] += value
-                pl.stats[i] += value
-            '''Check achievements will be the function that checks & gives out the achievements, implemented later'''
-            # check_achievements(pl)
-            for i in pl.stats:
-                self.assertTrue(expr=pl.stats[i] == value)
-    """
+    def test_correct_number_of_badges(self):
+        self.assertEqual(len(list(Badge.objects.all())), 12)
+
+    def test_correct_number_of_players(self):
+        self.assertEqual(len(list(Badge.objects.all())), 12)
+
 
 class ViewTests(TestCase):
 
