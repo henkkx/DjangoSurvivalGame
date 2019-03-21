@@ -56,6 +56,16 @@ class MasterOfPuppets:
                                        1, "You recognise the handwritting but you are not sure where from:</br>"
                                           "Today was one of the bad days again, all the other kids made fun of me.</br>"
                                           "All except one, the one kid that has been good to me")
+        output["Toilet notebook"] = Lore("Toilet notebook", "An old notebook thrown away on top of the sink.", 1,
+                                         "You open up the notebook , there's a story inside, there are even pictures from the perspective of the victim.</br>"
+                                         "Someone bot beat up by a bunch of other people. They apparently were hitting on the partner of one of the group that beat them.</br>"
+                                         "They kept saying that they weren't hitting on them, they were just talking they have a lab together and know each other.</br>"
+                                         "The other's wouldn't listen.")
+        output["Pint of beer"] = Food("Pint of beer", "No product placement, just a pint of beer, drink away", 1, 10, 10)
+        output["Cocktail"] = Food("Cocktail", "What's your favourite cocktail? Well that kind of cocktail", 1, 10, 10)
+        output["Newspaper segment"] = Lore("Newspaper segment", "A piece torn from a newspaper", 1,
+                                           "The article says that a university student was stabbed in broad daylight in one of the lab rooms of the university they were attending</br>"
+                                           "Apparently they couldn't get them to the hospital in time. The event happened because the student was involved in drug activity.")
 
 
         #------ Neibolt -------
@@ -113,6 +123,9 @@ class MasterOfPuppets:
                              "'Very good, just wanted to let you know, when we were kids you helped me a lot, with the others messing with me and all that.</br>"
                              "You are confused, Tony looks just like you remembered him when you were kids, but talks of that time as if it was the past.</br>"
                              "As finished his sentence he turns back around, as if he doesn't realise you are there anymore.")
+        output["Barwoman"] = NPC("Barwoman","You kind of remember her", "The barwoman is about 40, she is really friendly. There's something about her that makes it look like she's been doing this for a while.", 100, "friendly",[],
+                                 "'Hello love,'she says, smiling.'How's the face? If you want a drink, help yourself'</br>"
+                                 "You nod and smile back. This place reminds you of a pain in the jaw & ribs.")
 
         #-----------------------------Neibolt-----------------------------------------
 
@@ -150,6 +163,9 @@ class MasterOfPuppets:
         output['Large Red Spider'] = Ghoul("Large Red Spider",player.level,"A large red spider, probably the size of a ruller")
         output['Raven'] = Rat("Raven",player.level)
         output['Sphinx'] = Ghoul("Sphinx",player.level)
+        output["Ghoul"] = Ghoul("Ghoul", player.level)
+        output["Android"] = Vampire("An hostile android", player.level)
+        output["Thug"] = Ghoul("Thug", player.level)
         return output
 
     def init_rooms(self):
@@ -176,9 +192,14 @@ class MasterOfPuppets:
                                    " You hope you were a good enough friend to somehow make up for that")
 
         '''Bar rooms'''
-        output["Main room"] = Room("Main room", {'''"Barwoman": self.NPCs["Barwoman"]'''}, {}, {'''"Pint of beer": self.objects["Pint of beer"]'''},"j")
+        output["Main room"] = Room("Main room", {"Barwoman": self.NPCs["Barwoman"]}, {}, {"Pint of beer": self.objects["Pint of beer"], "Cocktail": self.objects["Cocktail"]},
+                                   "It's the main room of the bar, there is a counter with a bar, stools, booths, a pool table one one end")
+        output["Bar toilets"] = Room("Bar toilets", {}, {}, {"Toilet notebook": self.objects["Toilet notebook"]},
+                                     "You enter the toilets of the bar. Pretty standard, clean for a bar just off campus. There is a notebook on top of the sink")
 
         '''University building rooms'''
+        output['Lab room'] = Room("Lab room", {}, {"Thug": self.creatures["Thug"]}, {"Newspaper segment": self.objects["Newspaper segment"]}, "A standard computer lab room")
+        output['Studying room'] = Room("Studying room", {}, {}, {}, "A room used for studying")
 
         #-----------------------------------------Neibolt House Rooms -----------------------------------------------------#
 
@@ -255,9 +276,9 @@ class MasterOfPuppets:
                                 [self.rooms["Burned Kitchen"], self.rooms["Burned Bedroom"], self.rooms["Burned Roof"]], [1, 0])
         output["Family house"] = Building("Family house", "This is a very standard family house. Looks relatively big, probably 3-4 bedrooms, maybe a guest house. Seems like it's freshly painted",
                                           [self.rooms["Living room"], self.rooms["Attic"], self.rooms["Game room"]], [2, 0])
-        output["Bar"] = Building("Bar", "A modern bar, the road-side walls are mostly glass. It seems almost empty", [self.rooms["Attic"]], [1, 1])
+        output["Bar"] = Building("Bar", "A modern bar, the road-side walls are mostly glass. It seems almost empty", [self.rooms["Main room"], self.rooms["Bar toilets"]], [1, 1])
         output["University building"] = Building("University building", "It's a small building with only a few rooms you can recall, but you used to be in it a LOT for assignments during your studies",
-                                                     [self.rooms["Living room"]], [2, 1])
+                                                     [self.rooms["Lab room"], self.rooms["Studying room"]], [2, 1])
 
         output["Neibolt House"] = Building("Neibolt House", "The house on the left it seems so familiar, but also so vague, it seems so inviting", [self.rooms["Neibolt Hallway"],self.rooms["Neibolt Bedroom"]
             ,self.rooms["Neibolt Basement"], self.rooms["Neibolt Lavatory"], self.rooms["Neibolt Kitchen"], self.rooms["Neibolt Attic"]], [1, 2])

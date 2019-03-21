@@ -246,9 +246,11 @@ def exit_current():
                 response += bld.description + "</br>"
     if bld_check:
         end_was_reached = True
+    print(bld_check)
     player.room = world['rooms']['default']
-    player_model.current_game = PC("PC", position=player.position[:], inventory=player.inventory.copy(),
-                                   hunger=player.hunger, hp=player.hp)
+    to_store = {"position": player.position[:], "inventory": player.inventory.copy(),
+                "hunger": player.hunger, "hp": player.hp}
+    player_model.current_game = to_store
     player_model.save()
     check_achievements()
         # which means back to main road (0) on the level we are (player.position), placeholder ground floor (0)
@@ -392,11 +394,11 @@ def game_initialisation():
 def load_game():
     global player, world, response, player_model
     if player_model.current_game is not None:
-        player = PC("PC", position=player_model.current_game.position[:],
-                    inventory=player_model.current_game.inventory.copy(),
-                    hunger=player_model.current_game.hunger,
-                    hp=player_model.current_game.hp)
-        player_model.save()
+        player = PC("PC", position=player_model.current_game["position"][:],
+                    inventory=player_model.current_game["inventory"].copy(),
+                    hunger=player_model.current_game['hunger'],
+                    hp=player_model.current_game["hp"])
+        # player_model.save()
     else:
         response = "No game to load"
 
