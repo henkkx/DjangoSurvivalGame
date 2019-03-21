@@ -7,71 +7,92 @@
 {% endblock %}
 
 {% block content %}
-<div id= "name">
-{{ name }}'s Sanctuary
+<!-- <div id= "name"> -->
+<!-- {{ name }'s Sanctuary -->
+<!-- </div> --> 
+
+
+<div class="image-aboutus-banner"style="margin-top:0px">
+        <div class="container">
+         <div class="row">
+             <div class="col-md-12">
+              <h1 class="lg-text">{{ name }}'s Sanctuary</h1>
+              <!-- <p class="image-aboutus-para">Learn More About Us</p> -->
+              <!-- <a class="btn btn-lg btn-primary" id ="meetTeamButton" href="#team" role="button">Meet Our Team</a> -->
+            </div>
+
+    
+            <div id="profilePic" class="col-sm">
+                <!-- <p>{{ name }'s Profile Picture:</p> -->
+                <div id = "image">
+                    {% if picture %}
+                    <img src="{{ picture.url }}" alt="{{ name }}'s profile picture" onerror="this.style.display='none'"/>
+                    {% else %}
+                    <img src="{% static 'images/ImageNotFound.png' %}" alt="No Picture Uploaded" onerror="this.style.display='none'"/>
+                    {% endif %}
+                </div>
+        </div>
+
+         </div>
+     </div>
 </div>
 
 
 <div class = "container"> 
+    
+    <div class ="row">
+            {% if user.username == name %}
+            <div id="Buttons" class="col-sm">
+                    <div id="display-upload">
+                        <button id="displayB">Upload New Image</button>
+                    </div>
+            
+                    {% if picture %}
+                    <div id="image-delete">
+                        <form method="post" action="profile" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="submit" value="Remove Your Profile Picture" onclick="return confirm('Are you sure?');"/>
+                        </form>
+                    </div>
+                    {% endif %}
+            
+                    <div id="image-upload">
+                        <form id="imageupload" method="post" action="profile" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p>
+                                <input id="file-input" type="file" name="file-input">
+                                <label for="file-input">Select File</label> 
+                            </p>
+                            <input type="submit" value="Upload New Profile Picture" onclick="return NoImageSelect() "/>
+                        </form>
+                        <button id="cancelB">Cancel</button>
+                    </div>
+                </div>
+                {% endif %}
+    </div>
+
     <div class="row">
-
-
+        <div class="col-sm" id="stats"></div>
+            <h1>{{ name }}'s Stats</h1>
+            <ul>
+                <li>Games Played: {{ games }}</li>
+                <li>Most Kills: {{ kills }}</li>
+            </ul>
+            <ul>
+                <li>Longest Survived: {{ days }}</li>
+                <li>Most Experience: {{ exp }}</li>
+            </ul>
 
 
     </div>
 </div>
 
-<div id = "stats" class=>
-    <h1>{{ name }}'s Stats</h1>
-    <ul>
-        <li>Games Played: {{ games }}</li>
-        <li>Most Kills: {{ kills }}</li>
-    </ul>
-    <ul>
-        <li>Longest Survived: {{ days }}</li>
-        <li>Most Experience: {{ exp }}</li>
-    </ul>
-</div>
-
-<div id="profilePic">
-    <p>{{ name }}'s Profile Picture:</p>
-    <div id = "image">
-        {% if picture %}
-        <img src="{{ picture.url }}" alt="{{ name }}'s profile picture" onerror="this.style.display='none'"/>
-        {% else %}
-        <img src="{% static "images/ImageNotFound.png" %}" alt="No Picture Uploaded" onerror="this.style.display='none'"/>
-        {% endif %}
-    </div>
 
 
-    {% if user.username == name %}
-    <div id="Buttons">
-        <div id="display-upload">
-            <button id="displayB">Upload New Image</button>
-        </div>
 
-        {% if picture %}
-        <div id="image-delete">
-            <form method="post" action="profile" enctype="multipart/form-data">
-                {% csrf_token %}
-                <input type="submit" value="Remove Your Profile Picture" onclick="return confirm('Are you sure?');"/>
-            </form>
-        </div>
-        {% endif %}
 
-        <div id="image-upload">
-            <form id="imageupload" method="post" action="profile" enctype="multipart/form-data">
-                {% csrf_token %}
-                <p>
-                    <input id="file-input" type="file" name="file-input">
-                    <label for="file-input">Select File</label> 
-                </p>
-                <input type="submit" value="Upload New Profile Picture" onclick="return NoImageSelect() "/>
-            </form>
-            <button id="cancelB">Cancel</button>
-        </div>
-    </div>
-    {% endif %}
+    
+    
 </div>
 
 <div id="achievements-table">
