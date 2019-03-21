@@ -188,7 +188,7 @@ class MasterOfPuppets:
                                      "The room reminds you of the living room of a childhood friend of yours. You don't remember who though.",0)
         output["Attic"] = Room("Attic", {}, {},{"Tony's journal": self.objects["Tony's journal"]},
                                "A standard Attic, a poster reading 'Who Watches The Watchmen' half hangs on one side", 1)
-        output["Game room"] = Room("Game room", {}, {'''"Ghoul": self.creatures["Ghoul"]'''}, {},
+        output["Game room"] = Room("Game room", {}, {"Ghoul": self.creatures["Ghoul"]}, {},
                                    "Tony's game room. He used to have a lot of games as a kid."
                                    " Now that you are older you realise that's what you get for your parents not giving you enough of their time."
                                    " You hope you were a good enough friend to somehow make up for that", 0)
