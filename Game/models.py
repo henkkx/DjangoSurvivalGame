@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 import pickle
 import datetime
+from picklefield.fields import PickledObjectField
 
 
 class Player(models.Model):
@@ -12,17 +13,8 @@ class Player(models.Model):
     most_kills = models.IntegerField(default=0)
     most_people = models.IntegerField(default=0)
     most_exp = models.IntegerField(default=0)
-    current_game = None
+    current_game = PickledObjectField()
     stats = {"kills": 0, "days": 0, "npcs": 0, "exp": 0}
-
-
-    # def save_game(self):
-    #     # pickle out data
-    #     pass
-    #
-    # def load_game(self):
-    #     # pickle in data
-    #     pass
 
     def __str__(self):
         return self.user.username
