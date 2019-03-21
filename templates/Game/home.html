@@ -4,8 +4,8 @@
 {% block head_css %}
 
    <!-- Custom styles for this template -->
-   <link href="static/css/home.css" rel="stylesheet">
-   <script src="/static/js/homeButtons.js"></script>
+   <link href="{% static "css/home.css" %}" rel="stylesheet">
+   <script src="{% static "js/homeButtons.js" %}"></script>
 
 {% endblock %}
 
@@ -21,7 +21,7 @@
       </ol>
      <div class="carousel-inner">
        <div class="carousel-item active">
-         <img class="first-slide" src="/static/images/mayhem.jpg" alt="First slide">
+         <img class="first-slide" src="{% static "images/mayhem.jpg" %}" alt="First slide">
          <div class="container">
            <div class="carousel-caption text-left">
              <h1>Get started.</h1>
@@ -41,7 +41,7 @@
          </div>
        </div>
        <div class="carousel-item">
-         <img class="third-slide" src="../../static/images/bwTown.JPG">
+         <img class="third-slide" src="{% static "images/bwTown.JPG" %}">
          <div class="container">
            <div class="carousel-caption text-right">
              <h1>100% free* to play!</h1>
@@ -71,7 +71,7 @@
      <!-- Three columns of text below the carousel -->
      <div class="row">
        <div class="col-lg-4">
-         <img class="rounded-circle" src="static/images/ign.png" alt="Generic placeholder image" width="140" height="140">
+         <img class="rounded-circle" src="{% static "images/ign.png" %}" alt="Generic placeholder image" width="140" height="140">
          <h2>IGN: "A Master piece!" 5/7</h2>
          <p>The intent is to provide players with a sense of pride and accomplishment for unlocking different heroes.
 
@@ -82,13 +82,13 @@
          <p><a class="btn btn-primary" href="https://www.reddit.com/r/MuseumOfReddit/comments/8ish3t/the_time_that_ea_got_a_sense_of_pride_and/" role="button">View details &raquo;</a></p>
        </div><!-- /.col-lg-4 -->
        <div class="col-lg-4">
-         <img class="rounded-circle" src="static/images/pcgamer.jpg" alt="Generic placeholder image" width="140" height="140">
+         <img class="rounded-circle" src="{% static "images/pcgamer.jpg" %}" alt="Generic placeholder image" width="140" height="140">
          <h2>PCGAMER: "Very enjoyable!" 5/5</h2>
           <p><strike>Apex Legends</strike> DjangoSurvivalGame is the best new battle royale game by far, an all around improvement on what's come before. First things first: It's free-to-play, and microtransactions are cosmetic-only. </p>
          <p><a class="btn btn-primary" href="https://www.pcgamer.com/uk/best-pc-games/" role="button">View details &raquo;</a></p>
        </div><!-- /.col-lg-4 -->
        <div class="col-lg-4">
-         <img class="rounded-circle" src="static/images/dunkey.jpg" alt="Generic placeholder image" width="140" height="140">
+         <img class="rounded-circle" src="{% static "images/dunkey.jpg" %}" alt="Generic placeholder image" width="140" height="140">
          <h2>Videogamedunkey: "It's pretty good, I'll give it a 10"</h2>
           <p>“Whoa, is that a crab with a top hat and a monocle? That’s where I draw the line. Come on Master Chief, let’s get the fuck outta here!”</p>
          <p><a class="btn btn-primary" href="https://www.youtube.com/watch?v=Vqw-cP51MSQ" role="button">View details &raquo;</a></p>
