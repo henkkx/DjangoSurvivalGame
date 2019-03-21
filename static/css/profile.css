@@ -27,6 +27,15 @@
     background: #f6f6f6;
 } */
 
+.stats{
+    position: absolute;
+    left: 0 ;
+}
+
+.badges{
+    align-content: right;
+}
+
 .image-aboutus-banner {
     background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.7)),url(../images/oldTownNight.jpg);
     background-repeat: no-repeat;
@@ -36,6 +45,7 @@
     padding-top: 110px;
     padding-bottom:110px;
     height: 30em;
+    margin-bottom: 40px;
  }
  
   .image-aboutus-sm-banner {
@@ -48,22 +58,26 @@
     padding-bottom:30px;
  }
 .lg-text {
+    position: relative;
+    margin-top: 10px;;
     font-size: 68px;
     font-weight: 600;
     text-transform: none;
     color:#fff;
-    text-align: center;
+    text-align: right;
 }
 
 
 /* This handles the profile picture division. it contains the profile image  division and associated buttons division*/
 
 #profilePic {
-    position: absolute;
-    left: 18px ;
-    top: 100px;
-    width: 500px;
+    position: relative;
+    
+    top: 0p;
+    /* width: 800px; */
 }
+
+
 
 /* #profilePic p {
     font-size: 18;
@@ -72,106 +86,47 @@
 } */
 
 /* This handles the profile image division */
-/* #image {
+#image {
+    
     position: relative;
-} */
+    left: 0;
+}
 
 #image img {
-    width: 400px;
-    height: 400px;
+    width: 200px;
+    height: 200px;
     
 }
 
+.container{
+    margin-bottom: 40px;
+    margin-left: 40px;  
+}
+
 /* Below all operate on the position and other aspects of the buttons */
-/* #Buttons {
-    position: relative;
+#Buttons {
+    position: absolute;
     height: auto;
     margin: auto;
-    margin-top: 10px;
-    margin-left: 10px;
+    /* margin-top: 10px; */
+    margin-left: 0px;
     margin-right: 10px;
-} */
+}
 
-/* #display-upload {
-    float: left;
-} */
-/* #image-delete {
-    height: auto;
-} */
-
-/* button, input{
-    min-width: 50%;
-    color: #444444;
-    background: #F3F3F3;
-    border: 1px #DADADA solid;
-    padding: 5px 10px;
-    border-radius: 2px;
-    font-weight: bold;
-    font-size: 9pt;
-    outline: none;
-} */
-
-
-/* button:hover, input:hover {
-    border: 1px #C6C6C6 solid;
-    box-shadow: 1px 1px 1px #EAEAEA;
-    color: #333333;
-    background: #F7F7F7;
-} */
-
-/* button:active, input:active {
-    box-shadow: inset 1px 1px 1px #DFDFDF;   
-} */
-
-
-/*This hides the regular file input button so that we can replace it with a better styled one.*/
-/* #file-input {
-    width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-} */
-
-/* #file-input + label {
-    max-width: 80%;
-    font-size: 1.25rem;
-    font-weight: 700;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    cursor: pointer;
-    display: inline-block;
-    overflow: hidden;
-    padding: 0.625rem 1.25rem;
-    color: black;
-    border: 2px solid currentColor;
-} */
-
-
-/* #file-input:focus + label,
-#file-input + label:hover {
-    color: gainsboro;
-} */
-
-/*This handles the name div */
-
-/* #name {
-    margin-left: 18px;
-    font-size: 24;
-    font-weight: 700; 
-} */
+#heading{
+    position: absolute;
+    right: 0;
+}
 
 
 
 
-
-
-
-
-
-
-
+#stats{
+    position: relative; /*or fixed*/
+    margin-bottom: 50px;
+    margin-left: 60px;
+    
+}
 
 
 /*Below is the styling for the achievement table*/
@@ -191,17 +146,17 @@
     width: 100%;
 }
 
-#achievements-table td, th {
+table td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
 
-#achievements-table tr:nth-child(even) {
+table tr:nth-child(even) {
         background-color: #dddddd;
 }
 
-#achievements-table img {
+table img {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -209,6 +164,13 @@
     width: 50px;
 }
 
+#badges{
+    position: auto;
+    margin-left: 50px; 
+    margin-bottom: 50px;
+
+    
+}
 
 #image-upload {
     display: none;

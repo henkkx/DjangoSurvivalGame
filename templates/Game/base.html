@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -51,20 +51,14 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'instructions' %}">How to play</a>
           <a class="dropdown-item" href="{% url 'about' %}">About us</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          
         </div>
       </li>
 
       </ul>
 
       <ul class="navbar-nav ml-auto">
-      <!-- <li>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search Players" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </li> -->
+      
 
 
       {% if not user.is_authenticated %}
@@ -85,9 +79,9 @@
         <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"> <i class="fa fa-user-o"></i>  </a>
         <ul class="dropdown-menu">
           <li><a href="{% url 'profile' %}" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></li>
-          <li><a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
+          
           <li class="divider dropdown-divider"></li>
-          <li><a href="{% url 'auth_logout' %}?next=/home" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+          <li><a href="{% url 'auth_logout' %}?next=/home" class="dropdown-item"><i class="fa fa-sign-out"></i> Logout</a></li>
         </ul>
       </li>
       <li id = "userGreeting"> Hello, {{ user }}!</li>
