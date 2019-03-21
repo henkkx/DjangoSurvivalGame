@@ -114,6 +114,31 @@ class MasterOfPuppets:
                              "You are confused, Tony looks just like you remembered him when you were kids, but talks of that time as if it was the past.</br>"
                              "As finished his sentence he turns back around, as if he doesn't realise you are there anymore.")
 
+        #-----------------------------Neibolt-----------------------------------------
+
+        output["Pennywise"] = NPC("Pennywise","Pennywise the clown","Pennywise the familiar monster that plauged your dreams as"
+                                    " a child, trying to lure you in untill one night it stopped",1000,"Menacing",[]
+                                  ,"The clown slowly turns and stares directly at me, his eyes so vivid, his tongue like that of a"
+                                   " lizard licks his shark like teeth. 'Welcome back, its been a while' he remarks '27 years, 27 long"
+                                   " years, i've been lusting for your blood ever since you escaped my grasp as a child, but the master"
+                                   " has a plan for you'. What could that mean who is the master, why does he still remember me, what is this place,"
+                                   " he speaks up once again 'Don't worry once the master is done with you, ill be coming for you', in an instance"
+                                   " he runs towards me teeth gleaning and mouth wide open, i'm startled scared but then as quick as he sprinted towards"
+                                   " me, he vanishes into thin air leaving behind a mysterious shawdow repeating the conversation we just had")
+
+        output["Playing Girl"] = NPC("Playing Girl","A young girl playing in the garden","A small young girl, about 3 years old"
+                                    " dressed in red with a flower headband",10,"friendly",[],"I attempt to speak to her, she turns around swiftly,"
+                                    " 'hi there my names Emma, and im playing with my mummy & daddy, we are going to my auntie Jills house tonight to see"
+                                    " all my friends i can't wait, whats your name', you hear a bang, you look away, you turn back she is not there anymore"
+                                    " all that remains is a little red flower resembling the one on her head band ")
+
+        output["Dead Girl"] = NPC("Dead Girl","The lifeless body of a young girl","A young girl thrown from the car she looks lifeless & numb",1,"Evil"
+                                  ,[],"you rush over to the lifeless body, in an instance it turns and faces you, it begins"
+                                            " to laugh menacingly before uttering the words, 'You killed them,you have taken what is not yours"
+                                            " to take, i will be seeing you' and in an instance your startled as the life appears to return to the young girl"
+                                            " briefly she mutters 'Am i okay, wheres mummy & daddy', you try to comfort her as she passes away, tears"
+                                            " raining from your eyes")
+
         return output
 
     def init_creatures(self):
@@ -121,8 +146,15 @@ class MasterOfPuppets:
         # yes in the end there is no correlation between creature name & class, we are using it for stats though
         output['Charred fur rat'] = Rat("Charred fur rat", player.level)
         output["The Hound of Buskerville"] = Ghoul("The Hound of Buskerville", player.level)
+<<<<<<< HEAD
         output["Ghoul"] = Ghoul("A.., humanoid that walks with it's hands? A ghoul or something? It screams 'STOP IT' in a childlike voice." , player.level)
         output["Android"] = Vampire("An hostile android", player.level)
+=======
+        output['Ghost Girl'] = Ghoul("Ghost Girl",player.level+2,"The ghost of a young girl in a red dress & flower headband")
+        output['Large Red Spider'] = Ghoul("Large Red Spider",player.level,"A large red spider, probably the size of a ruller")
+        output['Raven'] = Rat("Raven",player.level)
+        output['Sphinx'] = Ghoul("Sphinx",player.level)
+>>>>>>> a8837dfaaab465deb087ee67355a432ace6e0da7
         return output
 
     def init_rooms(self):
@@ -160,7 +192,7 @@ class MasterOfPuppets:
                                 " A red ballon seems to be leading you there. Stairs lead to the second floor, they look unsafe"
                                                                         " falling apart",0)
 
-        output["Neibolt Basement"] = Room("Neibolt Basement",{},{},{"Paper Plane":self.objects["Paper Plane"]},"The ballon leads you to the basement, there is a creature just in the shadow, he "
+        output["Neibolt Basement"] = Room("Neibolt Basement",{"Pennywise": self.NPCs["Pennywise"]},{},{"Paper Plane":self.objects["Paper Plane"]},"The ballon leads you to the basement, there is a creature just in the shadow, he "
                                                                       "seems to be lying down, His eyes fiery yellow, teeth as sharp as claws, "
                                                                       "his voice soothing & inviting, he resembles the creature that plaged your dreams as"
                                                                       " a child, he throws a paperplane towards you",-1)
@@ -173,20 +205,23 @@ class MasterOfPuppets:
                                          "The toilet seems to be working, Hmmm intresting [FLUSH] blood appears to flowing instead of water, unnerving "
                                          "There seems to be some tooth paste and a brush here also",1)
 
-        output["Neibolt Kitchen"] = Room("Neibolt Kitchen", {}, {}, {"Jam Sandwich": self.objects["Jam Sandwich"]},"Hmmm this kitchen, it reminds you of home, there seems to be a sandwich on the table, You look up "
-                                        "BLOOD smeered all over roof, it reads Welcome Home, What could this mean" ,0)
+        output["Neibolt Kitchen"] = Room("Neibolt Kitchen", {}, {"Large Red Spider": self.creatures['Large Red Spider']}, {"Jam Sandwich": self.objects["Jam Sandwich"]},"Hmmm this kitchen, it reminds you of home, there seems to be a sandwich on the table, You look up "
+                                        "BLOOD smeered all over roof, it reads Welcome Home, What could this mean, "
+                                        "A large red spider, probably the size of a ruller, lays on the table moving around the room, it seems strong"
+                                                                                                                   " best to keep away" ,0)
 
-        output["Neibolt Attic"] = Room("Neibolt Attic", {}, {}, {"Attic Photo": self.objects["Attic Photo"],"Silver Sword": self.objects["Silver Sword"]},
-                                         "The attic creaks, you hear movement below like a dog pancing quickly, Thats no dog no that fast "
+        output["Neibolt Attic"] = Room("Neibolt Attic", {}, {"Sphinx": self.creatures['Sphinx']}, {"Attic Photo": self.objects["Attic Photo"],"Silver Sword": self.objects["Silver Sword"]},
+                                         "The attic creaks, you hear movement below like a dog pancing quickly, Thats not a dog not that fast "
+                                         " Your startled in front of you there a appears to be sphinx muttering a riddle, "
                                          "There appears to be something shining off in the distance, a silver glimmer & and a photo", 2)
 
         # ---------------------------------------Murder House (Innocent House)---------------------------------------------------#
 
-        output["Innocent Hallway"] = Room("Innocent Hallway", {}, {}, {},
+        output["Innocent Hallway"] = Room("Innocent Hallway", {}, {"Raven":self.creatures["Raven"]}, {},
                                          "This hallway, it appears to be warped, portals seem to be placed at each stairway they appear "
-                                         "to give off a reverberating humming sound", 0)
+                                         "to give off a reverberating humming sound, A raven stands strong its pupils a glistening red", 0)
 
-        output["Innocent Garden"] = Room("Innocent Garden", {}, {}, {},
+        output["Innocent Garden"] = Room("Innocent Garden", {"Playing Girl": self.NPCs["Playing Girl"]}, {}, {},
                                          "The portal sent me to a garden, a memory seems to be playing, a young girl seems to be playing with her"
                                          " family their faces they seems so familiar, There seems to be another portal decending down",-1)
 
@@ -194,9 +229,11 @@ class MasterOfPuppets:
                                          "In an instance i've arrived in a garage, there is a car, violent RED, there seems"
                                          " to be a brick in the distance, A portal looms below", -2)
 
-        output["Innocent Bedroom"] = Room("Innocent Bedroom", {}, {}, {"Bedroom Photo":self.objects["Bedroom Photo"],"Bedroom Book":self.objects["Bedroom Book"]},
+        output["Innocent Bedroom"] = Room("Innocent Bedroom", {}, {"Ghost Girl": self.creatures['Ghost Girl']}, {"Bedroom Photo":self.objects["Bedroom Photo"],"Bedroom Book":self.objects["Bedroom Book"]},
                                          "A young girls bedroom, beautiful toys litter the room, there seems to be a photo &"
-                                         " book in the room, Another portal becons from ceiling maybe i can make it with a jump ", 1)
+                                         " book in the room,In the corner of your eye you catch the glipse of what appears to be a young girl"
+                                         " hovering above the ground, dressed fully in red & wearing a flower headband"
+                                         "Another portal becons from ceiling maybe i can make it with a jump ", 1)
 
         output["Innocent Road"] = Room("Innocent Road", {}, {}, {"TimberBark": self.objects["TimberBark"]},
                                           "I seem to be have transported to a blank rural road, headlights appear in the distance, another"
@@ -204,7 +241,7 @@ class MasterOfPuppets:
                                           " a tree, i can make it with a short leap",
                                           2)
 
-        output["Innocent Place"] = Room("Innocent Place", {}, {}, {"MetalShard": self.objects["MetalShard"]},
+        output["Innocent Place"] = Room("Innocent Place", {"Dead Girl": self.NPCs["Dead Girl"]}, {}, {"MetalShard": self.objects["MetalShard"]},
                                        "There seems to be an accident, The red car"
                                        " destroyed, the driver and front passanger appear to be impaled in the car, a young girls body seems"
                                        " to be thrown from the car, she appears lifeless, a young man seems to be distraught, ITS ME THATS ME,",
