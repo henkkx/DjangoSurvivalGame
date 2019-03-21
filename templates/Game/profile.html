@@ -1,9 +1,9 @@
 {% extends 'Game/base.html' %}
 {% block head_css %}
-<link rel="stylesheet"  type="text/css" href="../../static/css/profile.css">
-<link rel="stylesheet" type="text/css" href="../../static/css/styles.css">
-<script src="/static/js/imageValidation.js"></script>
 {% load staticfiles %}
+<link rel="stylesheet"  type="text/css" href="{% static "css/profile.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/styles.css" %}">
+<script src="{% static "js/imageValidation.js" %}"></script>
 {% endblock %}
 
 {% block content %}

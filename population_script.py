@@ -87,7 +87,7 @@ players = []
 for i in range(0,10):
     players.append({"username":"Player{0}".format(i), "email": "{0:06d}{1}@student.gla.ac.uk".format(i, chr(65+i)),
                 "password": "TestPass",
-                 "games_played": i*10, "most_days_survived": min(i*1,3), "most_kills": i*1, "most_people": round(i*0.5), "most_exp": 40*i})
+                 "games_played": i*10, "most_days_survived": min(round(i*0.5),3), "most_kills": i*1, "most_people": round(i*0.5), "most_exp": 40*i})
 
 #Main populate function.
 #Generates ten players with increasing stats, badges and awards achievements to worthy players
@@ -140,7 +140,16 @@ def add_player(username, email, password, games_played, most_days_survived, most
                               most_people=most_people, most_exp=most_exp)
     except:
         try:
-            return Player.objects.get(user=User.objects.get(username=username))
+            new_player = Player.objects.get(user=User.objects.get(username=username))
+            new_player.games_played = games_played
+            new_player.most_days_survived = most_days_survived
+            new_player.most_kills = most_kills
+            new_player.most_people = most_people
+            new_player.most_exp = most_exp
+            new_player.picture = picture
+            new_player.save()
+            return new_player
+            
         except:
             return None
 

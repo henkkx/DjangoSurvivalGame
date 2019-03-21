@@ -77,20 +77,12 @@ class ViewTests(TestCase):
         result = finders.find('images/dunkey.jpg')
         self.assertIsNotNone(result)
 
-    def test_ig_image(self):
-        result = finders.find('images/ig logo.png')
-        self.assertIsNotNone(result)
-
     def test_landing_image(self):
         result = finders.find('images/landing.jpg')
         self.assertIsNotNone(result)
 
     def test_mayhem_image(self):
         result = finders.find('images/mayhem.jpg')
-        self.assertIsNotNone(result)
-
-    def test_ign_image(self):
-        result = finders.find('images/ign.jpg')
         self.assertIsNotNone(result)
 
     def test_tunnel_image(self):
@@ -116,51 +108,12 @@ class ViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['user_count'], 2)
 
-    def test_home_displays_correct_users_by_kills(self):
-        #Create ten users with increasing number of kills
-        player_list = []
-        for i in range(1, 11):
-            player_list.append(Player.objects.create(user=User.objects.create_user(username="test user {0}".format(i),email='test1@mail.com', password='limbo')
-                              , picture=None, games_played=10*i,
-                              most_days_survived=10*i, most_kills=10*i,
-                              most_people=10*i, most_exp=10*i))
-
-        #reverse player list and get first five elements to get players with most kills.
-        top_players = player_list[:-6:-1]
-
-        #Get response from home view and then compare home provided list with top_players
-        response = self.client.get(reverse('home'))
-        self.assertEquals(list(response.context['players']), top_players)
 
         
         
         
 
-    # Population Script Check
 
-    def test_population_script(self):
-        print("Game population:")
-        try:
-            from Game import game_populate
-            game_populate()
-            print("OK")
-        except ImportError:
-            print('does not exist')
-        except NameError:
-            print('game_populate() does not exist or is not correct')
-        except:
-            print('Something went wrong with the game_populate file')
-        print("Backend population ( badges)")
-        try:
-            from populate_backend import populate
-            populate()
-            print("OK")
-        except ImportError:
-            print('does not exist')
-        except NameError:
-            print('game_populate() does not exist or is not correct')
-        except:
-            print('Something went wrong with the game_populate file')
 
 
     

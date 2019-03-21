@@ -23,15 +23,32 @@ except:
 import json
 from django.http import HttpResponse
 
-player = PC("PC")
-world = None
+'''
+The player starts on a road. They can only see & enter 2 buildings. In each building there are rooms,
+sometimes in different floors that they can enter. In the rooms they may fight creatures, converse with NPCs,
+interact with objects. They may only exit when on the ground floor. When exiting a "fog" forces them to the
+next row of another 2 buildings, until they either die of hunger ( on exit of building hunger is reduced) or in a fight
+or reach the end ( the end is wherever there are no more buildings)
+.
+All of the functions that run the game are practically here, they are not a lot but it's still a long file,
+Brace yourselves
+
+NOTE: The input parameters of the functions will be explained at the handle() function as it's the one
+which uses all of these
+'''
+player = PC("PC") # global, the player of the game ( not Django Player model)
+world = None # the dictionary the world exists in
+# the following two booleans are just for checks in the game, game_over means we died,
+# end_was_reached means we finished the game
 game_over = False
 end_was_reached = False
-response = "Welcome to our world, adventurer"
-player_model = None
+response = "Welcome to our world, adventurer" # global, the text printed on the screen of the website
+player_model = None # the Django Model for the Player which is connected to a User
 
 
 def initialise(inp):
+    '''This functions initializes the player_model, and then the game itself
+    In other words, we now know which user is playing'''
     global player_model
     player_model = Player.objects.get_or_create(user=User.objects.get(username=inp))[0]
     # if not player_model.most_people:
@@ -45,62 +62,24 @@ def initialise(inp):
     print("initialised")
     game_initialisation()
 
-#This function displays information about the specified object or creature.
-#If no arguments are passed the current room will be described.
-#It makes use of the get_description method in the rooms class. Take a look.
-
-
-# def inspect(player, entity=None):
-#     room = player.room
-#     pl = player.level
-#     if room is None:
-#         return "You are on the street"
-#     if entity is None:
-#         return room.get_description()
-#
-#     #if there are creatures in the room that match the entity then output info about these creatures
-#     #if not move on to objects
-#     if room.creatures:
-#
-#         #Get all creatures with matching type
-#         creatures = room.get_creatures(entity)
-#         if creatures:
-#
-#             #Display information for all creatures whose type matches entity. Includes level comparison for each
-#             output = ["There are {0} {1}(s):".format(len(creatures), entity)]
-#             for creature in creatures:
-#                 output.append("{0}.  {1}".format(creature.__str__(), creature.level_comp(pl)))
-#
-#             return "\n".join(output)
-#
-#     if room.objects:
-#
-#         #Get all objects with matching type
-#         objects = room.get_objects(entity)
-#         if objects:
-#
-#             #Display information for all creatures whose type matches entity. Includes level comparison for each
-#             output = ["There are {0} {1}(s):".format(len(objects), entity)]
-#             for objec in objects:
-#                 output.append("{0}.".format(objec.__str__()))
-#             return "\n".join(output)
-#
-#     return "There are no entities matching {0}".format(entity)
-
 
 def fight(creature):
+    ''' This function runs the fight between the player & parameter creature.
+    '''
     global response, game_over, player
     for c in player.room.creatures.values():
         if c.name == creature:
             creature = c
             break
-    player_damage = 5
-    print(player.hp, player_damage, creature.hp, creature.ap)
+    player_damage = 5 # default player damage if the player holds no weapon
+    print(player.hp, player_damage, creature.hp, creature.ap) # just for reference in the console if we need to
     for weapon in player.inventory["Weapon"]:
+        # will take the stronger weapon in the inventory are the one used
         if weapon.dmg > player_damage:
             player_damage = weapon.dmg
     if not (player_damage <= 0 and creature.ap <= 0):
         while True:
+            # runs the fight, player strikes first, one by one with the creature, whoever dies first loses
             creature.hp -= player_damage
             if creature.hp <= 0:
                 response = "You killed a {0} and gained {2} xp points.</br> You now have {1} hp.".format(creature.name, player.hp, creature.xp)
@@ -119,6 +98,7 @@ def fight(creature):
     else:
         response = "You can't fight with that creature because you both deal no damage," \
                    " as in you literally heal each other, odd."
+        # the above should never happen, just in case though
 
 
 # Allows the user to pick_up an item from the current room
@@ -147,13 +127,13 @@ def pick_up(object_name):
         return "There are no objects to pick up"
 
 
-#Allows the player to drop an object to the floor
+# Allows the player to drop an object to the floor
 def drop(object_name):
     global response, player
     if player.room is None:
         return "You must be within a room to drop an item"
 
-    #if the players inventory is empty stop here
+    # if the players inventory is empty stop here
     if player.inventory_empty():
         return "Your inventory is empty. There is nothing drop"
 
@@ -167,25 +147,9 @@ def drop(object_name):
         return "You dont have an object called {0} in your inventory".format(object_name)
 
 
-# def view_inventory(player):
-#     return player.get_inventory()
-
-'''
-Below are all the functions related to moving. For now we will have:
- "available" which will return the available buildings to enter when on the road
- "enter" which is to enter either building on your sides
- "exit_current" which is to exit the building you are currently in ( if on the ground floor)
- "move_room" which moves you between rooms,
- "move_floor" which is to either go a floor up or a floor down
- 
- Might be better if we move some of these in the Building class so we don't need to pass building,
-  we'll then need to pass player though
-  
-  Although they don't need to return True or False, it'll help debuggins so at least for now they do
- '''
-
 
 def available():
+    '''Gives the available buildings where we currently are'''
     current_buildings_avail = []
     if player.position[0] == 0:
         for building in world["buildings"].values():
@@ -198,6 +162,7 @@ def available():
 
 
 def enter(building):
+    '''Makes the player enter a building'''
     global response, player_model, player, world
     response = ""
     try:
@@ -206,7 +171,7 @@ def enter(building):
                 building = bld
                 break
     except:
-        game_initialisation()
+        game_initialisation()  # will re-initialise the game if world is empty, the error came up randomly
 
     if building in available():
         new_pos = building.position[:]
@@ -222,16 +187,19 @@ def enter(building):
 
 
 def exit_current():
+    ''' Makes the player exit the building & sets the position to the next row of buildings'''
     global response, player_model, game_over, end_was_reached
-    bld_check = True
+    bld_check = True  # this will check that there are buildings available , so we haven't reached the end of the world
     if player.position[2] == 0:  # if on ground floor
         player.position = [0, player.position[1]+1, 0]
         player.room = None
         player.hunger -= 20
-        if player.hunger < 0:
+        if player.hunger < 0: # checks that the player hasn't died of hunger
             response = "You died of hunger"
             game_over = True
             return;
+
+        # below we show the buildings that are in the place we just exit to
         response = "You are now on the street. </br>" \
                    "The fog is advancing as you step out of the building, you have to move forward in order to escape it.</br>" \
                    "You can see what seems like a sun ever so slightly raising  itself up in the horizon, you keep walking, the fog keeps guiding.</br>" \
@@ -247,7 +215,9 @@ def exit_current():
     if bld_check:
         end_was_reached = True
     print(bld_check)
-    player.room = world['rooms']['default']
+    player.room = world['rooms']['default']  # error prevention
+
+    # below we create a checkpoint for the user to load
     to_store = {"position": player.position[:], "inventory": player.inventory.copy(),
                 "hunger": player.hunger, "hp": player.hp}
     player_model.current_game = to_store
@@ -256,7 +226,8 @@ def exit_current():
         # which means back to main road (0) on the level we are (player.position), placeholder ground floor (0)
 
 
-def move_room(room):  # room is the room name
+def move_room(room):
+    ''' Moves the player to another parameter room. Room is the name so we have to go through the objects to find it'''
     global response
     for bld in world["buildings"].values():
         if player.position[:-1] == bld.position:
@@ -269,6 +240,7 @@ def move_room(room):  # room is the room name
 
 
 def move_floor(move):
+    ''' Moves the player either one floor up or down, indicated by parameter move ( = "up" or "down"'''
     global response
     response = "You move floor, now you see the following rooms:</br>"
     for bld in world["buildings"].values():
@@ -284,9 +256,12 @@ def move_floor(move):
             response = ""
     for room in building.rooms:
         response += room.name + ", "
+    player.room = world["rooms"]["default"]
 
 
 def converse(npc):
+    '''Will display the conversation text with the NPC specified, again NPC is a name, we have to go through the objects
+    to find them'''
     global response
     for n in world["NPCs"].values():
         if npc == n.name:
@@ -298,6 +273,7 @@ def converse(npc):
 
 
 def consume(food_name):
+    ''' Consume food with name food_name, runs PC.eat(food) in file people.py to do it '''
     global response, player
     response = "Got into consume"
     if player.inventory["Food"] == []:
@@ -312,12 +288,10 @@ def consume(food_name):
 
 
 def handle(text_in):
+    ''' :param text_in is a string received from the web-app. We split by space, index 0 is the commands, everything else are the parameters
+    Some like Move, come in as Move to (room name) hence the parameters are from index 2 and onward.'''
     global world, player, response, player_model
     cmds = text_in.decode("utf-8").split(" ")
-    if not player_model:
-        response = "No Player, click 'Play Now'"
-        return;
-    output_dict = {}
     if cmds[0] == "Move":
         move_room(" ".join(cmds[2:]))
     elif cmds[0] == "Enter":
@@ -350,6 +324,7 @@ def handle(text_in):
 
 
 def check_stats():
+    ''' This function checks & updates the statistic of the Player model ( so the User)'''
     if player_model.most_kills < player_model.stats["kills"]:
         player_model.most_kills = player_model.stats["kills"]
         player_model.stats["kills"] = 0
@@ -366,6 +341,7 @@ def check_stats():
 
 
 def game_initialisation():
+    ''' Initialises the game'''
     global world, game_over, player, response, end_was_reached
     check_stats()
     __ = MasterOfPuppets()
@@ -392,6 +368,7 @@ def game_initialisation():
 
 
 def load_game():
+    '''Loads the last checkpoint the player(User) was at'''
     global player, world, response, player_model
     if player_model.current_game is not None:
         player = PC("PC", position=player_model.current_game["position"][:],
@@ -407,10 +384,15 @@ def load_game():
 
 
 def available_actions():
-    global player_model, response
-    if game_over:
+    ''' This function will go through the whole world. It will return a json of all the available actions
+    that the player can currently perform
+    For details of how it works, it's better to look at game_populate.py for the datatypes of all the data'''
+    global player_model, response\
+
+    if game_over:  # if the player has died
         return json.dumps({"Game over": " ", "text": response})
-    if end_was_reached:
+
+    if end_was_reached:  # if the player has reached the end of the world
         response = "As you traverse through the fog, you suddenly see a light.</br>" \
                    "The light comes closer to reveal 2 figures, about 40cm tall each, levitating in front of you.</br>" \
                    "One is dressed in a white robe, fair skinned with long, light brown hair. The other had red skin, no hair and horns</br>" \
@@ -442,21 +424,15 @@ def available_actions():
                     data_post["Talk to"].append(npc.name)
         # from here on out, it's where we can move IF in a room, so it doesn't matter if we are in a room ,
         # just that we are in a building
-        try:
-            for bld in world["buildings"].values():
-                if player.position[:-1] == bld.position:
-                    current_building = bld
-                    # current_building = world["buildings"]["Roofless house"]
-        except:
-            print("Error in finding current building, default to Family house")
-            current_building = world["buildings"]["Family house"]
-
+        for bld in world["buildings"].values():
+            if player.position[:-1] == bld.position:
+                current_building = bld
         for room in current_building.rooms:
             current_room = "default"
             try:
                 current_room = player.room.name
             except:
-                print("Player is not in a building/room")
+                print("Player is not in a building/room") # this error should never happen anymore
             if room.pos == player.position[2] and room.name != current_room:
                 data_post['Move to'].append(room.name)
         if current_building.can_go_up(player.position[2]):
@@ -488,6 +464,7 @@ def available_actions():
 
 
 def can_enter_buildings():
+    ''' Self-explanatory, if we can enter a building'''
     output = []
     for bld in world["buildings"]:
         if bld.position == player.position[:-1]:
@@ -496,64 +473,8 @@ def can_enter_buildings():
 
 
 def check_achievements():
+    '''This function will update the achievments of the player depending on their stats'''
     global player_model
     for bdg in Badge.objects.all():
         if player_model.stats[bdg.badge_type] >= bdg.criteria:
             Achievement.objects.get_or_create(player=player_model, badge=bdg)
-
-
-
-"""
-#Test data
-# Zombie1 = Zombie("timmy",10)
-# Zombie2 = Zombie("tommy",3)
-# Spider = Spider("Shelob", 5)
-# weapon1 = Weapon("Sword of 1000 Truths", "It was foretold, that one day, heroes who could wield the sword might reveal themselves.", 2, 10, 2)
-# lore1 = Lore("Necronomicon", "Book of dead names. Read at your own peril", 1, "Ph\'nglui mglw\'nafh Cthulhu R\'lyeh wgah\'nagl fhtagn")
-# Barney = NPC("Barney", "A tall, fat man.", "long description", 100, "Chaotic Neutral", None)
-# Billy = NPC("Billy", "A short, thin man.", "long description", 100, "Chaotic Neutral", None)
-# dark_room = Room("Spooky Room", [Barney, Billy], [Zombie1, Spider, Zombie2], [weapon1, lore1], " a dark dillapidated room with no windows", None)
-# player = PC("username", 6, position = None)
-#player.room = dark_room
-player = PC("username", 6, position=None)
-
-#Tests
-#print(inspect(player.room))
-#print(inspect(player.room, player.level, "apple"))
-
-#Inventory test
-
-print("\nInventory Tests:\n")
-print(view_inventory(player))
-print(drop(player, "iten"))
-print(inspect(player, "Lore"))
-print(pick_up(player, "Necronomicon"))
-print(view_inventory(player))
-print(inspect(player, "Lore"))
-print(drop(player, "Necro"))
-print(drop(player, "Necronomicon"))
-print(inspect(player, "Lore"))
-print(inspect(player))
-print(inspect(player, "Food"))
-print(view_inventory(player))
-print(pick_up(player, "Cake"))
-print(view_inventory(player))
-player.hp -= 15
-player.hunger -= 10
-print(consume(player, "Apple"))
-print(consume(player, "Cake"))
-print(view_inventory(player))
-print(consume(player, "Apple"))
-print(inspect(player))
-#fight(weapon1,Zombie1,True)
-
-
-# Converse Tests
-'''
-player = PC("username", 6, None)
-
-#player = PC("username", 6, None)
-player.add_item(Weapon("na","na",12,12,22))
-converse(player, Billy)
-'''
-"""
