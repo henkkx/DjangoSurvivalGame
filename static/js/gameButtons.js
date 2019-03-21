@@ -30,14 +30,48 @@ function get_fun(){
             success: function (data) {
                 for (var i in data) {
                     if (i != "text") {
-                        for (var j in data[i]) {
-                            $('#buttons').append('<button class="actionBtn" onClick=post_fun(this.firstChild.nodeValue)>' + i + " " + data[i][j] + '</button>');
+                        if (i == "Inventory") {
+                            for (var j in data[i]) {
+                                $('#buttons').append('<button class="actionBtn btn btn-success" onClick=post_fun(this.firstChild.nodeValue)>' + i + " " + data[i][j] + '</button>');
+                            }
+                        } else if (i == "Enter") {
+                            for (var j in data[i]) {
+                                $('#buttons').append('<button class="actionBtn btn btn-light" onClick=post_fun(this.firstChild.nodeValue)>' + i + " " + data[i][j] + '</button>');
+                            }
+                        }else if (i== "Fight" || i=="Game over"){
+                            for (var j in data[i]) {
+                                $('#buttons').append('<button class="actionBtn btn btn-danger" onClick=post_fun(this.firstChild.nodeValue)>' + i + " " + data[i][j] + '</button>');
+                            }
+                        }else if( i== "Exit"){
+                            for (var j in data[i]) {
+                                $('#buttons').append('<button class="actionBtn btn btn-secondary" onClick=post_fun(this.firstChild.nodeValue)>' + i + " " + data[i][j] + '</button>');
+                            }
+                        }else if(i=="Talk to"){
+                            for (var j in data[i]) {
+                                $('#buttons').append('<button class="actionBtn btn btn-danger" onClick=post_fun(this.firstChild.nodeValue)>' + i + " " + data[i][j] + '</button>');
+                            }
+                        }else if(i== "Read" || i=="Consume"){
+                            for (var j in data[i]) {
+                                $('#buttons').append('<button class="actionBtn btn btn-warning" onClick=post_fun(this.firstChild.nodeValue)>' + i + " " + data[i][j] + '</button>');
+                            }
+                        }else if(i == "Pick" || i == "Drop"){
+                            for (var j in data[i]) {
+                                $('#buttons').append('<button class="actionBtn btn btn-light" onClick=post_fun(this.firstChild.nodeValue)>' + i + " " + data[i][j] + '</button>');
+                            }
                         }
-                    }else{
+                        else{
+                            for (var j in data[i]) {
+                                $('#buttons').append('<button class="actionBtn btn btn-dark" onClick=post_fun(this.firstChild.nodeValue)>' + i + " " + data[i][j] + '</button>');
+                            }
+                        }
+                        // for (var j in data[i]) {
+                        //     $('#buttons').append('<button class="actionBtn btn btn-danger" onClick=post_fun(this.firstChild.nodeValue)>' + i + " " + data[i][j] + '</button>');
+                        // }
+                    } else {
                         $("#gameText").append('<p>' + " " + data[i] + '</p>');
-                        }
                     }
                 }
+            }
         });
     scroll()
 }
