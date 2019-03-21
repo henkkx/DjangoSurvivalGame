@@ -29,9 +29,10 @@ class MasterOfPuppets:
 
         #Changed final arguments to match object constuctor parameters
         output["Bread"] = Food("Bread", "An apparently fresh loaf of bread, smells like it just came out...of the oven",
-                           1, 40, 5)
+                           1, 40, 20)
         output["Health Potion"] = Food("Health Potion", "It's small, it's red, come on this is in every game. Hm, maybe ours is green.",
                            1, 50, 0)
+        output["Oat bar"] = Food("Oat bar", "An oat bar with raisins", 1, 20, 15)
         output["Burned note 1"] = Lore("Burned note #1", "A slightly burned piece of paper with scribbled writing. Looks like you wrote it",
                            1, "Why would I do that? How could I let this happen even?")
         output["Burned note 2"] = Lore("Burned note #2", "A slightly burned piece of paper with scribbled writing. Looks like you wrote it",
@@ -41,6 +42,11 @@ class MasterOfPuppets:
                               "You can clearly however, now, tell that his character wasn't equipped to take that. He mentions your name a few times.</br>"
                               "He says that you were good to him, helped him fell like he wasn't useless, says he could tell that sometimes,</br>"
                               "you didn't want to play with him because others you tease you for it, but you usually still did. He was more perceptive than you thought back then.")
+        output["Crumbled note"] = Lore("Crumbled note", "A piece of paper with something written in it, crumbled up in a ball",
+                                       1, "You recognise the handwritting but you are not sure where from:</br>"
+                                          "Today was one of the bad days again, all the other kids made fun of me.</br>"
+                                          "All except one, the one kid that has been good to me")
+
 
         return output
 
@@ -65,11 +71,13 @@ class MasterOfPuppets:
                              "'Very good, just wanted to let you know, when we were kids you helped me a lot, with the others messing with me and all that.</br>"
                              "You are confused, Tony looks just like you remembered him when you were kids, but talks of that time as if it was the past.</br>"
                              "As finished his sentence he turns back around, as if he doesn't realise you are there anymore.")
+
         return output
 
     def init_creatures(self):
         output = {}
         output['Charred fur rat'] = Rat("Charred fur rat", player.level)
+        output["The Hound of Buskerville"] = Ghoul("The Hound of Buskerville", player.level)
         return output
 
     def init_rooms(self):
@@ -83,6 +91,7 @@ class MasterOfPuppets:
                                      "The room reminds you of the living room of a childhood friend of yours. You don't remember who though.",0)
         output["Attic"] = Room("Attic", {}, {},{"Tony's journal": self.objects["Tony's journal"]},
                                "A standard Attic, a poster reading 'Who Watches The Watchmen' halfs hangs on one side",1)
+        output[""]
         return output
 
     def init_buildings(self):

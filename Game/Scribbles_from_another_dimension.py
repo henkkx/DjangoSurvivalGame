@@ -93,7 +93,7 @@ def fight(creature):
         if c.name == creature:
             creature = c
             break
-    player_damage = 0
+    player_damage = 5
     print(player.hp, player_damage, creature.hp, creature.ap)
     for weapon in player.inventory["Weapon"]:
         if weapon.dmg > player_damage:
@@ -102,7 +102,8 @@ def fight(creature):
         while True:
             creature.hp -= player_damage
             if creature.hp <= 0:
-                response = "You killed a {0} </br> You now have {1} hp".format(creature.name, player.hp)
+                response = "You killed a {0} and gained {2} xp points.</br> You now have {1} hp.".format(creature.name, player.hp, creature.xp)
+                player_model.stats["exp"] += creature.xp
                 player.room.creatures.pop(creature.name)
                 if player_model.stats["kills"] != 0:
                     player_model.stats["kills"] += 1

@@ -18,30 +18,13 @@ class DatabaseTests(TestCase):
         test_user_2 = User.objects.create_user(username="test user 2",
                                                 email='test2@mail.com',
                                                 password='limbo')
-        Player.objects.create(user=test_user_1, picture=None, games_played=10,
+        player1 = Player.objects.create(user=test_user_1, picture=None, games_played=10,
                           most_days_survived=10, most_kills=10,
-                          most_people=10, most_exp=10)
-        Player.objects.create(user=test_user_2, picture=None, games_played=20,
+                          most_people=10, most_exp=10, stats={"kills": 10, "days": 10, "npcs": 10, "exp": 10})
+        player2 = Player.objects.create(user=test_user_2, picture=None, games_played=20,
                           most_days_survived=20, most_kills=20,
-                          most_people=20, most_exp=20)
-
-    #Updated to check against values and not keys
-    def test_players_have_no_stats_on_create(self):
-        user_no = 1
-        test_player = Player.objects.get(user=User.objects.get(username="test user {0}".format(user_no)))
-        for statistic in test_player.stats.values():
-            self.assertTrue(expr=statistic == 0)
-
-    def test_players_have_data(self):
-        user_no = 1
-        test_player = Player.objects.get(user=User.objects.get(username="test user {0}".format(user_no)))
-        self.assertTrue(expr=test_player.games_played == user_no*10 and
-                        test_player.most_days_survived == user_no*10 and
-                        test_player.most_kills == user_no*10 and
-                        test_player.most_people == user_no*10 and
-                        test_player.most_exp == user_no*10)
-
-
+                          most_people=20, most_exp=20, stats={"kills": 20, "days": 20, "npcs": 20, "exp": 20})
+        return player1, player2
 
     #The changes this made to the stats field of the player objects seemed to persist for some reason.
     #Even after deletion of the player object.
@@ -79,7 +62,7 @@ class ViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_sign_up(self):
-        url = reverse('sign_up')
+        url = reverse('registration_register')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -156,10 +139,22 @@ class ViewTests(TestCase):
     # Population Script Check
 
     def test_population_script(self):
-
+        print("Game population:")
         try:
             from Game import game_populate
             game_populate()
+            print("OK")
+        except ImportError:
+            print('does not exist')
+        except NameError:
+            print('game_populate() does not exist or is not correct')
+        except:
+            print('Something went wrong with the game_populate file')
+        print("Backend population ( badges)")
+        try:
+            from populate_backend import populate
+            populate()
+            print("OK")
         except ImportError:
             print('does not exist')
         except NameError:
