@@ -8,7 +8,6 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from Game.models import Player, Achievement
-from Game.game_handler import *
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
@@ -21,7 +20,6 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from Game.models import Player, Achievement
-from Game.game_handler import *
 import json
 from django.views.decorators.csrf import csrf_exempt
 from Game.Scribbles_from_another_dimension import available_actions, handle, initialise
@@ -90,35 +88,6 @@ def about(request):
     return render(request, 'Game/about.html', context_dict)
 
 
-# def sign_up(request):
-#     registered = False
-
-#     if request.method == "POST":
-#         # display the forms ( waiting for models)
-#         user_form = UserForm(data=request.POST)
-#         profile_form = Profile(data=request.POST)
-#         if user_form.is_valid and profile_form.is_valid:
-#             # save user data
-#             user = user_form.save()
-#             user.set_password(user.password)
-#             user.save()
-#             # save profile data
-#             profile = profile_form.save(commit=False)
-#             profile.user = user
-#             # if the user provided a picture save that
-#             if 'picture' in request.FILES:
-#                 profile.picture = request.FILES['picture']
-#             profile.save()
-#             registered = True
-#         else:
-#             print(user_form.errors, profile_form.errors)
-#     else:
-#         user_form = UserForm()
-#         profile_form = Profile()
-#     return render(request, 'registration/registration_form.html',
-#                   {'user_form': user_form,
-#                    'profile_form': profile_form,
-#                    'registered': registered})
 
 def WrongPage(request):
     return render(request, 'Game/WrongPage.html')
@@ -184,38 +153,6 @@ def profile(request, user=None):
 
     return render(request, 'Game/profile.html', contxt)
 
-# @csrf_exempt
-# def initialise(request):
-#     # print(request.user, " initalise here")
-#     # retrieve associated player object and pass important stats to template
-#     initialise(request.user.username)
-#     if request.user.is_authenticated:
-#         player_temp = Player.objects.get_or_create(user=request.user)[0]
-#         print(player_temp, "___----")
-#         initialise(request.user.username)
-
-    # form = Profile({'picture': player.picture})
-    #
-    # if request.method == 'POST':
-    #
-    #     image = request.FILES.get('picture', False)
-    #
-    #     if image is False:
-    #         return HttpResponseRedirect(reverse("my_profile"))
-    #
-    #     player.picture = image
-    #     player.save()
-    #     return HttpResponseRedirect(reverse("my_profile"))
-    # else:
-    #     print(form.errors)
-    #
-    # contxt["form"] = form
-    #
-    # return render(request, 'Game/my_profile.html', contxt)
-
-
-# def my_test(request):
-#     return render(request, "Game/gamePage.html", {})
 
 
 def get_actions(request):
