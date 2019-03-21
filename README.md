@@ -1,7 +1,8 @@
-#Scribbles From Another Dimensions
+# Scribbles From Another Dimensions
 
 
-Description:
+## Description:
+
 The purpose of this web application is to provide an interface for a
 game of search and survival. The game is as follows:
 
