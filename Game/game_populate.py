@@ -146,15 +146,10 @@ class MasterOfPuppets:
         # yes in the end there is no correlation between creature name & class, we are using it for stats though
         output['Charred fur rat'] = Rat("Charred fur rat", player.level)
         output["The Hound of Buskerville"] = Ghoul("The Hound of Buskerville", player.level)
-<<<<<<< HEAD
-        output["Ghoul"] = Ghoul("A.., humanoid that walks with it's hands? A ghoul or something? It screams 'STOP IT' in a childlike voice." , player.level)
-        output["Android"] = Vampire("An hostile android", player.level)
-=======
         output['Ghost Girl'] = Ghoul("Ghost Girl",player.level+2,"The ghost of a young girl in a red dress & flower headband")
         output['Large Red Spider'] = Ghoul("Large Red Spider",player.level,"A large red spider, probably the size of a ruller")
         output['Raven'] = Rat("Raven",player.level)
         output['Sphinx'] = Ghoul("Sphinx",player.level)
->>>>>>> a8837dfaaab465deb087ee67355a432ace6e0da7
         return output
 
     def init_rooms(self):
