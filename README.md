@@ -13,7 +13,7 @@ On any particular street in the town, there are a number of houses and the playe
 Winning a fight grants experience points and allows the player to loot whatever is left in the room.
 Losing a fight might result in losing health or resulting in a GAME OVER for the player.
 
-Each action in the game costs time. When a player leaves a building. At the end of the day, the amount of food is decrease. 
+Each action in the game costs time. When a player leaves a building. At the end of the day, the amount of food is decreased. 
 If there is not enough food, then player may die from hunger
 
 Players get exp actively by winning fights. Players get different badges based on their exp, and their exp is also shown on the leaderboards. 
@@ -22,8 +22,8 @@ Players get exp actively by winning fights. Players get different badges based o
 ## Specifications:
 ### The Logged On Users Are Able To Access These Features :
    
-   view, update and maintain their profile
-   start a game and return back to a game in progress.
+   View, update and maintain their profile
+   Start a game and return back to a game in progress.
    Play the game according to the mechanics described above
    View the leader board & Other Player Stats
    
