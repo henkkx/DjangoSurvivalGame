@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from Game.models import PC
+from Game.models import Player
 from Game.game_handler import *
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -61,7 +61,7 @@ def instructions(request):
 
 def about(request):
     # line below SHOULD count total number of users
-    all_user_count = Count(User.objects.all())
+    all_user_count = len(User.objects.all())
     context_dict = {'user_count': all_user_count}
     return render(request, 'Game/about.html', context_dict)
 
@@ -116,6 +116,21 @@ def my_profile(request):
     return render(request, 'Game/my_profile.html', {})
 
 
+
+def test_view(request):
+    
+    render(request, "Game/gamePage.html")
+
+
+def jsonreturn():
+    data = data = {
+        'name': 'abc',
+        'location': 'Finland',
+        'is_active': True,
+        'count': 999
+    }
+    return JsonResponse(data)
+    return render(request, 'Game/my_profile.html', {})
 def my_test(request):
     return render(request, "Game/gamePage.html",{})
 

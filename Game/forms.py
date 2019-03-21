@@ -1,5 +1,5 @@
 from django import forms
-from Game.models import PC
+from Game.models import Player
 from django.contrib.auth.models import User
 
 
@@ -10,9 +10,11 @@ class UserForm(forms.ModelForm):
         model = User
         fields = {'username', 'email', 'password'}
 
+    field_order = ['username', 'email', 'password']
+
 
 class Profile(forms.ModelForm):
 
     class Meta:
-        model = PC
+        model = Player
         fields = {'picture'}
