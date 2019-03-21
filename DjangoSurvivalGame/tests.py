@@ -113,31 +113,7 @@ class ViewTests(TestCase):
         
         
 
-    # Population Script Check
 
-    def test_population_script(self):
-        print("Game population:")
-        try:
-            from Game import game_populate
-            game_populate()
-            print("OK")
-        except ImportError:
-            print('does not exist')
-        except NameError:
-            print('game_populate() does not exist or is not correct')
-        except:
-            print('Something went wrong with the game_populate file')
-        print("Backend population ( badges)")
-        try:
-            from populate_backend import populate
-            populate()
-            print("OK")
-        except ImportError:
-            print('does not exist')
-        except NameError:
-            print('game_populate() does not exist or is not correct')
-        except:
-            print('Something went wrong with the game_populate file')
 
 
     
