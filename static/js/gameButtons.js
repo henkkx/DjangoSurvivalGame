@@ -9,7 +9,6 @@ function post_fun(inp) {
         success: function(){
             $(".actionBtn").remove();
             get_fun();
-            scroll();
         }
     })
 }
@@ -68,12 +67,11 @@ function get_fun(){
                         //     $('#buttons').append('<button class="actionBtn btn btn-danger" onClick=post_fun(this.firstChild.nodeValue)>' + i + " " + data[i][j] + '</button>');
                         // }
                     } else {
-                        $("#gameText").append('<p>' + " " + data[i] + '</p>');
+                        $("#gameText").prepend('<p>' + " " + data[i] + '</p>');
                     }
                 }
             }
         });
-    scroll()
 }
 $(document).ready(function() {
     // the moment the page is ready, get the available actions ( view will initialise game)
@@ -89,6 +87,7 @@ $(document).ready(function() {
 function scroll(){
     // scrolls the text to the bottom
     var scroll_view = document.getElementById("gameText");
-    scroll_view.scrollTop=scroll_view.scrollHeight;
+    scroll_view.scrollTop = scroll_view.scrollHeight;
+
 }
 
