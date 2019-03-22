@@ -38,9 +38,15 @@ Players get exp actively by winning fights. Players get different badges based o
 
 Python 3.5 or greater is required.
 
+Navigate Into The Directory That Contains manage.py
+
 ```shell
 pip install -r requirements.txt
-python DjangoSurvivalGame/manage.py runserver
+python manage.py migrate
+python manage.py makemigrations Game
+python manage.py migrate
+python population_script.py populate
+python manage.py runserver
 ```
 
 These commands will install all the required python modules and begin running the Django webserver.
