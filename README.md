@@ -51,6 +51,14 @@ python manage.py runserver
 
 These commands will install all the required python modules and begin running the Django webserver.
 
+### Remember
+
+If you are running this on a local server, set Debug to True in settings.py as otherwise
+the Django framework won't load the static files.
+
+This will also disable the 404 request page, However on python anywhere debug is set to False,
+because python anywhere will handle the static links
+
 ## Developing
 
 ### Built With
