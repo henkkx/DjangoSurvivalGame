@@ -54,9 +54,9 @@ These commands will install all the required python modules and begin running th
 ### Remember
 
 If you are running this on a local server, set Debug to True in settings.py as otherwise
-the Django framework won't load the static files.
+the Django framework won't load the static files, this will also disable the 404 request page.
 
-This will also disable the 404 request page, However on python anywhere debug is set to False,
+However on python anywhere debug is set to False,
 because python anywhere will handle the static links
 
 ## Developing
