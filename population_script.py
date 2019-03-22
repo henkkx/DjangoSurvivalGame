@@ -15,7 +15,7 @@ badges = [
      'badge_type': 'kills',
      'icon': "badge_icons/ZombieHunterBadge1.png"},
     {'name': 'Murderer',
-     'description': 'You are crazy, you have made at least 10 kills',
+     'description': 'You are a murder machine',
      'criteria': 3,
      'badge_type': 'kills',
      'icon': "badge_icons/ZombieHunterBadge2.png"},
