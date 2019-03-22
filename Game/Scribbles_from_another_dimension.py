@@ -223,6 +223,7 @@ def exit_current():
     player_model.current_game = to_store
     player_model.save()
     check_achievements()
+    check_stats()
         # which means back to main road (0) on the level we are (player.position), placeholder ground floor (0)
 
 
