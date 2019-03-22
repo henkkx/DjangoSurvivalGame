@@ -5,7 +5,7 @@
 
 {% block content %}
 
-
+<!-- BANNER -->
 <div class="banner"style="margin-top:0px">
     <div class="container">
      <div class="row">
@@ -16,10 +16,11 @@
      </div>
  </div>
  </div>
-
+<!-- SIGN UP FORM -->
  <div class="container__child signup__form">
   <form class="form-signin" action="." method="post">
       {% csrf_token %}
+      <!-- USE OUR CUSTOM FORM IN FORM.HTML -->
       {% include 'registration/form.html' with form=form %}
       <div class="m-t-lg">
           <ul class="list-inline">

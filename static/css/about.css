@@ -17,49 +17,6 @@ body {
     font-family: 'Roboto';
 }
 
-/* Footer */
-.footer {
-    position: relative;
-    background-color: #fff;
-    color: #707070;
-    padding: 55px 0 40px;
-}
-.footer h5 {
-    font-size: 18px;
-    font-weight: 700;
-    font-family: 'Open Sans', sans-serif;
-    color: #707070;
-    position: relative;
-    padding-bottom: 16px;
-}
-.footer h5:after {
-    content: '';
-    display: block;
-    margin: 5px 0 0;
-    width: 40%;
-    height: 1px;
-    background-color: #fff;
-}
-.footer ul {
-    list-style: none;
-    line-height: 2.2em;
-    padding-left:0px;
-}
-.footer ul a {
-    color:#707070;;
-}
-.footer ul a:hover {
-    color:#274abb;;
-    text-decoration:none;
-}
-/*footer bottom */
-.footer-bottom {
-    padding-top: 5px;
-    padding-bottom: 15px;
-    border-top: 1px solid rgba(0,0,0,0.09);
-    background: #fff;
-    
-}
 
 .container{
     padding-top: 60px;
@@ -141,11 +98,6 @@ h3 {
      color: #000;
 }
 
-/* p {
-    font-weight: 400;
-    font-style: normal;
-    color: #494949;
-} */
 
 
 a {
@@ -169,7 +121,6 @@ i {
 /* MEET OUR TEAM */
 
 #team {
-    /* background: #eee !important; */
     background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url("../images/teamBg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -208,6 +159,7 @@ section .section-title {
     background: #ffffff;
 }
 
+
 .image-flip:hover .backside,
 .image-flip.hover .backside {
     -webkit-transform: rotateY(0deg);
@@ -218,6 +170,7 @@ section .section-title {
     border-radius: .25rem;
 }
 
+/* handle rotations of the cards on hovering */
 .image-flip:hover .frontside,
 .image-flip.hover .frontside {
     -webkit-transform: rotateY(180deg);
@@ -225,7 +178,7 @@ section .section-title {
     -o-transform: rotateY(180deg);
     transform: rotateY(180deg);
 }
-
+/* flip transitions */
 .mainflip {
     -webkit-transition: 1s;
     -webkit-transform-style: preserve-3d;
@@ -285,6 +238,7 @@ section .section-title {
     min-height: 312px;
 }
 
+/* links on the cards */
 .backside .card a {
     font-size: 28px;
     color: #000;

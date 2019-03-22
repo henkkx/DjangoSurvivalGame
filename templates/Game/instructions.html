@@ -2,14 +2,14 @@
 {% load staticfiles %}
 
 {% block head_css %}
-      <link rel="stylesheet" href="{% static "css/instructions.css" %}">
-      <script src="{% static "js/aboutUsScroll.js" %}"></script>
+      <link rel="stylesheet" href="{% static 'css/instructions.css' %}">
+      <script src="{% static 'js/aboutUsScroll.js' %}"></script>
 
 {% endblock %}
 
 {% block content %}
 
-
+<!-- banner  -->
 <div class="image-howto-banner" style="margin-top:0px">
   <div class="container">
    <div class="row">
@@ -26,7 +26,7 @@
 <!-- Page Content -->
 <div class="container objects">
 
-    <!-- Project One -->
+    <!-- houses -->
     <div class="row">
       <div class="col-md-4">
         <a href="#">
@@ -38,7 +38,7 @@
         <p> In the game, there are a number of houses or buildings. The player can choose to enter a house. Each of these houses has a number of different rooms.</p>
         
       </div>
-
+<!-- rooms -->
       <div class="col-md-4">
           <a href="#">
             <img class="img-fluid rounded mb-3 mb-md-0" src="{% static "images/room.jpg" %}" alt="">
@@ -56,7 +56,7 @@
 
     <hr>
 
-    <!-- Project Three -->
+    <!--  creatures -->
     <div class="row">
       <div class="col-md-4">
         <a href="#">
@@ -68,7 +68,7 @@
         <p> The player may choose to talk to them  or to fight them</p>
 
       </div>
-
+<!-- items -->
       <div class="col-md-4">
           <a href="#">
             <img class="img-fluid rounded mb-3 mb-md-0" src="{% static "images/weapon.jpg" %}" alt="">

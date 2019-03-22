@@ -1,31 +1,6 @@
 
 /* This handles the players stat's */
-/* Some inspiration from https://codepen.io/secondfret/pen/mIBqf */
-/* #stats {
-    position: absolute;
-    right: 120px;
-    width: 800px;
-}
 
-#stats ul {
-    float: left;
-    width: 400px;
-    list-style-type: none;
-}
-
-#stats li {
-    margin-top: 25px;
-    margin-bottom: 25px;
-    font-size: 20px;
-    border-bottom: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    
-}
-
-#stats li:hover{
-    font-size: 30px;
-    background: #f6f6f6;
-} */
 
 .stats{
     position: absolute;
@@ -36,6 +11,7 @@
     align-content: right;
 }
 
+/* banner on top of the page */
 .image-aboutus-banner {
     background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.7)),url(../images/oldTownNight.jpg);
     background-repeat: no-repeat;
@@ -57,6 +33,7 @@
     padding-top: 30px;
     padding-bottom:30px;
  }
+ /* text in the banner */
 .lg-text {
     position: relative;
     margin-top: 10px;;
@@ -79,11 +56,6 @@
 
 
 
-/* #profilePic p {
-    font-size: 18;
-    font-weight: 500;
-    
-} */
 
 /* This handles the profile image division */
 #image {

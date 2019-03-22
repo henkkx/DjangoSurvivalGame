@@ -24,7 +24,7 @@ body {
 
 
 
-/* CUSTOMIZE THE CAROUSEL
+/* CAROUSEL
 -------------------------------------------------- */
 
 /* Carousel base class */
@@ -64,7 +64,7 @@ body {
   padding: 2rem;
 }
 
-/* MARKETING CONTENT
+/* REVIEWS 
 -------------------------------------------------- */
 
 /* Center align the text within the three columns below the carousel */
@@ -129,7 +129,7 @@ section .section-title {
 .leaderboard ol li {
   list-style-type: none;
   position: relative;
-  /* z-index: 1; */
+  
   font-size: 14px;
   counter-increment: leaderboard;
   padding: 4px 10px 4px 50px;
@@ -138,7 +138,7 @@ section .section-title {
 .leaderboard ol li::before {
   content: counter(leaderboard);
   position: absolute;
-  /* z-index: 2; */
+  
   top: 15px;
   left: 15px;
   width: 20px;
@@ -151,7 +151,7 @@ section .section-title {
 }
 .leaderboard ol li mark {
   position: absolute;
-  /* z-index: 2; */
+  
   top: 0;
   left: 0;
   width: 100%;
@@ -166,8 +166,7 @@ section .section-title {
 .leaderboard ol li mark::before, .leaderboard ol li mark::after {
   content: '';
   position: absolute;
-  /* z-index: 1; */
-  /* bottom: -11px; */
+  
   left: -9px;
   -webkit-transition: all .1s ease-in-out;
   transition: all .1s ease-in-out;
@@ -181,17 +180,17 @@ section .section-title {
 }
 .leaderboard ol li p {
   position: relative;
-  /* z-index: 2; */
+  
   text-align: right;
   color: #e1e1e1;
 }
 
 
-
+/* HOVER ANIMATION */
 .leaderboard ol li::after {
   content: '';
   position: absolute;
-  /* z-index: 1; */
+  
   top: 0;
   left: 0;
   width: 100%;
@@ -202,6 +201,25 @@ section .section-title {
   transition: all .3s ease-in-out;
   opacity: 0;
 }
+
+.leaderboard ol li:hover::after {
+  opacity: 0.8;
+  -webkit-transform: scaleX(1.05) scaleY(1.1);
+          transform: scaleX(1.05) scaleY(1.1);
+}
+.leaderboard ol li:hover mark::before, .leaderboard ol li:hover mark::after {
+  opacity: 1;
+  -webkit-transition: all .35s ease-in-out;
+  transition: all .35s ease-in-out;
+}
+
+/* KILLS COLOURS */
+#kills{
+  background: -webkit-linear-gradient(top, #110402, #911803);
+  background: linear-gradient(to bottom, #110402, #911803);
+}
+
+
 .leaderboard ol li:nth-child(1) {
   background: #fa6855;
 }
@@ -223,27 +241,6 @@ section .section-title {
 }
 
 
-.leaderboard ol li:hover::after {
-  opacity: 0.8;
-  -webkit-transform: scaleX(1.05) scaleY(1.1);
-          transform: scaleX(1.05) scaleY(1.1);
-}
-.leaderboard ol li:hover mark::before, .leaderboard ol li:hover mark::after {
-  opacity: 1;
-  -webkit-transition: all .35s ease-in-out;
-  transition: all .35s ease-in-out;
-}
-
-
-#kills{
-  background: -webkit-linear-gradient(top, #110402, #911803);
-  background: linear-gradient(to bottom, #110402, #911803);
-}
-
-#days_survived{
-  background: -webkit-linear-gradient(top, #3b3c46, #aeb3bb);
-  background: linear-gradient(to bottom, #3b3c46, #aeb3bb);
-}
 
  #kills li a {  display: block; }
  #days_survived li a {
@@ -251,6 +248,12 @@ section .section-title {
   display: block;
   
 } 
+
+/* DAYS SURVIVED COLOURS */
+#days_survived{
+  background: -webkit-linear-gradient(top, #3b3c46, #aeb3bb);
+  background: linear-gradient(to bottom, #3b3c46, #aeb3bb);
+}
 #days_survived li:nth-child(1){
   background: #409e01;
 }
